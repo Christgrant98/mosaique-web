@@ -1,0 +1,11 @@
+---
+import Container from "../ui/Container.astro";
+import { serviceSpikeItems } from "../../data/services";
+import ServicesScene from "./ServicesScene";
+---
+
+<section class="services-spike" aria-labelledby="services-spike-title">
+  <Container>
+    <ServicesScene services={serviceSpikeItems} client:load />
+  </Container>
+</section>

@@ -67,6 +67,8 @@ Scroll progress determines which service is active. The active service drives te
 
 This relationship is a priority because it provides a clear technical model for synchronized editorial storytelling.
 
+The reusable orchestration extracted from this study is now documented as the Mosaïque-owned Scroll-Linked Scene pattern in `PATTERNS.md`. This document remains the source for external fidelity analysis.
+
 ## 8. Scroll-Triggered Image Synchronization
 
 Images update in response to the active service. The image change must feel connected to the text state, not independent.
@@ -158,4 +160,4 @@ Future implementation should prioritize:
 
 `Services Intro -> Panel Reveal -> Sticky Services -> Active Service -> Image Synchronization -> Cinematic Transition`
 
-No Movra sections are implemented in the foundation phase. These notes define behavior targets for future Mosaïque sections.
+These notes define behavior and fidelity targets for future Mosaïque sections. Implementation status and internal interaction ownership belong in `PATTERNS.md` and the section code.

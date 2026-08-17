@@ -12,13 +12,13 @@ Compositions may be asymmetric when they improve rhythm or storytelling. Motion 
 
 The system follows this hierarchy:
 
-`Primitive Tokens -> Semantic Tokens -> Components -> Sections -> Pages`
+`Primitive Tokens -> Semantic Tokens -> Motion Primitives -> Interaction Patterns -> Sections -> Pages`
 
 Primitive tokens define raw values such as color palettes, spacing steps, type scales, durations, easing curves, breakpoints, and z-index levels.
 
 Semantic tokens assign product meaning to primitives: background, surface, text, border, overlay, section padding, page gutters, motion timing, and layout widths.
 
-Components consume semantic tokens. Sections compose components. Pages compose sections.
+Components and motion primitives consume semantic tokens. Interaction patterns coordinate primitives around proven behaviors. Sections apply those patterns to content, and pages compose sections. Reusable interaction and composition patterns are documented in `PATTERNS.md`.
 
 CSS custom properties are the executable source of truth. Documentation explains intent, but implemented tokens win if a contradiction appears.
 
@@ -219,6 +219,8 @@ Planned motion primitives:
 - ScrollProgress: maps section scroll progress to a normalized value.
 - MediaCrossfade: image transition primitive.
 - PanelReveal: staged panel transition for future sections.
+
+`ScrollLinkedScene` is the first extracted scroll orchestration primitive. Its Mosaïque-owned composition pattern and consumer boundaries are documented in `PATTERNS.md`.
 
 Panel-level and cinematic patterns should be implemented only when a real section needs them.
 

@@ -1,0 +1,22 @@
+---
+import Container from "../ui/Container.astro";
+import Heading from "../ui/Heading.astro";
+import Section from "../ui/Section.astro";
+import Stack from "../ui/Stack.astro";
+import Text from "../ui/Text.astro";
+
+import "../../styles/sections/services-spike.css";
+---
+
+<Section class="services-spike services-spike__intro">
+  <Container>
+    <Stack gap="content" class="max-w-[var(--layout-max-reading)]">
+      <Text as="span" variant="caption" tone="secondary">Technical spike</Text>
+      <Heading as="h2" variant="display-lg">Services scroll system</Heading>
+      <Text variant="body-lg">
+        A reusable proof of scroll progress, active service state, sticky media, and image
+        synchronization using placeholder content.
+      </Text>
+    </Stack>
+  </Container>
+</Section>
