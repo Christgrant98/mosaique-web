@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  columns?: 2 | 3 | 4 | 6 | 12;
+}
+
+const { columns = 12, class: className, ...attrs } = Astro.props;
+---
+
+<div
+  class:list={[
+    "grid gap-[var(--layout-grid-gap)]",
+    columns === 2 && "grid-cols-1 md:grid-cols-2",
+    columns === 3 && "grid-cols-1 md:grid-cols-3",
+    columns === 4 && "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
+    columns === 6 && "grid-cols-2 md:grid-cols-6",
+    columns === 12 && "grid-cols-4 md:grid-cols-12",
+    className,
+  ]}
+  {...attrs}
+>
+  <slot />
+</div>

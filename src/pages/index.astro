@@ -1,17 +1,28 @@
 ---
-
+import Container from "../components/ui/Container.astro";
+import Heading from "../components/ui/Heading.astro";
+import Section from "../components/ui/Section.astro";
+import Stack from "../components/ui/Stack.astro";
+import Text from "../components/ui/Text.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Hello Scientist World!</title>
-	</head>
-	<body>
-		<h1>Hello scientist world!</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Mosaïque Web Foundation"
+  description="Technical and visual foundation for Mosaïque Web."
+>
+  <main>
+    <Section minViewport>
+      <Container narrow>
+        <Stack gap="content">
+          <Text as="span" variant="caption" tone="secondary">Foundation</Text>
+          <Heading as="h1" variant="display-lg">Mosaïque Web</Heading>
+          <Text variant="body-lg">
+            Design tokens, layout primitives, media rules, and motion primitives are ready for
+            the next implementation phase.
+          </Text>
+        </Stack>
+      </Container>
+    </Section>
+  </main>
+</BaseLayout>

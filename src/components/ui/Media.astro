@@ -1,0 +1,65 @@
+---
+import { Image } from "astro:assets";
+import type { HTMLAttributes } from "astro/types";
+import type { ImageMetadata } from "astro";
+
+interface Props extends Omit<HTMLAttributes<"figure">, "src"> {
+  alt: string;
+  aspectRatio?: string;
+  fit?: "cover" | "contain";
+  loading?: "eager" | "lazy";
+  objectPosition?: string;
+  priority?: boolean;
+  sizes?: string;
+  src: ImageMetadata | string;
+  widths?: number[];
+}
+
+const {
+  alt,
+  aspectRatio = "4 / 5",
+  fit = "cover",
+  loading,
+  objectPosition = "center",
+  priority = false,
+  sizes = "(min-width: 1024px) 50vw, 100vw",
+  src,
+  widths = [640, 960, 1280, 1600],
+  class: className,
+  ...attrs
+} = Astro.props;
+
+const resolvedLoading = loading ?? (priority ? "eager" : "lazy");
+const imageClass = "size-full";
+const imageStyle = `object-fit:${fit};object-position:${objectPosition};`;
+---
+
+<figure
+  class:list={["overflow-hidden bg-[var(--color-surface-muted)]", className]}
+  style={`aspect-ratio:${aspectRatio};`}
+  {...attrs}
+>
+  {
+    typeof src === "string" ? (
+      <img
+        src={src}
+        alt={alt}
+        class={imageClass}
+        style={imageStyle}
+        loading={resolvedLoading}
+        decoding="async"
+      />
+    ) : (
+      <Image
+        src={src}
+        alt={alt}
+        class={imageClass}
+        style={imageStyle}
+        widths={widths}
+        sizes={sizes}
+        loading={resolvedLoading}
+        decoding="async"
+      />
+    )
+  }
+</figure>

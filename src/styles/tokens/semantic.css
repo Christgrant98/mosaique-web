@@ -1,0 +1,31 @@
+@theme static {
+  --color-primary: var(--color-green-900);
+  --color-secondary: color-mix(in oklab, var(--color-green-900) 72%, var(--color-gray-300));
+  --color-muted: var(--color-gray-300);
+  --color-inverse: var(--color-cream-100);
+  --color-background: var(--color-cream-100);
+  --color-background-inverse: var(--color-green-900);
+  --color-surface: var(--color-white);
+  --color-surface-elevated: color-mix(in oklab, var(--color-white) 84%, var(--color-cream-100));
+  --color-surface-muted: color-mix(in oklab, var(--color-gray-300) 32%, var(--color-cream-100));
+  --color-accent: var(--color-tan-500);
+  --color-accent-contrast: var(--color-green-900);
+  --color-border-default: color-mix(in oklab, var(--color-green-900) 22%, transparent);
+  --color-border-strong: color-mix(in oklab, var(--color-green-900) 42%, transparent);
+  --color-overlay: rgb(11 36 28 / 0.72);
+}
+
+:root {
+  --color-text-primary: var(--color-primary);
+  --color-text-secondary: var(--color-secondary);
+  --color-text-inverse: var(--color-inverse);
+  --color-text-muted: var(--color-muted);
+  --color-border-subtle: var(--color-border-default);
+  --color-overlay-image: rgb(11 36 28 / 0.34);
+  --color-overlay-modal: var(--color-overlay);
+  --color-accent-muted: color-mix(in oklab, var(--color-accent) 24%, var(--color-background));
+
+  --focus-ring-color: var(--color-accent);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 3px;
+}

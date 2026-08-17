@@ -1,0 +1,8 @@
+:root {
+  --layout-max-content: 90rem;
+  --layout-max-reading: 44rem;
+  --layout-grid-columns: 12;
+  --layout-grid-gap: clamp(var(--space-4), 2vw, var(--space-8));
+  --layout-section-min: 100svh;
+  --layout-sticky-top: clamp(var(--space-5), 8svh, var(--space-16));
+}

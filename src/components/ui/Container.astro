@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  bleed?: boolean;
+  narrow?: boolean;
+}
+
+const { bleed = false, narrow = false, class: className, ...attrs } = Astro.props;
+---
+
+<div
+  class:list={[
+    !bleed && "mx-auto w-full px-[var(--space-page-gutter)]",
+    !bleed && !narrow && "max-w-[var(--layout-max-content)]",
+    !bleed && narrow && "max-w-[var(--layout-max-reading)]",
+    bleed && "w-full",
+    className,
+  ]}
+  {...attrs}
+>
+  <slot />
+</div>

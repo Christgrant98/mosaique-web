@@ -1,0 +1,40 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type TextTag = "p" | "span" | "div";
+type TextVariant = "body-lg" | "body" | "caption";
+type TextTone = "primary" | "secondary" | "inverse";
+
+interface Props extends HTMLAttributes<TextTag> {
+  as?: TextTag;
+  tone?: TextTone;
+  variant?: TextVariant;
+}
+
+const {
+  as = "p",
+  tone = "secondary",
+  variant = "body",
+  class: className,
+  ...attrs
+} = Astro.props;
+const Tag = as;
+
+const variantClass = {
+  "body-lg":
+    "text-[length:var(--text-body-lg-size)] leading-[var(--text-body-lg-line-height)] font-[var(--text-body-lg-weight)] tracking-[var(--text-body-lg-letter-spacing)]",
+  body: "text-[length:var(--text-body-size)] leading-[var(--text-body-line-height)] font-[var(--text-body-weight)] tracking-[var(--text-body-letter-spacing)]",
+  caption:
+    "text-[length:var(--text-caption-size)] leading-[var(--text-caption-line-height)] font-[var(--text-caption-weight)] tracking-[var(--text-caption-letter-spacing)]",
+}[variant];
+
+const toneClass = {
+  primary: "text-[color:var(--color-text-primary)]",
+  secondary: "text-[color:var(--color-text-secondary)]",
+  inverse: "text-[color:var(--color-text-inverse)]",
+}[tone];
+---
+
+<Tag class:list={[variantClass, toneClass, className]} {...attrs}>
+  <slot />
+</Tag>

@@ -1,0 +1,25 @@
+:root {
+  --motion-duration-fast: var(--primitive-duration-fast);
+  --motion-duration-standard: var(--primitive-duration-standard);
+  --motion-duration-slow: var(--primitive-duration-slow);
+  --motion-duration-cinematic: var(--primitive-duration-cinematic);
+
+  --motion-easing-standard: var(--ease-standard);
+  --motion-easing-cinematic: var(--ease-cinematic);
+
+  --motion-reveal-distance: clamp(1rem, 3vw, 2.5rem);
+  --motion-stagger-interval: 80ms;
+  --motion-crossfade-duration: var(--motion-duration-slow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-fast: 1ms;
+    --motion-duration-standard: 1ms;
+    --motion-duration-slow: 1ms;
+    --motion-duration-cinematic: 1ms;
+    --motion-reveal-distance: 0;
+    --motion-stagger-interval: 0ms;
+    --motion-crossfade-duration: 1ms;
+  }
+}

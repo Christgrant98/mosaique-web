@@ -1,0 +1,29 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type HeadingLevel = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+type HeadingVariant = "display-xl" | "display-lg" | "heading-lg" | "heading-md";
+
+interface Props extends HTMLAttributes<HeadingLevel> {
+  as?: HeadingLevel;
+  variant?: HeadingVariant;
+}
+
+const { as = "h2", variant = "heading-lg", class: className, ...attrs } = Astro.props;
+const Tag = as;
+
+const variantClass = {
+  "display-xl":
+    "font-display text-[length:var(--text-display-xl-size)] leading-[var(--text-display-xl-line-height)] font-[var(--text-display-xl-weight)] tracking-[var(--text-display-xl-letter-spacing)]",
+  "display-lg":
+    "font-display text-[length:var(--text-display-lg-size)] leading-[var(--text-display-lg-line-height)] font-[var(--text-display-lg-weight)] tracking-[var(--text-display-lg-letter-spacing)]",
+  "heading-lg":
+    "font-display text-[length:var(--text-heading-lg-size)] leading-[var(--text-heading-lg-line-height)] font-[var(--text-heading-lg-weight)] tracking-[var(--text-heading-lg-letter-spacing)]",
+  "heading-md":
+    "font-display text-[length:var(--text-heading-md-size)] leading-[var(--text-heading-md-line-height)] font-[var(--text-heading-md-weight)] tracking-[var(--text-heading-md-letter-spacing)]",
+}[variant];
+---
+
+<Tag class:list={[variantClass, className]} {...attrs}>
+  <slot />
+</Tag>
