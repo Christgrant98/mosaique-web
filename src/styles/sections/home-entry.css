@@ -266,7 +266,7 @@
 
 .home-hero__title {
   color: var(--color-text-inverse);
-  font-size: 2.25rem;
+  font-size: 1.875rem;
   line-height: 0.98;
   margin: 0;
   max-inline-size: 18ch;
@@ -338,7 +338,7 @@
   }
 
   .home-hero__title {
-    font-size: 2.75rem;
+    font-size: 2rem;
     max-inline-size: 20ch;
   }
 
@@ -357,7 +357,7 @@
   }
 
   .home-hero__title {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 }
 

@@ -10,7 +10,12 @@ import "../../styles/sections/home-entry.css";
 const [heroBrand, heroCategory] = heroContent.brand.split(" ");
 ---
 
-<section class="home-hero" id="top" aria-labelledby="home-hero-title">
+<section
+  class="home-hero"
+  id="top"
+  aria-labelledby="home-hero-title"
+  style="--hero-title-opacity: 1; --hero-title-y: 0; --hero-action-opacity: 1; --hero-action-y: 0; --hero-action-pointer-events: auto;"
+>
   <p class="home-hero__brand" aria-hidden="true">
     <span>{heroBrand}</span>
     <span>{heroCategory}</span>
@@ -95,8 +100,7 @@ const [heroBrand, heroCategory] = heroContent.brand.split(" ");
       const progress = clamp((window.scrollY - heroTop) / scrollRange);
       const brandProgress = rangeProgress(progress, 0, 0.58);
       const brandHandoffProgress = rangeProgress(progress, 0.56, 0.64);
-      const titleProgress = rangeProgress(progress, 0.46, 0.72);
-      const actionProgress = rangeProgress(progress, 0.52, 0.78);
+      const actionProgress = 1;
       const captionProgress = rangeProgress(progress, 0.64, 0.88);
 
       if (heroBrand && navigationBrand) {
@@ -120,8 +124,6 @@ const [heroBrand, heroCategory] = heroContent.brand.split(" ");
         );
       }
 
-      hero.style.setProperty("--hero-title-opacity", String(titleProgress));
-      hero.style.setProperty("--hero-title-y", `${(1 - titleProgress) * 1.5}rem`);
       hero.style.setProperty("--hero-action-opacity", String(actionProgress));
       hero.style.setProperty("--hero-action-y", `${(1 - actionProgress) * 1.25}rem`);
       hero.style.setProperty(
