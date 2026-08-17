@@ -54,7 +54,7 @@ The consumer owns:
 - section layout, sticky boundaries, responsive composition, and visual transitions;
 - the meaning communicated by active and inactive states.
 
-The current Services spike is the first consumer. Its section layer supplies service data, renders the copy and placeholder media, and owns every `services-spike` class.
+Services is the first consumer. Its section layer supplies service data, renders the copy and placeholder media, and owns every `services-spike` class. The current fidelity pass also composes the section with the neutral Astro `PanelReveal` primitive, which provides the sticky handoff without knowing Services content or styling.
 
 ### Responsive behavior
 

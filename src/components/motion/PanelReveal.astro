@@ -1,0 +1,40 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  panelClass?: string;
+}
+
+const { class: className, panelClass, ...attrs } = Astro.props;
+---
+
+<div class:list={["panel-reveal", className]} {...attrs}>
+  <div class="panel-reveal__lead">
+    <slot name="lead" />
+  </div>
+  <div class:list={["panel-reveal__panel", panelClass]}>
+    <slot />
+  </div>
+</div>
+
+<style>
+  .panel-reveal {
+    position: relative;
+  }
+
+  .panel-reveal__lead {
+    position: sticky;
+    top: 0;
+  }
+
+  .panel-reveal__panel {
+    position: relative;
+    z-index: var(--primitive-z-content);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .panel-reveal__lead {
+      position: relative;
+    }
+  }
+</style>

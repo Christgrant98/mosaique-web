@@ -25,7 +25,10 @@ export default function ServicesScene({ services }: ServicesSceneProps) {
                 key={service.id}
                 role="img"
               >
-                <span className="services-spike__media-label">{service.eyebrow}</span>
+                <span className="services-spike__media-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="services-spike__media-label">{service.mediaLabel}</span>
               </div>
             ))}
           </div>
@@ -33,13 +36,13 @@ export default function ServicesScene({ services }: ServicesSceneProps) {
       )}
       renderContent={({ activeIndex, activeItem, itemCount, items, registerItem }) => (
         <div className="services-spike__list">
-          <div className="services-spike__progress" aria-hidden="true">
-            <div className="services-spike__progress-bar" />
-          </div>
-
-          <h2 className="visually-hidden" id="services-spike-title">
-            Services technical spike
-          </h2>
+          <header className="services-spike__scene-heading">
+            <p className="services-spike__scene-eyebrow">Nuestros servicios</p>
+            <h2 id="services-spike-title">Una producción completa, a la medida de cada ocasión.</h2>
+            <div className="services-spike__progress" aria-hidden="true">
+              <div className="services-spike__progress-bar" />
+            </div>
+          </header>
 
           {items.map((service, index) => {
             const isActive = index === activeIndex;
@@ -56,13 +59,13 @@ export default function ServicesScene({ services }: ServicesSceneProps) {
                     {String(index + 1).padStart(2, "0")} / {String(itemCount).padStart(2, "0")}
                   </span>
                   <div>
-                    <p className="text-[length:var(--text-caption-size)] font-[var(--text-caption-weight)] leading-[var(--text-caption-line-height)] text-accent">
+                    <p className="services-spike__eyebrow">
                       {service.eyebrow}
                     </p>
-                    <h3 className="mt-3 font-display text-[length:var(--text-heading-md-size)] font-[var(--text-heading-md-weight)] leading-[var(--text-heading-md-line-height)] text-primary">
+                    <h3 className="services-spike__title">
                       {service.title}
                     </h3>
-                    <p className="mt-5 max-w-[var(--layout-max-reading)] text-[length:var(--text-body-lg-size)] leading-[var(--text-body-lg-line-height)] text-secondary">
+                    <p className="services-spike__description">
                       {service.description}
                     </p>
                   </div>

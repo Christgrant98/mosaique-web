@@ -4,6 +4,7 @@ import Heading from "../components/ui/Heading.astro";
 import Section from "../components/ui/Section.astro";
 import Stack from "../components/ui/Stack.astro";
 import Text from "../components/ui/Text.astro";
+import PanelReveal from "../components/motion/PanelReveal.astro";
 import ServicesIntro from "../components/sections/ServicesIntro.astro";
 import StickyServices from "../components/sections/StickyServices.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -26,7 +27,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </Stack>
       </Container>
     </Section>
-    <ServicesIntro />
-    <StickyServices />
+    <PanelReveal>
+      <ServicesIntro slot="lead" />
+      <StickyServices />
+    </PanelReveal>
   </main>
 </BaseLayout>

@@ -6,7 +6,11 @@ import ServicesScene from "./ServicesScene";
 import "../../styles/sections/services-spike.css";
 ---
 
-<section class="services-spike" aria-labelledby="services-spike-title">
+<section
+  class="services-spike services-spike--scene"
+  id="services"
+  aria-labelledby="services-spike-title"
+>
   <Container>
     <ServicesScene services={serviceSpikeItems} client:load />
   </Container>
