@@ -2,7 +2,7 @@ import type { ContentLink } from "../types";
 
 export const servicesContent = {
   intro: {
-    title: "Todo lo que un evento necesita, compuesto en un solo lugar.",
+    title: "Todo lo que un evento necesita.",
     text: "MOSAÏQUE ofrece servicios integrales y modulares. Podemos encargarnos de la producción completa de un evento o apoyar etapas específicas como montaje, desmontaje, logística, mobiliario, insumos, ambientación o coordinación con venues.",
     highlight:
       "Tú eliges el nivel de acompañamiento. Nosotros nos encargamos de que cada pieza encaje.",
