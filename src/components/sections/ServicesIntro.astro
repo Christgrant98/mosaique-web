@@ -4,6 +4,7 @@ import Heading from "../ui/Heading.astro";
 import Section from "../ui/Section.astro";
 import Stack from "../ui/Stack.astro";
 import Text from "../ui/Text.astro";
+import { servicesContent } from "../../content/home/services";
 
 import "../../styles/sections/services-spike.css";
 ---
@@ -11,12 +12,9 @@ import "../../styles/sections/services-spike.css";
 <Section class="services-spike__intro">
   <Container>
     <Stack gap="content" class="max-w-[var(--layout-max-reading)]">
-      <Text as="span" variant="caption" tone="secondary">Servicios</Text>
-      <Heading as="h2" variant="display-lg">Cada evento comienza con una intención.</Heading>
-      <Text variant="body-lg">
-        La convertimos en una experiencia clara, cuidada y memorable, desde la primera idea hasta
-        el último detalle.
-      </Text>
+      <Heading as="h2" variant="display-lg">{servicesContent.intro.title}</Heading>
+      <Text variant="body-lg">{servicesContent.intro.text}</Text>
+      <Text>{servicesContent.intro.highlight}</Text>
     </Stack>
   </Container>
 </Section>

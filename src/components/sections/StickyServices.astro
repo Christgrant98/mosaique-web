@@ -1,6 +1,7 @@
 ---
 import Container from "../ui/Container.astro";
-import { serviceSpikeItems } from "../../data/services";
+import Button from "../ui/Button.astro";
+import { servicesContent } from "../../content/home/services";
 import ServicesScene from "./ServicesScene";
 
 import "../../styles/sections/services-spike.css";
@@ -12,6 +13,26 @@ import "../../styles/sections/services-spike.css";
   aria-labelledby="services-spike-title"
 >
   <Container>
-    <ServicesScene services={serviceSpikeItems} client:load />
+    <ServicesScene
+      services={servicesContent.items}
+      panelReveal={servicesContent.panelReveal}
+      client:load
+    />
+  </Container>
+  <Container>
+    <div class="services-spike__transition" id="services-contact">
+      <div>
+        <h2>{servicesContent.transitionCta.title}</h2>
+        <p>{servicesContent.transitionCta.text}</p>
+      </div>
+      <div class="services-spike__transition-actions">
+        <Button href={servicesContent.transitionCta.actions.primary.href}>
+          {servicesContent.transitionCta.actions.primary.label}
+        </Button>
+        <Button href={servicesContent.transitionCta.actions.secondary.href} variant="secondary">
+          {servicesContent.transitionCta.actions.secondary.label}
+        </Button>
+      </div>
+    </div>
   </Container>
 </section>

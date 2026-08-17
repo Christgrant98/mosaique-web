@@ -1,11 +1,15 @@
 import { ScrollLinkedScene } from "../motion/ScrollLinkedScene";
-import type { ServiceSpikeItem } from "../../data/services";
+import type {
+  ServiceContentItem,
+  ServicesPanelRevealContent,
+} from "../../content/home/services";
 
 type ServicesSceneProps = {
-  services: ServiceSpikeItem[];
+  panelReveal: ServicesPanelRevealContent;
+  services: readonly ServiceContentItem[];
 };
 
-export default function ServicesScene({ services }: ServicesSceneProps) {
+export default function ServicesScene({ panelReveal, services }: ServicesSceneProps) {
   return (
     <ScrollLinkedScene
       className="services-spike__scene"
@@ -16,7 +20,7 @@ export default function ServicesScene({ services }: ServicesSceneProps) {
             {services.map((service, index) => (
               <div
                 aria-hidden={index !== activeIndex}
-                aria-label={service.mediaLabel}
+                aria-label={service.title}
                 className={[
                   "services-spike__media-panel",
                   index === activeIndex ? "is-active" : "",
@@ -25,20 +29,21 @@ export default function ServicesScene({ services }: ServicesSceneProps) {
                 key={service.id}
                 role="img"
               >
-                <span className="services-spike__media-number">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="services-spike__media-label">{service.mediaLabel}</span>
+                <span className="services-spike__media-number">{service.index}</span>
+                <span className="services-spike__media-label">{service.title}</span>
               </div>
             ))}
           </div>
         </div>
       )}
       renderContent={({ activeIndex, activeItem, itemCount, items, registerItem }) => (
-        <div className="services-spike__list">
+        <div className="services-spike__list" id="services-list">
           <header className="services-spike__scene-heading">
-            <p className="services-spike__scene-eyebrow">Nuestros servicios</p>
-            <h2 id="services-spike-title">Una producción completa, a la medida de cada ocasión.</h2>
+            <h2 id="services-spike-title">{panelReveal.title}</h2>
+            <p className="services-spike__scene-intro">{panelReveal.text}</p>
+            <a className="services-spike__scene-cta" href={panelReveal.cta.href}>
+              {panelReveal.cta.label}
+            </a>
             <div className="services-spike__progress" aria-hidden="true">
               <div className="services-spike__progress-bar" />
             </div>
@@ -56,11 +61,11 @@ export default function ServicesScene({ services }: ServicesSceneProps) {
               >
                 <div className="services-spike__item-grid">
                   <span className="services-spike__index">
-                    {String(index + 1).padStart(2, "0")} / {String(itemCount).padStart(2, "0")}
+                    {service.index} / {String(itemCount).padStart(2, "0")}
                   </span>
                   <div>
                     <p className="services-spike__eyebrow">
-                      {service.eyebrow}
+                      Servicio {service.index} — {service.category}
                     </p>
                     <h3 className="services-spike__title">
                       {service.title}
@@ -68,6 +73,13 @@ export default function ServicesScene({ services }: ServicesSceneProps) {
                     <p className="services-spike__description">
                       {service.description}
                     </p>
+                    <div className="services-spike__ideal-for">
+                      <p className="services-spike__ideal-for-label">Ideal para:</p>
+                      <p>{service.idealFor}</p>
+                    </div>
+                    <a className="services-spike__item-cta" href={service.cta.href}>
+                      {service.cta.label}
+                    </a>
                   </div>
                 </div>
               </article>
@@ -75,7 +87,7 @@ export default function ServicesScene({ services }: ServicesSceneProps) {
           })}
 
           <p className="visually-hidden" aria-live="polite">
-            Active service {activeIndex + 1} of {itemCount}: {activeItem.title}
+            Servicio activo {activeIndex + 1} de {itemCount}: {activeItem.title}
           </p>
         </div>
       )}

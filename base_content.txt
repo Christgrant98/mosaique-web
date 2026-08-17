@@ -1,0 +1,530 @@
+# Copy web — MOSAÏQUE EVENTS
+
+## 01. Navigation
+
+*Logo:*
+MOSAÏQUE EVENTS
+
+*Menú principal:*
+Inicio
+Nosotros
+Servicios
+Experiencias
+Proceso
+Preguntas
+Contacto
+
+*CTA navegación:*
+Cotizar un evento
+
+---
+
+## 02. Hero
+
+*Eyebrow:*
+EVENTOS · PRODUCCIÓN · EXPERIENCIAS
+
+*Título principal:*
+Creamos eventos que se viven, se recuerdan y se comparten.
+
+*Subtítulo:*
+MOSAÏQUE EVENTS es una empresa integral de eventos en Montréal, especializada en la organización, producción, montaje y creación de experiencias para celebraciones privadas, bodas, cumpleaños, eventos corporativos y alianzas con venues.
+
+*Texto de apoyo:*
+Diseñamos cada evento como una composición única: concepto, logística, ambientación, mobiliario, producción y ejecución reunidos en una experiencia fluida, elegante y memorable.
+
+*CTA principal:*
+Planear mi evento
+
+*CTA secundario:*
+Ver servicios
+
+*Frase corta para imagen o overlay:*
+Every detail has its place.
+
+---
+
+## 03. About / Intro
+
+*Título:*
+Una empresa de eventos diseñada para crear experiencias completas.
+
+*Texto principal:*
+MOSAÏQUE EVENTS nace con una visión clara: transformar celebraciones, espacios y momentos en experiencias cuidadosamente producidas. Nuestro trabajo integra planificación, estética, logística, mobiliario, montaje, operación y alianzas estratégicas para construir eventos que conectan personas, marcas y lugares.
+
+*Texto secundario:*
+Trabajamos con clientes privados, empresas, restaurantes, salones y venues que buscan elevar la forma en que celebran, reciben invitados o activan sus espacios. Desde una boda íntima hasta una fiesta corporativa, desde un montaje puntual hasta un evento propio con venta de entradas, cada proyecto se construye con intención, precisión y una identidad visual memorable.
+
+*Frase destacada:*
+No solo organizamos eventos. Creamos escenarios para que las experiencias sucedan.
+
+---
+
+## 04. Milestones / Timeline
+
+*Título:*
+De una idea a una experiencia en movimiento.
+
+*Introducción:*
+Cada evento comienza con una intención. Nuestro proceso convierte esa intención en concepto, producción y ejecución real.
+
+*Etapa 01 — Concepto*
+Escuchamos la idea, el objetivo y el tipo de experiencia que se quiere crear. Definimos el estilo, el formato, el público, el espacio y las necesidades principales del evento.
+
+*Etapa 02 — Diseño y planificación*
+Construimos una propuesta clara: ambientación, mobiliario, logística, tiempos, proveedores, montaje, recursos técnicos y elementos necesarios para que la experiencia funcione.
+
+*Etapa 03 — Producción*
+Coordinamos cada componente del evento, desde el alquiler de mobiliario e insumos hasta la operación con venues, restaurantes, salones, marcas o aliados estratégicos.
+
+*Etapa 04 — Montaje y ejecución*
+Nos encargamos del montaje, desmontaje, coordinación y seguimiento operativo para que el evento ocurra de manera fluida, organizada y visualmente coherente.
+
+*Etapa 05 — Experiencia*
+El resultado es un evento que no solo se ve bien, sino que se siente bien: ordenado, elegante, funcional y memorable para quienes lo viven.
+
+---
+
+## 05. Metrics / Statistics
+
+*Título:*
+Eventos con estructura, estética y estrategia.
+
+*Métrica 01:*
+*360°*
+Organización, producción, montaje, logística y alquiler en un solo sistema de servicio.
+
+*Métrica 02:*
+*4+ formatos*
+Bodas, cumpleaños, celebraciones privadas, eventos corporativos y experiencias propias.
+
+*Métrica 03:*
+*1 concepto*
+Cada evento se diseña a partir de una idea central, una estética definida y una ejecución coherente.
+
+*Métrica 04:*
+*Múltiples ingresos*
+Producción, alquiler, tickets, alianzas con venues, patrocinios y acuerdos comerciales.
+
+*Métrica 05:*
+*A medida*
+Paquetes personalizables según el tipo de evento, el espacio, el presupuesto y el nivel de producción requerido.
+
+---
+
+## 06. Why Choose Us
+
+*Título:*
+¿Por qué elegir MOSAÏQUE?
+
+*Razón 01 — Servicio integral*
+Reunimos en un solo lugar planificación, producción, mobiliario, montaje, desmontaje, logística y coordinación. Esto permite una experiencia más organizada, clara y eficiente.
+
+*Razón 02 — Estética premium*
+Cada evento se construye con una dirección visual cuidada. Buscamos que los espacios se sientan elegantes, memorables y alineados con la intención de cada celebración.
+
+*Razón 03 — Flexibilidad comercial*
+Podemos trabajar en eventos completos, servicios independientes, alquiler de inventario, alianzas con venues o experiencias propias con venta de entradas.
+
+*Razón 04 — Visión estratégica*
+No solo producimos eventos para clientes. También creamos experiencias que pueden aumentar el tráfico, la visibilidad y el posicionamiento de restaurantes, salones y espacios aliados.
+
+*Razón 05 — Ejecución confiable*
+Cuidamos la logística antes, durante y después del evento para que cada detalle tenga un lugar y cada etapa avance con claridad.
+
+---
+
+## 07. Marquee Divider
+
+*Texto ticker opción 01:*
+WEDDINGS · PRIVATE EVENTS · CORPORATE CELEBRATIONS · VENUE EXPERIENCES · EVENT PRODUCTION · FURNITURE RENTAL · LOGISTICS · MONTRÉAL
+
+*Texto ticker opción 02:*
+CREATE · PRODUCE · CELEBRATE · CONNECT · TRANSFORM · GATHER · REMEMBER
+
+*Texto ticker opción 03:*
+EVENTOS QUE CONECTAN · EXPERIENCIAS QUE PERMANECEN · ESPACIOS QUE COBRAN VIDA
+
+---
+
+## 08. Services Intro
+
+*Título grande:*
+Todo lo que un evento necesita, compuesto en un solo lugar.
+
+*Texto:*
+MOSAÏQUE ofrece servicios integrales y modulares. Podemos encargarnos de la producción completa de un evento o apoyar etapas específicas como montaje, desmontaje, logística, mobiliario, insumos, ambientación o coordinación con venues.
+
+*Frase destacada:*
+Tú eliges el nivel de acompañamiento. Nosotros nos encargamos de que cada pieza encaje.
+
+---
+
+## 09. Services Panel Reveal
+
+*Título:*
+Servicios diseñados para adaptarse a cada ocasión.
+
+*Texto:*
+Cada evento tiene una escala, un propósito y una dinámica distinta. Por eso nuestros servicios pueden contratarse de forma independiente o combinarse en paquetes personalizados según las necesidades del cliente, el espacio y el tipo de experiencia.
+
+*CTA:*
+Explorar servicios
+
+---
+
+## 10. Services Scroller
+
+### Servicio 01 — Organización y producción de eventos
+
+*Título:*
+Organización y producción integral
+
+*Texto:*
+Diseñamos, planificamos y producimos eventos de principio a fin. Coordinamos concepto, logística, tiempos, ambientación, montaje, proveedores y ejecución para bodas, cumpleaños, celebraciones privadas y eventos corporativos.
+
+*Ideal para:*
+Clientes que quieren delegar la planeación completa de su evento y contar con una producción organizada, estética y confiable.
+
+*CTA:*
+Cotizar producción integral
+
+---
+
+### Servicio 02 — Bodas y celebraciones privadas
+
+*Título:*
+Bodas y momentos privados
+
+*Texto:*
+Creamos celebraciones íntimas, elegantes y memorables. Nos encargamos de transformar una idea en una experiencia visual y emocionalmente coherente, cuidando cada detalle del ambiente, el montaje y la ejecución.
+
+*Ideal para:*
+Bodas íntimas, aniversarios, cumpleaños especiales, cenas privadas, showers, compromisos y celebraciones familiares.
+
+*CTA:*
+Planear una celebración
+
+---
+
+### Servicio 03 — Eventos corporativos
+
+*Título:*
+Eventos corporativos y experiencias de marca
+
+*Texto:*
+Producimos eventos para empresas, equipos y marcas que buscan conectar con sus invitados de una manera cuidada, profesional y memorable. Adaptamos el concepto, el espacio y la producción al objetivo de cada encuentro.
+
+*Ideal para:*
+Lanzamientos, cenas corporativas, activaciones, celebraciones internas, networking, reuniones privadas y experiencias de marca.
+
+*CTA:*
+Crear un evento corporativo
+
+---
+
+### Servicio 04 — Experiencias propias y alianzas con venues
+
+*Título:*
+Eventos propios y alianzas estratégicas
+
+*Texto:*
+Creamos y promovemos experiencias en alianza con restaurantes, salones y venues que buscan aumentar su tráfico, visibilidad y posicionamiento. MOSAÏQUE puede desarrollar el concepto, la producción, la promoción y la operación del evento.
+
+*Ideal para:*
+Restaurantes, bares, salones, terrazas, hoteles, galerías y espacios que quieren activar su venue con experiencias memorables.
+
+*CTA:*
+Proponer una alianza
+
+---
+
+### Servicio 05 — Montaje, desmontaje y logística
+
+*Título:*
+Montaje, desmontaje y soporte logístico
+
+*Texto:*
+Ofrecemos apoyo operativo para eventos que requieren instalación, organización del espacio, movimiento de mobiliario, coordinación de recursos y desmontaje posterior. Nuestro enfoque es práctico, ordenado y eficiente.
+
+*Ideal para:*
+Clientes, planners, venues o proveedores que necesitan soporte puntual antes, durante o después de un evento.
+
+*CTA:*
+Solicitar soporte logístico
+
+---
+
+### Servicio 06 — Alquiler de mobiliario, equipos e insumos
+
+*Título:*
+Alquiler de mobiliario e insumos para eventos
+
+*Texto:*
+Disponemos de inventario propio para complementar eventos de diferentes formatos. Nuestro mobiliario, equipos e insumos pueden alquilarse de forma individual o integrarse dentro de paquetes personalizados.
+
+*Ideal para:*
+Eventos que necesitan mobiliario, decoración, elementos funcionales, equipos o insumos específicos sin contratar una producción completa.
+
+*CTA:*
+Ver opciones de alquiler
+
+---
+
+### Servicio 07 — Paquetes personalizables
+
+*Título:*
+Paquetes hechos a la medida
+
+*Texto:*
+Combinamos servicios de producción, montaje, logística, alquiler y ambientación según las necesidades reales del evento. Cada paquete se adapta al presupuesto, el espacio, la cantidad de invitados y el nivel de acompañamiento requerido.
+
+*Ideal para:*
+Clientes que buscan flexibilidad y una solución clara, sin pagar por servicios que no necesitan.
+
+*CTA:*
+Crear mi paquete
+
+---
+
+## 11. Services CTA / Transition
+
+*Título:*
+¿Tienes una idea, un espacio o una celebración en mente?
+
+*Texto:*
+Podemos ayudarte a convertirla en una experiencia completa. Cuéntanos qué quieres crear y te guiaremos con una propuesta adaptada a tu evento, presupuesto y objetivos.
+
+*CTA principal:*
+Solicitar cotización
+
+*CTA secundario:*
+Hablar con nosotros
+
+---
+
+## 12. Projects / Portfolio
+
+*Título:*
+Experiencias que toman forma.
+
+*Introducción:*
+Cada proyecto es una composición distinta. Algunos nacen para celebrar una historia personal; otros para activar un espacio, conectar una comunidad o posicionar una marca.
+
+*Proyecto 01 — Celebraciones privadas*
+Diseño, producción y montaje para momentos íntimos, elegantes y memorables.
+
+*Proyecto 02 — Bodas y eventos familiares*
+Experiencias cuidadas para celebrar con intención, belleza y organización.
+
+*Proyecto 03 — Eventos corporativos*
+Encuentros profesionales con estética, estructura y una ejecución confiable.
+
+*Proyecto 04 — Activaciones con venues*
+Eventos propios y alianzas estratégicas para generar tráfico, visibilidad y nuevas oportunidades comerciales.
+
+*Proyecto 05 — Montajes y alquileres*
+Soluciones prácticas para complementar eventos con mobiliario, equipos e insumos propios.
+
+*CTA:*
+Ver próximos proyectos
+
+---
+
+## 13. Process
+
+*Título:*
+Nuestro proceso
+
+*Introducción:*
+Un evento memorable necesita más que una buena idea. Necesita estructura, tiempos, coordinación y una visión clara desde el inicio.
+
+### Paso 01 — Escuchamos
+
+Conocemos tu idea, el tipo de evento, el número de invitados, el espacio, el estilo deseado, el presupuesto aproximado y el nivel de acompañamiento que necesitas.
+
+### Paso 02 — Diseñamos la propuesta
+
+Creamos una propuesta adaptada al evento: concepto, servicios, mobiliario, logística, tiempos, necesidades técnicas y posibles paquetes.
+
+### Paso 03 — Coordinamos
+
+Organizamos los recursos necesarios, validamos detalles, alineamos expectativas y coordinamos con clientes, venues, aliados o proveedores involucrados.
+
+### Paso 04 — Producimos
+
+Ejecutamos el montaje, la ambientación, la logística y los elementos definidos para que el evento avance de manera clara y ordenada.
+
+### Paso 05 — Cerramos
+
+Realizamos desmontaje, revisión final y cierre operativo, cuidando que la experiencia termine con la misma atención con la que empezó.
+
+*Frase final:*
+Cada paso existe para que el evento se sienta fluido, cuidado y memorable.
+
+---
+
+## 14. Testimonials
+
+*Título:*
+Lo que buscamos generar en cada experiencia.
+
+*Testimonio 01:*
+“Un evento elegante, organizado y visualmente impecable.”
+
+*Testimonio 02:*
+“Una experiencia que se sintió cuidada desde el primer detalle.”
+
+*Testimonio 03:*
+“Más que una celebración, fue un momento memorable.”
+
+*Testimonio 04:*
+“Logística clara, estética premium y una ejecución confiable.”
+
+*Testimonio 05:*
+“El espacio se transformó por completo.”
+
+*Nota:*
+Cuando tengas clientes reales, estos textos deben reemplazarse por testimonios auténticos.
+
+---
+
+## 15. Values / Spotlight
+
+*Título:*
+Cada detalle tiene un lugar.
+
+*Texto:*
+El nombre MOSAÏQUE refleja nuestra forma de entender los eventos: piezas distintas que, al unirse con intención, crean una experiencia completa. Un espacio, una mesa, una luz, una canción, un recorrido, una alianza, una conversación. Todo forma parte de la composición.
+
+*Valores:*
+
+*Elegancia*
+Buscamos una estética sobria, cuidada y memorable.
+
+*Precisión*
+Organizamos cada etapa para que la experiencia fluya.
+
+*Flexibilidad*
+Adaptamos nuestros servicios al tipo de cliente, evento y espacio.
+
+*Colaboración*
+Creamos valor junto a venues, restaurantes, marcas y aliados.
+
+*Experiencia*
+Pensamos más allá del montaje: diseñamos momentos que se sienten.
+
+*Frase destacada:*
+MOSAÏQUE es la unión entre estética, producción y experiencia.
+
+---
+
+## 16. FAQ
+
+*Título:*
+Preguntas frecuentes
+
+*Pregunta 01:*
+¿MOSAÏQUE organiza eventos completos?
+
+*Respuesta:*
+Sí. Podemos encargarnos de la organización y producción integral de bodas, cumpleaños, celebraciones privadas y eventos corporativos, incluyendo planificación, montaje, logística, mobiliario y coordinación general.
+
+*Pregunta 02:*
+¿Puedo contratar solo alquiler de mobiliario o insumos?
+
+*Respuesta:*
+Sí. Nuestros servicios pueden contratarse de forma independiente. Puedes alquilar mobiliario, equipos o insumos específicos sin necesidad de contratar la producción completa del evento.
+
+*Pregunta 03:*
+¿Ofrecen montaje y desmontaje?
+
+*Respuesta:*
+Sí. Ofrecemos servicios de montaje, desmontaje y soporte logístico para clientes, planners, venues o proveedores que necesitan apoyo operativo en un evento.
+
+*Pregunta 04:*
+¿Trabajan con restaurantes, salones o venues?
+
+*Respuesta:*
+Sí. MOSAÏQUE desarrolla alianzas con venues, restaurantes y espacios que quieren crear eventos propios, aumentar tráfico, mejorar posicionamiento o generar nuevas fuentes de ingreso a través de experiencias.
+
+*Pregunta 05:*
+¿Pueden crear eventos propios con venta de entradas?
+
+*Respuesta:*
+Sí. Además de producir eventos para clientes, MOSAÏQUE puede crear, promover y operar experiencias propias o en colaboración con aliados, incluyendo modelos de venta de entradas, patrocinios o acuerdos comerciales.
+
+*Pregunta 06:*
+¿Los paquetes son fijos?
+
+*Respuesta:*
+No necesariamente. Podemos ofrecer paquetes base, pero cada propuesta puede adaptarse según el tipo de evento, número de invitados, espacio, presupuesto y servicios requeridos.
+
+*Pregunta 07:*
+¿Dónde trabajan?
+
+*Respuesta:*
+MOSAÏQUE EVENTS trabaja principalmente en Montréal y sus alrededores, con posibilidad de evaluar eventos en otras zonas según el proyecto.
+
+*Pregunta 08:*
+¿Cómo puedo pedir una cotización?
+
+*Respuesta:*
+Puedes contactarnos a través del formulario, indicando el tipo de evento, fecha tentativa, número de invitados, ubicación y servicios que necesitas. Con esa información podremos preparar una propuesta adaptada.
+
+---
+
+## 17. Final CTA
+
+*Título:*
+Construyamos una experiencia memorable.
+
+*Texto:*
+Ya sea una boda, una celebración privada, un evento corporativo, una alianza con un venue o un montaje puntual, MOSAÏQUE puede ayudarte a darle forma a cada detalle.
+
+*CTA principal:*
+Cotizar mi evento
+
+*CTA secundario:*
+Crear una alianza
+
+*Frase de cierre:*
+Eventos cuidadosamente compuestos. Experiencias diseñadas para permanecer.
+
+---
+
+## 18. Footer
+
+*Logo:*
+MOSAÏQUE EVENTS
+
+*Descripción corta:*
+Empresa integral de eventos en Montréal especializada en producción, organización, montaje, logística, alquiler de mobiliario y creación de experiencias en alianza con venues.
+
+*Links:*
+Inicio
+Nosotros
+Servicios
+Experiencias
+Proceso
+FAQ
+Contacto
+
+*Servicios:*
+Producción integral
+Bodas y celebraciones privadas
+Eventos corporativos
+Alquiler de mobiliario
+Montaje y desmontaje
+Alianzas con venues
+
+*Contacto:*
+Montréal, Québec
+Cotizaciones y alianzas
+[info@mosaique-events.com](mailto:info@mosaique-events.com)
+
+*Frase final:*
+Every detail has its place.
+
+*Legal:*
+©️ MOSAÏQUE EVENTS. All rights reserved.
