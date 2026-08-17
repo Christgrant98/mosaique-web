@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "motion/react";
 import type { HTMLAttributes } from "react";
+import { motionTokens } from "../../tokens/motion";
 
 type StaggerTextProps = HTMLAttributes<HTMLSpanElement> & {
   text: string;
@@ -21,9 +22,9 @@ export function StaggerText({ text, ...props }: StaggerTextProps) {
           initial={{ opacity: 0, y: "0.35em" }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
-            delay: index * 0.08,
-            duration: 0.48,
-            ease: [0.22, 1, 0.36, 1],
+            delay: index * motionTokens.stagger.interval,
+            duration: motionTokens.duration.staggerText,
+            ease: motionTokens.easing.standard,
           }}
           style={{ display: "inline-block" }}
           key={`${word}-${index}`}

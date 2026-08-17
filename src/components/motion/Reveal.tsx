@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import type { HTMLMotionProps } from "motion/react";
 import type { ReactNode } from "react";
+import { motionTokens } from "../../tokens/motion";
 
 type RevealProps = Omit<HTMLMotionProps<"div">, "children"> & {
   children: ReactNode;
@@ -18,8 +19,8 @@ export function Reveal({ children, delay = 0, once = true, style, ...props }: Re
       viewport={{ once, amount: 0.24 }}
       transition={{
         delay,
-        duration: reducedMotion ? 0 : 0.64,
-        ease: [0.16, 1, 0.3, 1],
+        duration: reducedMotion ? 0 : motionTokens.duration.slow,
+        ease: motionTokens.easing.cinematic,
       }}
       style={style}
       {...props}

@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import tsPlugin from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import astro from "eslint-plugin-astro";
 
@@ -10,6 +11,9 @@ export default [
   ...astro.configs["flat/recommended"],
   {
     files: ["**/*.{ts,tsx}"],
+    plugins: {
+      "@typescript-eslint": tsPlugin,
+    },
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -21,6 +25,8 @@ export default [
     },
     rules: {
       "no-undef": "off",
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "error",
     },
   },
 ];

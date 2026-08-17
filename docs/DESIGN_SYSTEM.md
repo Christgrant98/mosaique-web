@@ -181,6 +181,8 @@ Motion rules:
 
 Reveal distances, stagger intervals, and crossfade timings are tokens. Reduced motion should remove non-essential movement while preserving state changes.
 
+Motion tokens deliberately have two synchronized representations: CSS custom properties in `src/styles/tokens/` for CSS, Tailwind, and layout motion; and TypeScript values in `src/tokens/motion.ts` for Motion and React runtime. Their conceptual names and values must remain equivalent. This avoids runtime CSS-variable reads, scattered component hardcodes, and unnecessary token-generation infrastructure.
+
 ## 9. Layering
 
 Semantic z-index scale:

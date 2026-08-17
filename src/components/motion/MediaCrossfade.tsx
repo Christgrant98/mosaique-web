@@ -1,5 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import type { CSSProperties } from "react";
+import { motionTokens } from "../../tokens/motion";
 
 type MediaCrossfadeItem = {
   id: string;
@@ -37,8 +38,8 @@ export function MediaCrossfade({ activeId, className, items }: MediaCrossfadePro
           animate={{ opacity: 1, scale: 1 }}
           exit={reducedMotion ? undefined : { opacity: 0, scale: 1.02 }}
           transition={{
-            duration: reducedMotion ? 0 : 0.64,
-            ease: [0.16, 1, 0.3, 1],
+            duration: reducedMotion ? 0 : motionTokens.duration.slow,
+            ease: motionTokens.easing.cinematic,
           }}
           style={{
             blockSize: "100%",
