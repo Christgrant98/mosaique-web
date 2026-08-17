@@ -1,0 +1,64 @@
+---
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+import Heading from "../ui/Heading.astro";
+import Text from "../ui/Text.astro";
+import { heroContent } from "../../content/home/hero";
+
+import "../../styles/sections/home-entry.css";
+
+const [heroBrand, heroCategory] = heroContent.brand.split(" ");
+---
+
+<section class="home-hero" id="top" aria-labelledby="home-hero-title">
+  <div class="home-hero__scene">
+    <figure
+      class="home-hero__media"
+      data-media-status={heroContent.media.status}
+      style={`--home-hero-media-position:${heroContent.media.position};`}
+    >
+      {
+        heroContent.media.src ? (
+          <img src={heroContent.media.src} alt={heroContent.media.alt} loading="eager" />
+        ) : (
+          <div class="home-hero__media-placeholder" aria-hidden="true">
+            <span></span>
+            <span></span>
+          </div>
+        )
+      }
+      <figcaption>{heroContent.overlay}</figcaption>
+    </figure>
+
+    <Container class="home-hero__stage">
+      <p class="home-hero__brand" aria-hidden="true">
+        <span>{heroBrand}</span>
+        <span>{heroCategory}</span>
+      </p>
+
+      <div class="home-hero__final-state">
+        <Heading as="h1" variant="heading-lg" class="home-hero__title" id="home-hero-title">
+          {heroContent.title}
+        </Heading>
+        <Button class="home-hero__primary-action" href={heroContent.actions.primary.href}>
+          {heroContent.actions.primary.label}
+        </Button>
+      </div>
+    </Container>
+  </div>
+
+  <div class="home-hero__handoff">
+    <Container class="home-hero__handoff-inner">
+      <Text as="span" variant="caption" tone="primary" class="home-hero__eyebrow">
+        {heroContent.eyebrow}
+      </Text>
+      <div class="home-hero__copy">
+        <Text variant="body-lg" tone="primary">{heroContent.subtitle}</Text>
+        <Text>{heroContent.supportingText}</Text>
+        <Button href={heroContent.actions.secondary.href} variant="secondary">
+          {heroContent.actions.secondary.label}
+        </Button>
+      </div>
+    </Container>
+  </div>
+</section>

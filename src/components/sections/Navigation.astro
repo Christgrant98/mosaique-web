@@ -1,0 +1,65 @@
+---
+import Container from "../ui/Container.astro";
+import { navigationContent } from "../../content/home/navigation";
+
+import "../../styles/sections/home-entry.css";
+
+const homeLabel = navigationContent.items[0].label;
+---
+
+<header class="site-navigation">
+  <Container class="site-navigation__inner">
+    <a class="site-navigation__contact" href={navigationContent.cta.href}>
+      <span aria-hidden="true">+</span>
+      <span class="site-navigation__contact-label">{navigationContent.cta.label}</span>
+    </a>
+
+    <a
+      class="site-navigation__brand"
+      href="#top"
+      aria-label={`${navigationContent.logo} — ${homeLabel}`}
+    >
+      <span>{navigationContent.logo}</span>
+    </a>
+
+    <details class="site-navigation__menu">
+      <summary>Menú</summary>
+      <nav aria-label="Navegación móvil">
+        <ul>
+          {
+            navigationContent.items.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </details>
+  </Container>
+</header>
+
+<script>
+  document.querySelectorAll<HTMLDetailsElement>(".site-navigation__menu").forEach((menu) => {
+    const summary = menu.querySelector<HTMLElement>("summary");
+
+    menu.addEventListener("click", (event) => {
+      if ((event.target as Element).closest("a")) {
+        menu.open = false;
+      }
+    });
+
+    document.addEventListener("pointerdown", (event) => {
+      if (menu.open && !menu.contains(event.target as Node)) {
+        menu.open = false;
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menu.open) {
+        menu.open = false;
+        summary?.focus();
+      }
+    });
+  });
+</script>

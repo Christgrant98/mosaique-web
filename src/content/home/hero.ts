@@ -1,6 +1,7 @@
 import type { ContentLink } from "../types";
 
 export const heroContent = {
+  brand: "MOSAÏQUE EVENTS",
   eyebrow: "EVENTOS · PRODUCCIÓN · EXPERIENCIAS",
   title: "Creamos eventos que se viven, se recuerdan y se comparten.",
   subtitle:
@@ -12,4 +13,10 @@ export const heroContent = {
     secondary: { label: "Ver servicios", href: "#services" } satisfies ContentLink,
   },
   overlay: "Every detail has its place.",
+  media: {
+    status: "pending",
+    src: null as string | null,
+    alt: "",
+    position: "center",
+  },
 } as const;

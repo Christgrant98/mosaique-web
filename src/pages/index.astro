@@ -1,32 +1,19 @@
 ---
-import Container from "../components/ui/Container.astro";
-import Heading from "../components/ui/Heading.astro";
-import Section from "../components/ui/Section.astro";
-import Stack from "../components/ui/Stack.astro";
-import Text from "../components/ui/Text.astro";
 import PanelReveal from "../components/motion/PanelReveal.astro";
+import Hero from "../components/sections/Hero.astro";
+import Navigation from "../components/sections/Navigation.astro";
 import ServicesIntro from "../components/sections/ServicesIntro.astro";
 import StickyServices from "../components/sections/StickyServices.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Mosaïque Web Foundation"
-  description="Technical and visual foundation for Mosaïque Web."
+  title="MOSAÏQUE EVENTS — Eventos en Montréal"
+  description="Empresa integral de eventos en Montréal especializada en organización, producción, montaje y experiencias."
 >
+  <Navigation />
   <main>
-    <Section minViewport>
-      <Container narrow>
-        <Stack gap="content">
-          <Text as="span" variant="caption" tone="secondary">Foundation</Text>
-          <Heading as="h1" variant="display-lg">Mosaïque Web</Heading>
-          <Text variant="body-lg">
-            Design tokens, layout primitives, media rules, and motion primitives are ready for
-            the next implementation phase.
-          </Text>
-        </Stack>
-      </Container>
-    </Section>
+    <Hero />
     <PanelReveal>
       <ServicesIntro slot="lead" />
       <StickyServices />
