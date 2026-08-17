@@ -151,8 +151,10 @@
 .services-spike__progress-bar {
   background: var(--color-accent);
   block-size: 100%;
-  inline-size: calc(var(--scroll-linked-progress, 0) * 100%);
-  transition: inline-size var(--motion-duration-fast) linear;
+  inline-size: 100%;
+  transform: scaleX(var(--scroll-linked-progress, 0));
+  transform-origin: left center;
+  transition: transform var(--motion-duration-fast) linear;
 }
 
 @media (min-width: 48rem) {
@@ -183,9 +185,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .services-spike__media-panel,
-  .services-spike__item,
-  .services-spike__progress-bar {
+  .services-spike__item {
     transform: none;
+    transition: none;
+  }
+
+  .services-spike__progress-bar {
     transition: none;
   }
 

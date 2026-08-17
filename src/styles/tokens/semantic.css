@@ -12,7 +12,7 @@
   --color-accent-contrast: var(--color-green-900);
   --color-border-default: color-mix(in oklab, var(--color-green-900) 22%, transparent);
   --color-border-strong: color-mix(in oklab, var(--color-green-900) 42%, transparent);
-  --color-overlay: rgb(11 36 28 / 0.72);
+  --color-overlay: color-mix(in srgb, var(--color-primary) 72%, transparent);
 }
 
 :root {
@@ -21,7 +21,7 @@
   --color-text-inverse: var(--color-inverse);
   --color-text-muted: var(--color-muted);
   --color-border-subtle: var(--color-border-default);
-  --color-overlay-image: rgb(11 36 28 / 0.34);
+  --color-overlay-image: color-mix(in srgb, var(--color-primary) 34%, transparent);
   --color-overlay-modal: var(--color-overlay);
   --color-accent-muted: color-mix(in oklab, var(--color-accent) 24%, var(--color-background));
 
