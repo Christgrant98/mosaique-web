@@ -1,0 +1,207 @@
+.final-cta {
+  background: var(--color-background-inverse);
+  color: var(--color-text-inverse);
+  overflow: clip;
+}
+
+.final-cta__content {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-block-size: 30rem;
+  padding-block: clamp(var(--space-10), 4vw, var(--space-16));
+  text-align: center;
+}
+
+.final-cta__content h2,
+.final-cta__content > p {
+  margin: 0;
+}
+
+.final-cta__content h2 {
+  font-size: clamp(2.75rem, 4.5vw, 3.5rem);
+  max-inline-size: 15ch;
+  text-wrap: balance;
+}
+
+.final-cta__content > p:not(.final-cta__closing) {
+  color: color-mix(in oklab, var(--color-text-inverse) 78%, transparent);
+  margin-block-start: var(--space-5);
+  max-inline-size: 58ch;
+}
+
+.final-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  justify-content: center;
+  margin-block-start: var(--space-6);
+}
+
+.final-cta .final-cta__action--primary {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.final-cta .final-cta__action--secondary {
+  border-color: color-mix(in oklab, var(--color-text-inverse) 52%, transparent);
+  color: var(--color-text-inverse);
+}
+
+.final-cta .final-cta__action--secondary:hover {
+  background: color-mix(in oklab, var(--color-text-inverse) 10%, transparent);
+}
+
+.final-cta__closing {
+  border-block-start: 1px solid color-mix(in oklab, var(--color-text-inverse) 24%, transparent);
+  font-family: var(--font-family-display);
+  font-size: clamp(1rem, 1.7vw, 1.25rem);
+  line-height: 1.3;
+  margin-block-start: var(--space-6) !important;
+  max-inline-size: 42ch;
+  padding-block-start: var(--space-4);
+  text-wrap: balance;
+}
+
+.final-cta__gallery {
+  block-size: clamp(16rem, 30vw, 25rem);
+  overflow: hidden;
+}
+
+.final-cta__track {
+  animation: final-cta-gallery-loop var(--motion-marquee-duration) linear infinite;
+  block-size: 100%;
+  display: flex;
+  inline-size: max-content;
+  will-change: transform;
+}
+
+.final-cta__group {
+  block-size: 100%;
+  display: grid;
+  flex: none;
+  gap: var(--space-2);
+  grid-auto-columns: clamp(12rem, 19vw, 18rem);
+  grid-auto-flow: column;
+  padding-inline-end: var(--space-2);
+}
+
+.final-cta__media {
+  background: var(--color-accent);
+  block-size: 100%;
+  margin: 0;
+  min-inline-size: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.final-cta__media span {
+  display: block;
+  position: absolute;
+}
+
+.final-cta__media span:first-child {
+  background: var(--color-primary);
+  block-size: 118%;
+  inline-size: 48%;
+  inset: -8% auto auto 20%;
+  opacity: 0.8;
+  transform: skewX(-12deg);
+}
+
+.final-cta__media span:last-child {
+  background: color-mix(in oklab, var(--color-primary) 68%, var(--color-accent));
+  block-size: 52%;
+  inline-size: 78%;
+  inset: auto -16% 0 auto;
+  opacity: 0.72;
+  transform: skewX(18deg);
+}
+
+.final-cta__media[data-tone="02"],
+.final-cta__media[data-tone="05"] {
+  background: var(--color-surface-muted);
+}
+
+.final-cta__media[data-tone="02"] span:first-child,
+.final-cta__media[data-tone="05"] span:first-child {
+  background: var(--color-accent);
+  inline-size: 68%;
+  inset-inline-start: -8%;
+  transform: skewX(14deg);
+}
+
+.final-cta__media[data-tone="02"] span:last-child,
+.final-cta__media[data-tone="05"] span:last-child {
+  background: var(--color-secondary);
+}
+
+.final-cta__media[data-tone="03"] {
+  background: var(--color-secondary);
+}
+
+.final-cta__media[data-tone="03"] span:first-child {
+  background: var(--color-surface-muted);
+  inset-inline-start: 42%;
+}
+
+.final-cta__media[data-tone="04"] span:first-child {
+  inline-size: 64%;
+  inset-inline-start: -10%;
+  transform: skewX(16deg);
+}
+
+@keyframes final-cta-gallery-loop {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 39.99rem) {
+  .final-cta__content {
+    min-block-size: 34rem;
+  }
+
+  .final-cta__actions {
+    align-items: stretch;
+    flex-direction: column;
+    inline-size: 100%;
+  }
+
+  .final-cta__action {
+    inline-size: 100%;
+  }
+
+  .final-cta__gallery {
+    block-size: 17rem;
+  }
+
+  .final-cta__group {
+    grid-auto-columns: 11rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .final-cta__track {
+    animation: none;
+    inline-size: 100%;
+    transform: none;
+    will-change: auto;
+  }
+
+  .final-cta__group {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    inline-size: 100%;
+  }
+
+  .final-cta__media:nth-child(n + 4) {
+    display: none;
+  }
+
+  .final-cta__group[data-duplicate="true"] {
+    display: none;
+  }
+}

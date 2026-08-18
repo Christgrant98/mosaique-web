@@ -106,9 +106,20 @@ This document is the source of truth for implementation status. The existence of
 
 - **Implementation: complete.** Eight native disclosure items render from `src/content/home/faq.ts` after Process.
 - The section uses semantic `details` and `summary` elements, so pointer and keyboard interaction work without React, custom JavaScript, or event listeners.
-- Desktop uses a sticky heading beside the disclosure list; tablet and mobile use a linear reading flow with constrained long questions and answers.
-- The section is motion-free, and reduced motion preserves the same native interaction.
-- **Fidelity Pass: not started.** Final spacing and visual comparison against Movra remain pending.
+- **Fidelity Pass: complete.** Desktop follows Movra's quiet split composition with a compact label and replaceable media contract in the left rail, a central divider, and a dense disclosure list on the right.
+- Questions use compact sans-serif hierarchy and circular chevrons; answers open below their question without changing the native disclosure contract.
+- Supporting browsers receive a token-driven CSS open/close transition through `::details-content`; other browsers retain immediate native disclosure behavior without JavaScript.
+- Tablet and mobile remove the decorative media and use a constrained linear flow. Reduced motion removes the disclosure and chevron transitions while preserving immediate state changes.
+- Desktop, tablet, mobile, pointer, keyboard, long-copy constraints, document overflow, and reduced-motion code paths were validated.
+
+### Final CTA
+
+- **Implementation: complete.** The closing section renders its title, supporting copy, two actions, and closing statement from `src/content/home/finalCta.ts` after FAQ.
+- **Fidelity Pass: complete.** The composition follows Movra's closing rhythm with centered copy and actions above a continuously moving gallery at the lower edge.
+- The gallery is a CSS-only infinite loop driven by the existing `--motion-marquee-duration` token, with two identical visual groups and no hover pause, JavaScript, listeners, or React hydration.
+- Approved photography remains pending, so five replaceable CSS media states are duplicated only for visual continuity and remain hidden from assistive technology.
+- Reduced motion stops the animation, removes the duplicate group, and presents three static media panels without changing content or actions.
+- Desktop, tablet, mobile, loop movement, action constraints, content completeness, document overflow, and reduced-motion code paths were validated.
 
 ### SEO / Metadata Baseline
 
@@ -117,17 +128,16 @@ This document is the source of truth for implementation status. The existence of
 
 ## Current
 
-### FAQ - Fidelity Pass
+### Footer - Implementation
 
-- **Status: ready to begin.** The semantic disclosure implementation is complete.
-- Compare hierarchy, spacing, disclosure styling, and responsive density against Movra.
+- **Status: not started.** Content exists only in `src/content/home/footer.ts`.
 - Do not modify other validated sections during this phase.
 
 ## Next
 
-### Final CTA - Implementation
+### Footer - Fidelity Pass
 
-- **Status: not started.** Content exists only in `src/content/home/finalCta.ts`.
+- **Status: blocked by implementation.** Begin only after Footer Implementation is complete.
 
 ## Pending
 
@@ -135,15 +145,6 @@ This document is the source of truth for implementation status. The existence of
 
 - **Status: deferred for business review.** The attempted implementation was fully removed; content remains only in `src/content/home/values.ts`.
 - Revisit implementation and the Movra spotlight/floating-card reference only after business approval.
-
-### Final CTA - Fidelity Pass
-
-- **Status: blocked by implementation.** Looping media behavior must include a reduced-motion alternative.
-
-### Footer
-
-- **Implementation: not started.** Content exists only in `src/content/home/footer.ts`.
-- **Fidelity Pass: not started.**
 
 ### Storybook
 
@@ -175,7 +176,7 @@ This document is the source of truth for implementation status. The existence of
 
 ## Known Issues / Deferred Decisions
 
-- Approved production photography is unavailable. Hero, About/Milestones, Metrics, Marquee, Services, Projects, and Process currently use lightweight replaceable placeholders.
+- Approved production photography is unavailable. Hero, About/Milestones, Metrics, Marquee, Services, Projects, Process, Testimonials, FAQ, and Final CTA currently use lightweight replaceable placeholders.
 - Approved self-hosted Cinzel and Montserrat font files are pending; see `docs/DESIGN_SYSTEM.md`.
 - Services intentionally remains `client:load`; changing hydration strategy is deferred until an explicit performance phase.
 - The working tree contained an uncommitted business-copy edit in `src/content/home/services.ts` when this roadmap was created. Preserve and review it before committing unrelated work.
