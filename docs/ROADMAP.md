@@ -152,22 +152,25 @@ This document is the source of truth for implementation status. The existence of
 - Services uses one dedicated polite live region for state changes instead of two competing announcements.
 - Desktop, tablet, mobile, 320 px reflow, menu-open containment, document overflow, and reduced-motion code paths were validated. Final assistive-technology testing with real users remains part of production acceptance.
 
-### SEO / Metadata Baseline
+### SEO / Metadata
 
-- **Implementation: partial baseline complete.** Spanish document language, page title, description, viewport metadata, and favicons are present.
-- Full SEO work remains pending.
+- **Implementation: complete for the current single-page surface.** Spanish document language, descriptive title, description, robots directives, Open Graph metadata, Twitter card metadata, favicons, and Organization JSON-LD are present.
+- `SITE_URL` is the single production URL source. Canonical, `og:url`, the Organization URL, sitemap generation, and the sitemap reference in robots are emitted only when it is configured, preventing localhost or speculative domains from entering production metadata.
+- The official Astro sitemap integration generates the sitemap index and page sitemap. `robots.txt` remains valid without a configured domain and adds the absolute sitemap URL when one exists.
+- Social image tags remain intentionally absent until an approved production image is available.
 
 ## Current
 
-### SEO / Metadata
+### Deployment Sync / Verification
 
-- **Status: ready to begin.** Complete social metadata, canonical strategy, structured data, sitemap, and robots decisions.
+- **Status: initial Vercel deployment live.** `https://mosaique-web.vercel.app` responds successfully over HTTPS.
+- The live deployment currently predates the completed SEO work: redeploy the current code and configure `SITE_URL` after the definitive public domain is confirmed, then verify canonical, robots, sitemap, metadata, and runtime behavior on the deployed revision.
 
 ## Next
 
-### Production Assets
+### Business Asset Brief
 
-- **Status: pending SEO work.** Replace approved photography placeholders and add approved self-hosted fonts before final performance and deployment acceptance.
+- **Status: pending business instruction.** Obtain approved photography, self-hosted font files, social sharing artwork, and any final content decisions before the production asset pass.
 
 ## Pending
 
@@ -176,23 +179,25 @@ This document is the source of truth for implementation status. The existence of
 - **Status: deferred for business review.** The attempted implementation was fully removed; content remains only in `src/content/home/values.ts`.
 - Revisit implementation and the Movra spotlight/floating-card reference only after business approval.
 
+### Production Assets
+
+- **Status: deferred pending business instruction.** Placeholder replacement, approved fonts, responsive image optimization, and social artwork will be completed when final assets are supplied.
+
 ### Storybook
 
 - **Status: not started and not currently configured.** No Storybook dependency, stories, or build command exists.
 - Add only under an explicit phase; it is not required for current section delivery.
 
-### SEO / Metadata
-
-- **Status: pending beyond baseline.** Social metadata, canonical strategy, structured data, production URLs, sitemap/robots decisions, and final content review have not been completed.
-
 ### Vercel
 
-- **Status: not configured.** No repository Vercel project metadata, deployment configuration, or deployment workflow is present.
+- **Status: initial deployment complete.** The Vercel URL is live; synchronization of the current SEO revision, final domain configuration, and production acceptance checks remain pending.
 
 ## Known Issues / Deferred Decisions
 
 - Approved production photography is unavailable. Hero, About/Milestones, Metrics, Marquee, Services, Projects, Process, Testimonials, FAQ, and Final CTA currently use lightweight replaceable placeholders.
 - Approved self-hosted Cinzel and Montserrat font files are pending; see `docs/DESIGN_SYSTEM.md`.
+- Approved social sharing artwork is pending; `og:image` and `twitter:image` should be enabled through the existing layout prop when it is delivered.
+- The final public domain remains unconfirmed. Production must define `SITE_URL` before deployment acceptance so canonical and sitemap URLs are emitted.
 - Services uses `client:visible`; preserve its server-rendered fallback and verify hydration again when production media is introduced.
 - The working tree contained an uncommitted business-copy edit in `src/content/home/services.ts` when this roadmap was created. Preserve and review it before committing unrelated work.
 - `README.md` remains the Astro starter README. New sessions should use `AGENTS.md` and this roadmap for project-specific guidance.

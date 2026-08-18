@@ -1,15 +1,17 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import process from "node:process";
 
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
-export default defineConfig({
-  integrations: [react()],
+const site = process.env.SITE_URL;
 
-  vite: {
-    plugins: [tailwindcss()],
-  },
+export default defineConfig({
+  site,
+  integrations: [react(), ...(site ? [sitemap()] : [])],
+  vite: { plugins: [tailwindcss()] },
 });
