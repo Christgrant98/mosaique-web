@@ -8,11 +8,6 @@ const [footerBrand, ...footerCategoryParts] = footerContent.logo.split(" ");
 const footerCategory = footerCategoryParts.join(" ");
 const primaryLinks = footerContent.links.slice(0, 4);
 const secondaryLinks = footerContent.links.slice(4);
-const serviceColumns = [
-  footerContent.services.slice(0, 2),
-  footerContent.services.slice(2, 4),
-  footerContent.services.slice(4, 6),
-];
 ---
 
 <footer class="site-footer" id="footer" aria-labelledby="footer-brand">
@@ -50,7 +45,7 @@ const serviceColumns = [
         <div>
           <h3>Servicios</h3>
           <ul>
-            {footerContent.services.slice(0, 3).map((service) => <li>{service}</li>)}
+            {footerContent.services.map((service) => <li>{service}</li>)}
           </ul>
         </div>
       </nav>
@@ -65,7 +60,6 @@ const serviceColumns = [
     <div class="site-footer__middle">
       <div class="site-footer__contact-lead">
         <h3>{footerContent.contact.purpose}</h3>
-        <p>{footerContent.description}</p>
         <a class="site-footer__contact-action" href={footerContent.contact.email.href}>
           <span>{footerContent.contact.email.label}</span>
           <span aria-hidden="true">→</span>
@@ -87,18 +81,6 @@ const serviceColumns = [
             <p>{footerContent.contact.location}</p>
           </div>
         </address>
-
-        <div class="site-footer__service-columns">
-          {
-            serviceColumns.map((services) => (
-              <ul>
-                {services.map((service) => (
-                  <li>{service}</li>
-                ))}
-              </ul>
-            ))
-          }
-        </div>
       </div>
     </div>
 

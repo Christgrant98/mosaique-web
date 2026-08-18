@@ -148,19 +148,12 @@
   gap: var(--space-5);
 }
 
-.site-footer__contact-lead > p {
-  color: color-mix(in oklab, var(--color-text-inverse) 76%, transparent);
-  line-height: var(--text-body-line-height);
-  max-inline-size: 46ch;
-}
-
 .site-footer__contact-action {
   align-items: center;
   border: 1px solid color-mix(in oklab, var(--color-text-inverse) 28%, transparent);
   display: grid;
   gap: var(--space-4);
   grid-template-columns: minmax(0, 1fr) auto;
-  margin-block-start: var(--space-5);
   min-block-size: 4rem;
   padding-inline: var(--space-6);
   text-decoration: none;
@@ -175,9 +168,7 @@
 }
 
 .site-footer__details {
-  align-content: space-between;
   display: grid;
-  gap: clamp(var(--space-12), 5vw, var(--space-20));
 }
 
 .site-footer__contact {
@@ -207,24 +198,6 @@
 
 .site-footer__contact p {
   color: color-mix(in oklab, var(--color-text-inverse) 76%, transparent);
-}
-
-.site-footer__service-columns {
-  display: grid;
-  gap: var(--space-8);
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.site-footer__service-columns ul {
-  align-content: start;
-  display: grid;
-  gap: var(--space-5);
-}
-
-.site-footer__service-columns li {
-  color: color-mix(in oklab, var(--color-text-inverse) 76%, transparent);
-  line-height: 1.45;
-  overflow-wrap: anywhere;
 }
 
 .site-footer__legal {
@@ -264,6 +237,17 @@
 
   .site-footer__contact > div:last-child {
     grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 80rem) {
+  .site-footer__contact > div {
+    gap: var(--space-5);
+    grid-template-rows: auto 4rem;
+  }
+
+  .site-footer__contact > div > :last-child {
+    align-self: center;
   }
 }
 
@@ -309,11 +293,6 @@
 
   .site-footer__contact {
     gap: var(--space-6);
-    grid-template-columns: 1fr;
-  }
-
-  .site-footer__service-columns {
-    gap: var(--space-5);
     grid-template-columns: 1fr;
   }
 
