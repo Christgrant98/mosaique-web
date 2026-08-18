@@ -102,6 +102,14 @@ This document is the source of truth for implementation status. The existence of
 - The section remains Astro-only and motion-free. Replaceable CSS media placeholders are used while approved photography is pending.
 - Names, quotes, and the explicit content status remain provisional; the internal editorial note is not rendered to visitors.
 
+### FAQ
+
+- **Implementation: complete.** Eight native disclosure items render from `src/content/home/faq.ts` after Process.
+- The section uses semantic `details` and `summary` elements, so pointer and keyboard interaction work without React, custom JavaScript, or event listeners.
+- Desktop uses a sticky heading beside the disclosure list; tablet and mobile use a linear reading flow with constrained long questions and answers.
+- The section is motion-free, and reduced motion preserves the same native interaction.
+- **Fidelity Pass: not started.** Final spacing and visual comparison against Movra remain pending.
+
 ### SEO / Metadata Baseline
 
 - **Implementation: partial baseline complete.** Spanish document language, page title, description, viewport metadata, and favicons are present.
@@ -109,28 +117,28 @@ This document is the source of truth for implementation status. The existence of
 
 ## Current
 
-### Values / Spotlights - Implementation
+### FAQ - Fidelity Pass
 
-- **Status: not started.** Content exists only in `src/content/home/values.ts`.
+- **Status: ready to begin.** The semantic disclosure implementation is complete.
+- Compare hierarchy, spacing, disclosure styling, and responsive density against Movra.
 - Do not modify other validated sections during this phase.
 
 ## Next
 
-### Values / Spotlights - Fidelity Pass
+### Final CTA - Implementation
 
-- **Status: blocked by implementation.** Movra spotlight/floating-card behavior remains the reference.
+- **Status: not started.** Content exists only in `src/content/home/finalCta.ts`.
 
 ## Pending
 
-### FAQ
+### Values / Spotlights
 
-- **Implementation: not started.** Content exists only in `src/content/home/faq.ts`.
-- **Fidelity Pass: not started.** Use semantic disclosure before custom scripting.
+- **Status: deferred for business review.** The attempted implementation was fully removed; content remains only in `src/content/home/values.ts`.
+- Revisit implementation and the Movra spotlight/floating-card reference only after business approval.
 
-### Final CTA
+### Final CTA - Fidelity Pass
 
-- **Implementation: not started.** Content exists only in `src/content/home/finalCta.ts`.
-- **Fidelity Pass: not started.** Looping media behavior must include a reduced-motion alternative.
+- **Status: blocked by implementation.** Looping media behavior must include a reduced-motion alternative.
 
 ### Footer
 
