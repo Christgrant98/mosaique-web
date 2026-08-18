@@ -1,14 +1,18 @@
 ---
 import Container from "../ui/Container.astro";
+import { footerContent } from "../../content/home/footer";
 import { navigationContent } from "../../content/home/navigation";
 
 import "../../styles/sections/home-entry.css";
+import "../../styles/sections/navigation-menu.css";
 
 const homeLabel = navigationContent.items[0].label;
 const [navigationBrand, navigationCategory] = navigationContent.logo.split(" ");
 ---
 
 <header class="site-navigation">
+  <div class="site-navigation__backdrop" aria-hidden="true"></div>
+
   <Container class="site-navigation__inner">
     <a class="site-navigation__contact" href={navigationContent.cta.href}>
       <span aria-hidden="true">+</span>
@@ -25,18 +29,45 @@ const [navigationBrand, navigationCategory] = navigationContent.logo.split(" ");
     </a>
 
     <details class="site-navigation__menu">
-      <summary>Menú</summary>
-      <nav aria-label="Navegación móvil">
-        <ul>
-          {
-            navigationContent.items.map((item) => (
-              <li>
-                <a href={item.href}>{item.label}</a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
+      <summary>
+        <span class="site-navigation__menu-open-icon" aria-hidden="true"></span>
+        <span class="site-navigation__menu-open-label">Menú</span>
+        <span class="site-navigation__menu-close-icon" aria-hidden="true"></span>
+        <span class="site-navigation__menu-close-label">Cerrar</span>
+      </summary>
+
+      <div class="site-navigation__menu-panel">
+        <nav aria-label="Navegación principal">
+          <ul>
+            {
+              navigationContent.items.map((item) => (
+                <li>
+                  <a href={item.href}>{item.label}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+
+        <div class="site-navigation__menu-footer">
+          <div class="site-navigation__menu-contact">
+            <address>{footerContent.contact.location}</address>
+            <a href={footerContent.contact.email.href}>
+              <span>{footerContent.contact.purpose}</span>
+              <strong>{footerContent.contact.email.label}</strong>
+            </a>
+          </div>
+
+          <div class="site-navigation__menu-media">
+            <div class="site-navigation__menu-media-placeholder" aria-hidden="true">
+              <span>{navigationContent.logo}</span>
+              <span></span>
+              <span></span>
+            </div>
+            <p>{footerContent.legal}</p>
+          </div>
+        </div>
+      </div>
     </details>
   </Container>
 </header>
@@ -44,6 +75,21 @@ const [navigationBrand, navigationCategory] = navigationContent.logo.split(" ");
 <script>
   document.querySelectorAll<HTMLDetailsElement>(".site-navigation__menu").forEach((menu) => {
     const summary = menu.querySelector<HTMLElement>("summary");
+    const root = document.documentElement;
+    let previousOverflow = "";
+
+    const getFocusableElements = () =>
+      Array.from(menu.querySelectorAll<HTMLElement>("summary, a[href]"));
+
+    menu.addEventListener("toggle", () => {
+      if (menu.open) {
+        previousOverflow = root.style.overflow;
+        root.style.overflow = "hidden";
+        menu.scrollTop = 0;
+      } else {
+        root.style.overflow = previousOverflow;
+      }
+    });
 
     menu.addEventListener("click", (event) => {
       if ((event.target as Element).closest("a")) {
@@ -58,9 +104,28 @@ const [navigationBrand, navigationCategory] = navigationContent.logo.split(" ");
     });
 
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && menu.open) {
+      if (!menu.open) return;
+
+      if (event.key === "Escape") {
         menu.open = false;
         summary?.focus();
+        return;
+      }
+
+      if (event.key === "Tab") {
+        const focusableElements = getFocusableElements();
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements.at(-1);
+
+        if (!firstElement || !lastElement) return;
+
+        if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
+        }
       }
     });
   });
