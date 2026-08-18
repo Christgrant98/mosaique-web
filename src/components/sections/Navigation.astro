@@ -51,9 +51,10 @@ const [navigationBrand, navigationCategory] = navigationContent.logo.split(" ");
 
         <div class="site-navigation__menu-footer">
           <div class="site-navigation__menu-contact">
-            <address>{footerContent.contact.location}</address>
+            <a href={footerContent.contact.phone.href}>
+              <strong>{footerContent.contact.phone.label}</strong>
+            </a>
             <a href={footerContent.contact.email.href}>
-              <span>{footerContent.contact.purpose}</span>
               <strong>{footerContent.contact.email.label}</strong>
             </a>
           </div>

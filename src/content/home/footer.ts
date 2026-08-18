@@ -24,6 +24,10 @@ export const footerContent = {
   contact: {
     location: "Montréal, Québec",
     purpose: "Cotizaciones y alianzas",
+    phone: {
+      label: "438 459 0481",
+      href: "tel:+14384590481",
+    } satisfies ContentLink,
     email: {
       label: "info@mosaique-events.com",
       href: "mailto:info@mosaique-events.com",
