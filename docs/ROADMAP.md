@@ -53,6 +53,14 @@ This document is the source of truth for implementation status. The existence of
 - **Fidelity Pass: complete.** Sticky media, seven service states, panel transition, scroll pacing, responsive behavior, and reduced motion were validated.
 - React is limited to the interactive Services scene and currently hydrates with `client:load`.
 
+### Projects / Experiences
+
+- **Implementation: complete.** Five project categories render from `src/content/home/projects.ts` in an Astro section.
+- **Fidelity Pass: complete.** Desktop now follows the Movra editorial split with project context and manual controls beside a portrait-media carousel; tablet and mobile use static two-column and single-column reading flows.
+- The desktop carousel uses native horizontal scrolling, scroll snap, touch/keyboard scrolling, accessible previous/next controls, announced active state, and no automatic advance.
+- Placeholder media remains lightweight and replaceable while approved photography is pending.
+- Desktop, tablet, mobile, reduced-motion behavior, overflow, and all five navigation states were validated.
+
 ### SEO / Metadata Baseline
 
 - **Implementation: partial baseline complete.** Spanish document language, page title, description, viewport metadata, and favicons are present.
@@ -60,25 +68,19 @@ This document is the source of truth for implementation status. The existence of
 
 ## Current
 
-### Projects / Experiences - Implementation
+### Metrics - Implementation
 
-- **Status: not started.** The content model exists in `src/content/home/projects.ts`; no Projects section or page composition exists yet.
-- Inspect the content, Movra manual-project-slider reference, available primitives, and approved media status before implementation.
-- Complete implementation only, then stop and report. Do not combine implementation and fidelity into an undocumented single state.
+- **Status: not started.** Content exists only in `src/content/home/metrics.ts`.
+- Inspect the Movra bento-metrics reference and approved media status before implementation.
+- Do not start until explicitly requested.
 
 ## Next
 
-### Projects / Experiences - Fidelity Pass
+### Metrics - Fidelity Pass
 
-- Compare composition, project-media role, controls, viewport usage, manual interaction, responsive behavior, and reduced motion against supplied Movra references.
-- Do not start until Projects / Experiences implementation has been reviewed and marked complete.
+- **Status: blocked by implementation.** Compare composition, responsive behavior, and motion only after the section exists.
 
 ## Pending
-
-### Metrics
-
-- **Implementation: not started.** Content exists only in `src/content/home/metrics.ts`.
-- **Fidelity Pass: not started.** Movra bento metrics are documented as a reference.
 
 ### Why Choose Us
 
@@ -150,7 +152,7 @@ This document is the source of truth for implementation status. The existence of
 
 ## Known Issues / Deferred Decisions
 
-- Approved production photography is unavailable. Hero, About/Milestones, and Services currently use lightweight replaceable placeholders.
+- Approved production photography is unavailable. Hero, About/Milestones, Services, and Projects currently use lightweight replaceable placeholders.
 - Approved self-hosted Cinzel and Montserrat font files are pending; see `docs/DESIGN_SYSTEM.md`.
 - Services intentionally remains `client:load`; changing hydration strategy is deferred until an explicit performance phase.
 - The working tree contained an uncommitted business-copy edit in `src/content/home/services.ts` when this roadmap was created. Preserve and review it before committing unrelated work.
