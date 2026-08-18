@@ -16,7 +16,7 @@ const serviceColumns = [
 ---
 
 <footer class="site-footer" id="footer" aria-labelledby="footer-brand">
-  <Container>
+  <Container bleed class="site-footer__container">
     <h2 class="site-footer__sr-only" id="footer-brand">{footerContent.logo}</h2>
 
     <div class="site-footer__top">
@@ -74,8 +74,18 @@ const serviceColumns = [
 
       <div class="site-footer__details">
         <address class="site-footer__contact">
-          <a href={footerContent.contact.email.href}>{footerContent.contact.email.label}</a>
-          <p>{footerContent.contact.location}</p>
+          <div>
+            <span>Teléfono</span>
+            <a href={footerContent.contact.phone.href}>{footerContent.contact.phone.label}</a>
+          </div>
+          <div>
+            <span>Email</span>
+            <a href={footerContent.contact.email.href}>{footerContent.contact.email.label}</a>
+          </div>
+          <div>
+            <span>Ubicación</span>
+            <p>{footerContent.contact.location}</p>
+          </div>
         </address>
 
         <div class="site-footer__service-columns">

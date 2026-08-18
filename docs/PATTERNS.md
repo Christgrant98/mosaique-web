@@ -54,7 +54,7 @@ The consumer owns:
 - section layout, sticky boundaries, responsive composition, and visual transitions;
 - the meaning communicated by active and inactive states.
 
-Services is the first consumer. Its section layer supplies service data, renders the copy and placeholder media, and owns every `services-spike` class. The current fidelity pass also composes the section with the neutral Astro `PanelReveal` primitive, which provides the sticky handoff without knowing Services content or styling.
+Services is the first consumer. Its section layer supplies service data, renders the copy and placeholder media, and owns every `services-spike` class. After removing ServicesIntro from the page, Marquee remains an independent preceding section while the neutral Astro `PanelReveal` primitive gives Services a panel-only overlap across the final viewport. Services retains its own sticky-media behavior inside that revealed panel.
 
 ### Responsive behavior
 

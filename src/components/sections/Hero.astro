@@ -66,10 +66,16 @@ const [heroBrand, heroCategory] = heroContent.brand.split(" ");
       const captionProgress = rangeProgress(progress, 0.64, 0.88);
 
       if (heroBrand && navigationBrand) {
+        const currentScale =
+          Number.parseFloat(hero.style.getPropertyValue("--hero-brand-scale")) || 1;
+        const heroBrandRect = heroBrand.getBoundingClientRect();
+        const heroBrandTop = Number.parseFloat(window.getComputedStyle(heroBrand).top);
         const navigationBrandRect = navigationBrand.getBoundingClientRect();
-        const heroBrandCenter = heroBrand.offsetTop + heroBrand.offsetHeight / 2;
+        const heroBrandWidth = heroBrandRect.width / currentScale;
+        const heroBrandHeight = heroBrandRect.height / currentScale;
+        const heroBrandCenter = heroBrandTop + heroBrandHeight / 2;
         const navigationBrandCenter = navigationBrandRect.top + navigationBrandRect.height / 2;
-        const targetScale = navigationBrandRect.width / heroBrand.offsetWidth;
+        const targetScale = navigationBrandRect.width / heroBrandWidth;
 
         hero.style.setProperty("--hero-brand-opacity", String(1 - brandHandoffProgress));
         hero.style.setProperty(

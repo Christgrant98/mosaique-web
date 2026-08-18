@@ -2,13 +2,14 @@
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"div"> {
+  overlap?: boolean;
   panelClass?: string;
 }
 
-const { class: className, panelClass, ...attrs } = Astro.props;
+const { class: className, overlap = false, panelClass, ...attrs } = Astro.props;
 ---
 
-<div class:list={["panel-reveal", className]} {...attrs}>
+<div class:list={["panel-reveal", { "panel-reveal--overlap": overlap }, className]} {...attrs}>
   <div class="panel-reveal__lead">
     <slot name="lead" />
   </div>
@@ -32,7 +33,19 @@ const { class: className, panelClass, ...attrs } = Astro.props;
     z-index: var(--primitive-z-content);
   }
 
+  .panel-reveal--overlap {
+    margin-block-start: -100svh;
+  }
+
+  .panel-reveal--overlap .panel-reveal__lead {
+    pointer-events: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
+    .panel-reveal--overlap {
+      margin-block-start: 0;
+    }
+
     .panel-reveal__lead {
       position: relative;
     }

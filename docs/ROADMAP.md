@@ -49,8 +49,8 @@ This document is the source of truth for implementation status. The existence of
 
 ### Services
 
-- **Implementation: complete.** ServicesIntro, PanelReveal, StickyServices, ServicesScene, and the neutral ScrollLinkedScene pattern are integrated.
-- **Fidelity Pass: complete.** Sticky media, seven service states, panel transition, scroll pacing, responsive behavior, and reduced motion were validated.
+- **Implementation: complete.** StickyServices, ServicesScene, PanelReveal, and the neutral ScrollLinkedScene pattern are integrated. ServicesIntro was removed from the page; Marquee remains an independent preceding section while a panel-only overlap lets Services reveal over its final viewport.
+- **Fidelity Pass: complete.** Section overlap, sticky media, seven service states, scroll pacing, responsive behavior, and reduced motion were validated.
 - React is limited to the interactive Services scene and hydrates with `client:visible`.
 
 ### Projects / Experiences
@@ -124,7 +124,7 @@ This document is the source of truth for implementation status. The existence of
 ### Footer
 
 - **Implementation: complete.** A semantic footer landmark renders brand, description, seven navigation links, six service labels, contact details, closing statement, and legal copy from `src/content/home/footer.ts` after `main`.
-- **Fidelity Pass: complete.** The footer continues Final CTA's inverse background and follows Movra's two-band closing rhythm with compact navigation groups, a framed Mosaïque logo wall, a contact action, service columns, and legal copy at the lower edge.
+- **Fidelity Pass: complete.** Final CTA now hands off through a compact edge-padded visual strip into Movra's two-row footer composition: aligned 50/50 desktop grids, inset vertical dividers, full-width horizontal dividers, three navigation groups, the framed Mosaïque brand grid, contact CTA and verified contact details, a six-item service grid, and the closing copy at opposite lower edges.
 - Desktop uses paired information bands, tablet stacks those bands, and mobile follows a linear reading order without introducing reference-only newsletter, partner brands, social links, or legal destinations.
 - The footer is Astro-only and contains no runtime JavaScript or motion; reduced motion therefore preserves the same static experience.
 - Handoff color, link destinations, mail link, content completeness, desktop, tablet, mobile, long-copy constraints, and document overflow were validated.

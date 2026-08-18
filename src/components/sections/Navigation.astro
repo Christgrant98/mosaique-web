@@ -24,8 +24,10 @@ const [navigationBrand, navigationCategory] = navigationContent.logo.split(" ");
       href="#top"
       aria-label={`${navigationContent.logo} — ${homeLabel}`}
     >
-      <span>{navigationBrand}</span>
-      <span>{navigationCategory}</span>
+      <span class="site-navigation__brand-line" aria-hidden="true">
+        <span>{navigationBrand}</span>
+        <span>{navigationCategory}</span>
+      </span>
     </a>
 
     <details class="site-navigation__menu">
