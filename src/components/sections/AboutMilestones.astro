@@ -4,6 +4,7 @@ import Heading from "../ui/Heading.astro";
 import Section from "../ui/Section.astro";
 import Text from "../ui/Text.astro";
 import { aboutContent } from "../../content/home/about";
+import { metricsContent } from "../../content/home/metrics";
 import { milestonesContent } from "../../content/home/milestones";
 
 import "../../styles/sections/about-milestones.css";
@@ -57,6 +58,92 @@ import "../../styles/sections/about-milestones.css";
           }
         </ol>
       </section>
+
+      <section class="about-milestones__metrics" aria-label={metricsContent.title}>
+        <ol class="about-milestones__metrics-list">
+          {
+            metricsContent.items.map((item) => {
+              const numericValue = item.value.match(/^(\d+)(.*)$/);
+
+              return (
+                <li class="about-milestones__metric">
+                  <article>
+                    <p class="about-milestones__metric-value" aria-label={item.value}>
+                      {numericValue ? (
+                        <span aria-hidden="true">
+                          <span data-metric-count data-count-to={numericValue[1]}>
+                            {numericValue[1]}
+                          </span>
+                          {numericValue[2]}
+                        </span>
+                      ) : (
+                        item.value
+                      )}
+                    </p>
+                    <Text>{item.label}</Text>
+                  </article>
+                </li>
+              );
+            })
+          }
+        </ol>
+      </section>
     </div>
   </Container>
 </Section>
+
+<script>
+  import { motionTokens } from "../../tokens/motion";
+
+  document.querySelectorAll<HTMLElement>(".about-milestones__metrics").forEach((section) => {
+    if (section.dataset.countReady === "true") return;
+
+    section.dataset.countReady = "true";
+
+    const counters = Array.from(section.querySelectorAll<HTMLElement>("[data-metric-count]"));
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (reducedMotion.matches || counters.length === 0) return;
+
+    counters.forEach((counter) => {
+      counter.textContent = "0";
+    });
+
+    let frameId = 0;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+
+        observer.disconnect();
+        const startedAt = performance.now();
+        const duration = motionTokens.duration.slow * 1000;
+
+        const update = (now: number) => {
+          const progress = Math.min((now - startedAt) / duration, 1);
+          const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+          counters.forEach((counter) => {
+            const target = Number(counter.dataset.countTo ?? 0);
+            counter.textContent = String(Math.round(target * easedProgress));
+          });
+
+          if (progress < 1) frameId = window.requestAnimationFrame(update);
+        };
+
+        frameId = window.requestAnimationFrame(update);
+      },
+      { threshold: 0.35 },
+    );
+
+    observer.observe(section);
+
+    window.addEventListener(
+      "pagehide",
+      () => {
+        observer.disconnect();
+        if (frameId) window.cancelAnimationFrame(frameId);
+      },
+      { once: true },
+    );
+  });
+</script>

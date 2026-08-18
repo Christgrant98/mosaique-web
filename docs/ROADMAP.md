@@ -61,6 +61,13 @@ This document is the source of truth for implementation status. The existence of
 - Placeholder media remains lightweight and replaceable while approved photography is pending.
 - Desktop, tablet, mobile, reduced-motion behavior, overflow, and all five navigation states were validated.
 
+### Metrics
+
+- **Implementation: complete.** Three active metrics render from `src/content/home/metrics.ts` inside `AboutMilestones.astro`, immediately after the milestone list rather than as a standalone page section.
+- **Fidelity Pass: complete.** The existing sticky About media accompanies the metric tiles, the redundant Metrics media placeholder was removed, and the responsive composition follows the supplied Movra reference.
+- Numeric values count from zero once when the block enters the viewport using IntersectionObserver, requestAnimationFrame, and the shared runtime motion duration; reduced motion preserves final values without animation.
+- Desktop, tablet, mobile, overflow, count states, content completeness, and reduced-motion behavior were validated.
+
 ### SEO / Metadata Baseline
 
 - **Implementation: partial baseline complete.** Spanish document language, page title, description, viewport metadata, and favicons are present.
@@ -68,24 +75,19 @@ This document is the source of truth for implementation status. The existence of
 
 ## Current
 
-### Metrics - Implementation
+### Why Choose Us - Implementation
 
-- **Status: not started.** Content exists only in `src/content/home/metrics.ts`.
-- Inspect the Movra bento-metrics reference and approved media status before implementation.
+- **Status: not started.** Content exists only in `src/content/home/whyChooseUs.ts`.
+- Inspect the Movra grouped editorial-card reference and approved media status before implementation.
 - Do not start until explicitly requested.
 
 ## Next
 
-### Metrics - Fidelity Pass
+### Why Choose Us - Fidelity Pass
 
-- **Status: blocked by implementation.** Compare composition, responsive behavior, and motion only after the section exists.
+- **Status: blocked by implementation.** Compare composition, hierarchy, responsive behavior, and any required motion only after the section exists.
 
 ## Pending
-
-### Why Choose Us
-
-- **Implementation: not started.** Content exists only in `src/content/home/whyChooseUs.ts`.
-- **Fidelity Pass: not started.**
 
 ### Marquee
 
@@ -152,7 +154,7 @@ This document is the source of truth for implementation status. The existence of
 
 ## Known Issues / Deferred Decisions
 
-- Approved production photography is unavailable. Hero, About/Milestones, Services, and Projects currently use lightweight replaceable placeholders.
+- Approved production photography is unavailable. Hero, About/Milestones, Metrics, Services, and Projects currently use lightweight replaceable placeholders.
 - Approved self-hosted Cinzel and Montserrat font files are pending; see `docs/DESIGN_SYSTEM.md`.
 - Services intentionally remains `client:load`; changing hydration strategy is deferred until an explicit performance phase.
 - The working tree contained an uncommitted business-copy edit in `src/content/home/services.ts` when this roadmap was created. Preserve and review it before committing unrelated work.
