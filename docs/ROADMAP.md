@@ -85,6 +85,14 @@ This document is the source of truth for implementation status. The existence of
 - Reduced motion removes the sticky scroll distance and staged reveal, hides the visual duplicate, and presents the statement and ticker as a static full-viewport composition.
 - Desktop, tablet, mobile, document overflow, scroll-linked stability, section handoff, content duplication semantics, and reduced-motion behavior were validated.
 
+### Process
+
+- **Implementation: complete.** Five semantic steps render from `src/content/home/process.ts` after Projects / Experiences.
+- **Fidelity Pass: complete.** Desktop follows the Movra editorial split with a bounded sticky media contract on the left, compact process rows on the right, and a quiet central divider.
+- Tablet preserves the split while stacking each row's title and description; mobile removes the placeholder media and uses a single-column reading flow.
+- The section remains Astro-only with CSS sticky and no React, JavaScript, scroll listeners, or active-state machinery.
+- Reduced motion returns the media to normal document flow. Desktop, tablet, mobile, sticky boundaries, content completeness, and document overflow were validated.
+
 ### SEO / Metadata Baseline
 
 - **Implementation: partial baseline complete.** Spanish document language, page title, description, viewport metadata, and favicons are present.
@@ -92,24 +100,19 @@ This document is the source of truth for implementation status. The existence of
 
 ## Current
 
-### Process - Implementation
+### Testimonials - Implementation
 
-- **Status: not started.** Content exists only in `src/content/home/process.ts`.
-- Implement the semantic section before comparing its sticky sequence against Movra.
+- **Status: not started.** Content exists only in `src/content/home/testimonials.ts`.
+- Implement the semantic section before comparing its editorial media composition against Movra.
 - Do not modify other validated sections during this phase.
 
 ## Next
 
-### Process - Fidelity Pass
+### Testimonials - Fidelity Pass
 
-- **Status: not started.** Begin only after Process Implementation is complete.
+- **Status: blocked by implementation.** Begin only after Testimonials Implementation is complete.
 
 ## Pending
-
-### Testimonials
-
-- **Implementation: not started.** Content exists only in `src/content/home/testimonials.ts`.
-- **Fidelity Pass: not started.**
 
 ### Values / Spotlights
 
@@ -161,7 +164,7 @@ This document is the source of truth for implementation status. The existence of
 
 ## Known Issues / Deferred Decisions
 
-- Approved production photography is unavailable. Hero, About/Milestones, Metrics, Marquee, Services, and Projects currently use lightweight replaceable placeholders.
+- Approved production photography is unavailable. Hero, About/Milestones, Metrics, Marquee, Services, Projects, and Process currently use lightweight replaceable placeholders.
 - Approved self-hosted Cinzel and Montserrat font files are pending; see `docs/DESIGN_SYSTEM.md`.
 - Services intentionally remains `client:load`; changing hydration strategy is deferred until an explicit performance phase.
 - The working tree contained an uncommitted business-copy edit in `src/content/home/services.ts` when this roadmap was created. Preserve and review it before committing unrelated work.
