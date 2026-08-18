@@ -121,6 +121,14 @@ This document is the source of truth for implementation status. The existence of
 - Reduced motion stops the animation, removes the duplicate group, and presents three static media panels without changing content or actions.
 - Desktop, tablet, mobile, loop movement, action constraints, content completeness, document overflow, and reduced-motion code paths were validated.
 
+### Footer
+
+- **Implementation: complete.** A semantic footer landmark renders brand, description, seven navigation links, six service labels, contact details, closing statement, and legal copy from `src/content/home/footer.ts` after `main`.
+- **Fidelity Pass: complete.** The footer continues Final CTA's inverse background and follows Movra's two-band closing rhythm with compact navigation groups, a framed Mosaïque logo wall, a contact action, service columns, and legal copy at the lower edge.
+- Desktop uses paired information bands, tablet stacks those bands, and mobile follows a linear reading order without introducing reference-only newsletter, partner brands, social links, or legal destinations.
+- The footer is Astro-only and contains no runtime JavaScript or motion; reduced motion therefore preserves the same static experience.
+- Handoff color, link destinations, mail link, content completeness, desktop, tablet, mobile, long-copy constraints, and document overflow were validated.
+
 ### SEO / Metadata Baseline
 
 - **Implementation: partial baseline complete.** Spanish document language, page title, description, viewport metadata, and favicons are present.
@@ -128,16 +136,17 @@ This document is the source of truth for implementation status. The existence of
 
 ## Current
 
-### Footer - Implementation
+### QA - Full Regression
 
-- **Status: not started.** Content exists only in `src/content/home/footer.ts`.
-- Do not modify other validated sections during this phase.
+- **Status: ready to begin.** All currently approved sections have completed their implementation and fidelity phases.
+- Validate the complete page across desktop, tablet, mobile, reduced motion, keyboard flow, section anchors, and production checks.
+- Values / Spotlights remains explicitly outside the regression scope pending business approval.
 
 ## Next
 
-### Footer - Fidelity Pass
+### Performance - Audit
 
-- **Status: blocked by implementation.** Begin only after Footer Implementation is complete.
+- **Status: pending full regression.** Run Lighthouse and Core Web Vitals checks after the complete page is stable.
 
 ## Pending
 
@@ -151,11 +160,6 @@ This document is the source of truth for implementation status. The existence of
 - **Status: not started and not currently configured.** No Storybook dependency, stories, or build command exists.
 - Add only under an explicit phase; it is not required for current section delivery.
 
-### Performance
-
-- **Status: pending full audit.** Static-first architecture and bounded hydration are in place, but Lighthouse/Core Web Vitals validation has not been completed.
-- Approved and optimized production imagery is still required for meaningful LCP validation.
-
 ### Accessibility
 
 - **Status: pending full audit.** Semantic markup, focus styles, keyboard navigation, and reduced-motion handling exist on implemented sections.
@@ -164,11 +168,6 @@ This document is the source of truth for implementation status. The existence of
 ### SEO / Metadata
 
 - **Status: pending beyond baseline.** Social metadata, canonical strategy, structured data, production URLs, sitemap/robots decisions, and final content review have not been completed.
-
-### QA
-
-- **Status: pending full regression.** Section-level visual and technical validation has been performed.
-- No automated unit, integration, end-to-end, or visual-regression suite is configured.
 
 ### Vercel
 
