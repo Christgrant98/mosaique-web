@@ -24,8 +24,9 @@
   --color-overlay-image: color-mix(in srgb, var(--color-primary) 34%, transparent);
   --color-overlay-modal: var(--color-overlay);
   --color-accent-muted: color-mix(in oklab, var(--color-accent) 24%, var(--color-background));
+  --color-accent-text: color-mix(in srgb, var(--color-accent) 60%, var(--color-primary));
 
-  --focus-ring-color: var(--color-accent);
+  --focus-ring-color: var(--color-accent-text);
   --focus-ring-width: 2px;
   --focus-ring-offset: 3px;
 }

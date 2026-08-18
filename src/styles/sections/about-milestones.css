@@ -115,7 +115,7 @@
 }
 
 .about-milestones__index {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-size: var(--text-caption-size);
   font-weight: var(--text-caption-weight);
   line-height: var(--text-caption-line-height);

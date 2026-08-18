@@ -1,6 +1,6 @@
 # Mosaïque Web Roadmap
 
-Last verified against code and git history: 2026-08-17.
+Last verified against code and git history: 2026-08-18.
 
 This document is the source of truth for implementation status. The existence of a module in `src/content/home/` does not mean its section has been implemented.
 
@@ -51,7 +51,7 @@ This document is the source of truth for implementation status. The existence of
 
 - **Implementation: complete.** ServicesIntro, PanelReveal, StickyServices, ServicesScene, and the neutral ScrollLinkedScene pattern are integrated.
 - **Fidelity Pass: complete.** Sticky media, seven service states, panel transition, scroll pacing, responsive behavior, and reduced motion were validated.
-- React is limited to the interactive Services scene and currently hydrates with `client:load`.
+- React is limited to the interactive Services scene and hydrates with `client:visible`.
 
 ### Projects / Experiences
 
@@ -129,6 +129,29 @@ This document is the source of truth for implementation status. The existence of
 - The footer is Astro-only and contains no runtime JavaScript or motion; reduced motion therefore preserves the same static experience.
 - Handoff color, link destinations, mail link, content completeness, desktop, tablet, mobile, long-copy constraints, and document overflow were validated.
 
+### QA - Full Regression
+
+- **Status: complete.** The approved page surface was validated on the production build across desktop, tablet, and mobile.
+- Section anchors, unique IDs, landmarks, horizontal overflow, Navigation focus containment and Escape behavior, Projects controls, FAQ disclosure semantics, Services hydration, Footer constraints, and runtime console output passed.
+- Reduced-motion CSS and JavaScript paths were reviewed across every animated section; static sections remain motion-free.
+- Values / Spotlights remains outside the approved regression scope pending business review.
+
+### Performance - Audit
+
+- **Status: baseline complete.** The production build ships approximately 27 KB gzip of initial HTML and CSS and approximately 96 KB gzip for the complete core payload after the interactive Services scene hydrates.
+- Services now uses `client:visible`: its complete server-rendered content remains available immediately, while React and Motion hydration is deferred until the section approaches the viewport.
+- Desktop and mobile confirmed that Services remains unhydrated at the top of the page, hydrates correctly on entry, preserves all seven states, and produces no runtime console errors or horizontal overflow.
+- Scroll work remains bounded through passive listeners, requestAnimationFrame batching, IntersectionObserver, and transform/opacity updates. No additional runtime dependency was introduced.
+- Final Lighthouse and field Core Web Vitals conclusions remain pending approved production imagery, self-hosted fonts, and a production deployment.
+
+### Accessibility - Audit
+
+- **Status: complete for the current implemented surface.** Document language, landmarks, heading hierarchy, accessible names, references, unique IDs, image alternatives, and hidden-content focus safety passed semantic review.
+- A keyboard-visible skip link now targets the main content, the title-less Why Choose Us proof band retains a visually hidden section heading, and the Navigation menu preserves focus containment and Escape close behavior.
+- Small accent text on light surfaces and the global focus indicator now use a dedicated contrast-safe semantic token; key Navigation actions meet a 44 px minimum target height.
+- Services uses one dedicated polite live region for state changes instead of two competing announcements.
+- Desktop, tablet, mobile, 320 px reflow, menu-open containment, document overflow, and reduced-motion code paths were validated. Final assistive-technology testing with real users remains part of production acceptance.
+
 ### SEO / Metadata Baseline
 
 - **Implementation: partial baseline complete.** Spanish document language, page title, description, viewport metadata, and favicons are present.
@@ -136,17 +159,15 @@ This document is the source of truth for implementation status. The existence of
 
 ## Current
 
-### QA - Full Regression
+### SEO / Metadata
 
-- **Status: ready to begin.** All currently approved sections have completed their implementation and fidelity phases.
-- Validate the complete page across desktop, tablet, mobile, reduced motion, keyboard flow, section anchors, and production checks.
-- Values / Spotlights remains explicitly outside the regression scope pending business approval.
+- **Status: ready to begin.** Complete social metadata, canonical strategy, structured data, sitemap, and robots decisions.
 
 ## Next
 
-### Performance - Audit
+### Production Assets
 
-- **Status: pending full regression.** Run Lighthouse and Core Web Vitals checks after the complete page is stable.
+- **Status: pending SEO work.** Replace approved photography placeholders and add approved self-hosted fonts before final performance and deployment acceptance.
 
 ## Pending
 
@@ -160,11 +181,6 @@ This document is the source of truth for implementation status. The existence of
 - **Status: not started and not currently configured.** No Storybook dependency, stories, or build command exists.
 - Add only under an explicit phase; it is not required for current section delivery.
 
-### Accessibility
-
-- **Status: pending full audit.** Semantic markup, focus styles, keyboard navigation, and reduced-motion handling exist on implemented sections.
-- Full keyboard, screen-reader, contrast, zoom, and automated accessibility regression checks remain pending.
-
 ### SEO / Metadata
 
 - **Status: pending beyond baseline.** Social metadata, canonical strategy, structured data, production URLs, sitemap/robots decisions, and final content review have not been completed.
@@ -177,7 +193,7 @@ This document is the source of truth for implementation status. The existence of
 
 - Approved production photography is unavailable. Hero, About/Milestones, Metrics, Marquee, Services, Projects, Process, Testimonials, FAQ, and Final CTA currently use lightweight replaceable placeholders.
 - Approved self-hosted Cinzel and Montserrat font files are pending; see `docs/DESIGN_SYSTEM.md`.
-- Services intentionally remains `client:load`; changing hydration strategy is deferred until an explicit performance phase.
+- Services uses `client:visible`; preserve its server-rendered fallback and verify hydration again when production media is introduced.
 - The working tree contained an uncommitted business-copy edit in `src/content/home/services.ts` when this roadmap was created. Preserve and review it before committing unrelated work.
 - `README.md` remains the Astro starter README. New sessions should use `AGENTS.md` and this roadmap for project-specific guidance.
 - Media models for future sections must not invent asset paths while approved assets are unavailable.

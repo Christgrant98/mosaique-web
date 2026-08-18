@@ -15,7 +15,7 @@ export default function ServicesScene({ panelReveal, services }: ServicesScenePr
       className="services-spike__scene"
       items={services}
       renderMedia={({ activeIndex }) => (
-        <div className="services-spike__media" aria-live="polite">
+        <div className="services-spike__media">
           <div className="services-spike__media-frame">
             {services.map((service, index) => (
               <div
@@ -67,12 +67,8 @@ export default function ServicesScene({ panelReveal, services }: ServicesScenePr
                     <p className="services-spike__eyebrow">
                       Servicio {service.index} — {service.category}
                     </p>
-                    <h3 className="services-spike__title">
-                      {service.title}
-                    </h3>
-                    <p className="services-spike__description">
-                      {service.description}
-                    </p>
+                    <h3 className="services-spike__title">{service.title}</h3>
+                    <p className="services-spike__description">{service.description}</p>
                     <div className="services-spike__ideal-for">
                       <p className="services-spike__ideal-for-label">Ideal para:</p>
                       <p>{service.idealFor}</p>
