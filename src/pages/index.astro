@@ -20,8 +20,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 >
   <Navigation />
   <main class="site-main" id="main-content" tabindex="-1">
-    <Hero />
-    <AboutMilestones />
+    <PanelReveal>
+      <Hero slot="lead" />
+      <AboutMilestones />
+    </PanelReveal>
     <WhyChooseUs />
     <Marquee />
     <PanelReveal overlap>

@@ -33,13 +33,13 @@ This document is the source of truth for implementation status. The existence of
 
 ### Hero
 
-- **Implementation: complete.** Full-viewport media scene, initial title and CTA, scroll-linked brand-to-topbar morph, sticky handoff, and replaceable media contract.
+- **Implementation: complete.** Full-viewport media scene, initial title and CTA, scroll-linked brand-to-topbar morph, sticky handoff, replaceable media contract, and a CSS-only PanelReveal handoff into About.
 - **Fidelity Pass: complete.** Initial, intermediate, final, and section-handoff states were compared against screenshots and recordings.
 - Desktop, tablet, mobile, and reduced-motion states were validated.
 
 ### About
 
-- **Implementation: complete.** Rendered through `AboutMilestones.astro` from `src/content/home/about.ts`.
+- **Implementation: complete.** Rendered through `AboutMilestones.astro` from `src/content/home/about.ts`; the section remains in normal flow while revealing over the temporarily sticky Hero.
 - **Fidelity Pass: complete.** The two-column editorial composition, viewport proportions, divider, sticky media, and responsive reading order were compared against the Movra recording.
 
 ### Milestones

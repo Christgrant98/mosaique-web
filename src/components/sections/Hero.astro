@@ -46,8 +46,10 @@ const [heroBrand, heroCategory] = heroContent.brand.split(" ");
     const navigation = document.querySelector<HTMLElement>(".site-navigation");
     const heroBrand = hero.querySelector<HTMLElement>(".home-hero__brand");
     const navigationBrand = navigation?.querySelector<HTMLElement>(".site-navigation__brand");
+    const scrollOrigin = hero.closest<HTMLElement>(".panel-reveal") ?? hero;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const controller = new AbortController();
+    let heroTop = scrollOrigin.getBoundingClientRect().top + window.scrollY;
     let frameId = 0;
 
     const update = () => {
@@ -58,7 +60,6 @@ const [heroBrand, heroCategory] = heroContent.brand.split(" ");
         return;
       }
 
-      const heroTop = hero.getBoundingClientRect().top + window.scrollY;
       const scrollRange = Math.max(window.innerHeight * 0.55, 1);
       const progress = clamp((window.scrollY - heroTop) / scrollRange);
       const brandProgress = rangeProgress(progress, 0, 0.58);
@@ -97,11 +98,16 @@ const [heroBrand, heroCategory] = heroContent.brand.split(" ");
       if (!frameId) frameId = window.requestAnimationFrame(update);
     };
 
+    const handleResize = () => {
+      heroTop = scrollOrigin.getBoundingClientRect().top + window.scrollY;
+      requestUpdate();
+    };
+
     window.addEventListener("scroll", requestUpdate, {
       passive: true,
       signal: controller.signal,
     });
-    window.addEventListener("resize", requestUpdate, { signal: controller.signal });
+    window.addEventListener("resize", handleResize, { signal: controller.signal });
     reducedMotion.addEventListener("change", requestUpdate, { signal: controller.signal });
     window.addEventListener(
       "pagehide",
