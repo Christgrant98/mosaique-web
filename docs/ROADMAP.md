@@ -89,9 +89,18 @@ This document is the source of truth for implementation status. The existence of
 
 - **Implementation: complete.** Five semantic steps render from `src/content/home/process.ts` after Projects / Experiences.
 - **Fidelity Pass: complete.** Desktop follows the Movra editorial split with a bounded sticky media contract on the left, compact process rows on the right, and a quiet central divider.
+- The Testimonials collection is integrated directly below the process steps in the right column, so the sticky Process media accompanies both content groups as one continuous composition.
 - Tablet preserves the split while stacking each row's title and description; mobile removes the placeholder media and uses a single-column reading flow.
 - The section remains Astro-only with CSS sticky and no React, JavaScript, scroll listeners, or active-state machinery.
 - Reduced motion returns the media to normal document flow. Desktop, tablet, mobile, sticky boundaries, content completeness, and document overflow were validated.
+
+### Testimonials
+
+- **Implementation: complete.** Five semantic blockquotes render from `src/content/home/testimonials.ts` inside Process, immediately below its final step rather than as a standalone page section.
+- **Fidelity Pass: complete.** Five alternating media/testimonial rows follow the supplied Movra composition, with a compact name above each quote.
+- Desktop and tablet alternate one-third media and two-thirds testimonial panels; mobile preserves a consistent media-then-testimonial reading order.
+- The section remains Astro-only and motion-free. Replaceable CSS media placeholders are used while approved photography is pending.
+- Names, quotes, and the explicit content status remain provisional; the internal editorial note is not rendered to visitors.
 
 ### SEO / Metadata Baseline
 
@@ -100,24 +109,18 @@ This document is the source of truth for implementation status. The existence of
 
 ## Current
 
-### Testimonials - Implementation
+### Values / Spotlights - Implementation
 
-- **Status: not started.** Content exists only in `src/content/home/testimonials.ts`.
-- Implement the semantic section before comparing its editorial media composition against Movra.
+- **Status: not started.** Content exists only in `src/content/home/values.ts`.
 - Do not modify other validated sections during this phase.
 
 ## Next
 
-### Testimonials - Fidelity Pass
+### Values / Spotlights - Fidelity Pass
 
-- **Status: blocked by implementation.** Begin only after Testimonials Implementation is complete.
+- **Status: blocked by implementation.** Movra spotlight/floating-card behavior remains the reference.
 
 ## Pending
-
-### Values / Spotlights
-
-- **Implementation: not started.** Content exists only in `src/content/home/values.ts`.
-- **Fidelity Pass: not started.** Movra spotlight/floating-card behavior remains a reference.
 
 ### FAQ
 
