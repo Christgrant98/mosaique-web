@@ -1,0 +1,182 @@
+---
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+import Heading from "../ui/Heading.astro";
+import Section from "../ui/Section.astro";
+import Text from "../ui/Text.astro";
+import { projectsContent } from "../../content/home/projects";
+
+import "../../styles/sections/projects.css";
+---
+
+<Section class="projects" id="experiences" spacing="spacious" aria-labelledby="projects-title">
+  <Container>
+    <div class="projects__header">
+      <Heading as="h2" variant="display-lg" id="projects-title">
+        {projectsContent.title}
+      </Heading>
+      <div class="projects__introduction">
+        <Text variant="body-lg">{projectsContent.introduction}</Text>
+        <Button href={projectsContent.cta.href} variant="ghost">
+          {projectsContent.cta.label}
+          <span aria-hidden="true">↓</span>
+        </Button>
+      </div>
+    </div>
+  </Container>
+
+  <projects-carousel class="projects__carousel" data-projects-carousel>
+    <Container>
+      <div class="projects__toolbar">
+        <p class="projects__counter" aria-live="polite" aria-atomic="true">
+          <span data-projects-current>01</span>
+          <span aria-hidden="true"> / </span>
+          <span class="visually-hidden">de</span>
+          <span>{String(projectsContent.items.length).padStart(2, "0")}</span>
+        </p>
+
+        <div class="projects__controls" aria-label="Controles de experiencias">
+          <button
+            class="projects__control"
+            type="button"
+            aria-label="Experiencia anterior"
+            aria-controls="projects-track"
+            data-projects-previous
+          >
+            <span aria-hidden="true">←</span>
+          </button>
+          <button
+            class="projects__control"
+            type="button"
+            aria-label="Experiencia siguiente"
+            aria-controls="projects-track"
+            data-projects-next
+          >
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+    </Container>
+
+    <div
+      class="projects__viewport"
+      id="projects-track"
+      role="region"
+      aria-label="Experiencias de Mosaïque"
+      aria-roledescription="carrusel"
+      tabindex="0"
+      data-projects-viewport
+    >
+      <ol class="projects__track">
+        {
+          projectsContent.items.map((project, itemIndex) => (
+            <li
+              class="projects__slide"
+              id={`project-${project.index}`}
+              role="group"
+              aria-label={`${itemIndex + 1} de ${projectsContent.items.length}`}
+              aria-roledescription="diapositiva"
+              data-projects-slide
+            >
+              <article class="projects__card">
+                <div
+                  class="projects__media"
+                  data-project-tone={project.index}
+                  aria-hidden="true"
+                >
+                  <span class="projects__media-brand">MOSAÏQUE</span>
+                  <span class="projects__media-index">{project.index}</span>
+                </div>
+
+                <div class="projects__details">
+                  <p class="projects__index" aria-hidden="true">
+                    {project.index}
+                  </p>
+                  <Heading as="h3" variant="heading-md" class="projects__title">
+                    {project.title}
+                  </Heading>
+                  <Text class="projects__description">{project.description}</Text>
+                </div>
+              </article>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </projects-carousel>
+</Section>
+
+<script>
+  class ProjectsCarousel extends HTMLElement {
+    connectedCallback() {
+      if (this.dataset.ready === "true") return;
+
+      const viewport = this.querySelector<HTMLElement>("[data-projects-viewport]");
+      const slides = Array.from(this.querySelectorAll<HTMLElement>("[data-projects-slide]"));
+      const previous = this.querySelector<HTMLButtonElement>("[data-projects-previous]");
+      const next = this.querySelector<HTMLButtonElement>("[data-projects-next]");
+      const current = this.querySelector<HTMLElement>("[data-projects-current]");
+
+      if (!viewport || !previous || !next || !current || slides.length === 0) return;
+
+      this.dataset.ready = "true";
+      let activeIndex = 0;
+
+      const updateState = (index: number) => {
+        activeIndex = Math.max(0, Math.min(index, slides.length - 1));
+        current.textContent = String(activeIndex + 1).padStart(2, "0");
+        previous.disabled = activeIndex === 0;
+        next.disabled = activeIndex === slides.length - 1;
+
+        slides.forEach((slide, slideIndex) => {
+          if (slideIndex === activeIndex) {
+            slide.setAttribute("aria-current", "true");
+          } else {
+            slide.removeAttribute("aria-current");
+          }
+        });
+      };
+
+      const moveTo = (index: number) => {
+        const destination = slides[index];
+        if (!destination) return;
+
+        destination.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "auto"
+            : "smooth",
+          block: "nearest",
+          inline: "start",
+        });
+      };
+
+      previous.addEventListener("click", () => moveTo(activeIndex - 1));
+      next.addEventListener("click", () => moveTo(activeIndex + 1));
+      viewport.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+        event.preventDefault();
+        moveTo(activeIndex + (event.key === "ArrowRight" ? 1 : -1));
+      });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+          if (!visible) return;
+          const index = slides.indexOf(visible.target as HTMLElement);
+          if (index >= 0) updateState(index);
+        },
+        { root: viewport, threshold: [0.55, 0.7, 0.85] },
+      );
+
+      slides.forEach((slide) => observer.observe(slide));
+      updateState(0);
+    }
+  }
+
+  if (!customElements.get("projects-carousel")) {
+    customElements.define("projects-carousel", ProjectsCarousel);
+  }
+</script>

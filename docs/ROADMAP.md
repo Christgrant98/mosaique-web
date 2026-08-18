@@ -60,25 +60,21 @@ This document is the source of truth for implementation status. The existence of
 
 ## Current
 
-### Projects / Experiences - Implementation
+### Projects / Experiences - Fidelity Pass
 
-- **Status: not started.** The content model exists in `src/content/home/projects.ts`; no Projects section or page composition exists yet.
-- Inspect the content, Movra manual-project-slider reference, available primitives, and approved media status before implementation.
-- Complete implementation only, then stop and report. Do not combine implementation and fidelity into an undocumented single state.
+- **Implementation: complete.** `Projects.astro` renders the five modeled experiences after Services with an Astro-first, manually controlled horizontal carousel.
+- Native scroll snap preserves touch and trackpad interaction; local progressive enhancement adds previous/next controls, keyboard arrows, active-state announcements, and bounded control states without adding a dependency or React island.
+- Desktop, tablet, mobile, page-overflow, browser-console, and initial/intermediate/final control states were validated. The reduced-motion fallback was verified in code; replaceable abstract panels remain in place while approved project photography is pending.
+- **Fidelity Pass: not started.** Compare composition, project-media role, controls, viewport usage, manual interaction, responsive behavior, and reduced motion against supplied Movra references.
 
 ## Next
 
-### Projects / Experiences - Fidelity Pass
+### Metrics - Implementation
 
-- Compare composition, project-media role, controls, viewport usage, manual interaction, responsive behavior, and reduced motion against supplied Movra references.
-- Do not start until Projects / Experiences implementation has been reviewed and marked complete.
+- **Status: not started.** Content exists only in `src/content/home/metrics.ts`.
+- Inspect the content, Movra bento-metrics reference, available primitives, and approved media status before implementation.
 
 ## Pending
-
-### Metrics
-
-- **Implementation: not started.** Content exists only in `src/content/home/metrics.ts`.
-- **Fidelity Pass: not started.** Movra bento metrics are documented as a reference.
 
 ### Why Choose Us
 
@@ -150,9 +146,8 @@ This document is the source of truth for implementation status. The existence of
 
 ## Known Issues / Deferred Decisions
 
-- Approved production photography is unavailable. Hero, About/Milestones, and Services currently use lightweight replaceable placeholders.
+- Approved production photography is unavailable. Hero, About/Milestones, Services, and Projects currently use lightweight replaceable placeholders.
 - Approved self-hosted Cinzel and Montserrat font files are pending; see `docs/DESIGN_SYSTEM.md`.
 - Services intentionally remains `client:load`; changing hydration strategy is deferred until an explicit performance phase.
-- The working tree contained an uncommitted business-copy edit in `src/content/home/services.ts` when this roadmap was created. Preserve and review it before committing unrelated work.
 - `README.md` remains the Astro starter README. New sessions should use `AGENTS.md` and this roadmap for project-specific guidance.
 - Media models for future sections must not invent asset paths while approved assets are unavailable.

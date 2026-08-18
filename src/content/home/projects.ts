@@ -14,8 +14,7 @@ export const projectsContent = {
     {
       index: "02",
       title: "Bodas y eventos familiares",
-      description:
-        "Experiencias cuidadas para celebrar con intención, belleza y organización.",
+      description: "Experiencias cuidadas para celebrar con intención, belleza y organización.",
     },
     {
       index: "03",
@@ -36,5 +35,5 @@ export const projectsContent = {
         "Soluciones prácticas para complementar eventos con mobiliario, equipos e insumos propios.",
     },
   ],
-  cta: { label: "Ver próximos proyectos", href: "#experiences" } satisfies ContentLink,
+  cta: { label: "Ver próximos proyectos", href: "#projects-track" } satisfies ContentLink,
 } as const;
