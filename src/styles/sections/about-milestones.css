@@ -152,6 +152,7 @@
 
 .about-milestones__metric {
   background: var(--color-surface);
+  container-type: inline-size;
   min-block-size: 14rem;
 }
 
@@ -160,6 +161,7 @@
   block-size: 100%;
   display: grid;
   gap: var(--space-8);
+  min-inline-size: 0;
   padding: clamp(var(--space-6), 4vw, var(--space-10));
 }
 
@@ -172,9 +174,11 @@
   font-family: var(--font-family-display);
   font-size: clamp(2.25rem, 8vw, 4.5rem);
   font-weight: var(--text-heading-md-weight);
+  inline-size: 100%;
   line-height: 0.98;
-  max-inline-size: 12ch;
-  overflow-wrap: break-word;
+  max-inline-size: 100%;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 
 .about-milestones__metric article > p:last-child {
@@ -306,7 +310,7 @@
   }
 
   .about-milestones__metric-value {
-    font-size: clamp(2.75rem, 4vw, 4rem);
+    font-size: clamp(2.25rem, 14cqi, 4rem);
   }
 
   .about-milestones__metric article > p:last-child {
