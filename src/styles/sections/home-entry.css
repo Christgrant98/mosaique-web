@@ -9,11 +9,7 @@
     transparent
   );
   border-block-end: 1px solid
-    color-mix(
-      in srgb,
-      var(--color-border-default) var(--hero-nav-progress, 0%),
-      transparent
-    );
+    color-mix(in srgb, var(--color-border-default) var(--hero-nav-progress, 0%), transparent);
   color: color-mix(
     in srgb,
     var(--color-text-primary) var(--hero-nav-progress, 0%),
@@ -102,45 +98,6 @@
 
 .site-navigation__menu summary::-webkit-details-marker {
   display: none;
-}
-
-.site-navigation__menu summary::before {
-  border-block: 1px solid currentColor;
-  block-size: 0.5rem;
-  content: "";
-  display: inline-block;
-  inline-size: 1.25rem;
-}
-
-.site-navigation__menu[open] summary::before {
-  block-size: 0;
-  border-block-end: 0;
-}
-
-.site-navigation__menu nav {
-  background: var(--color-background);
-  border: 1px solid var(--color-border-default);
-  color: var(--color-text-primary);
-  inline-size: min(22rem, calc(100vw - (var(--space-page-gutter) * 2)));
-  inset-block-start: calc(100% + var(--space-2));
-  inset-inline-end: 0;
-  padding: var(--space-8);
-  position: absolute;
-}
-
-.site-navigation__menu ul {
-  display: grid;
-  gap: var(--space-5);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.site-navigation__menu a {
-  color: var(--color-text-primary);
-  font-size: var(--text-navigation-size);
-  font-weight: var(--text-navigation-weight);
-  text-decoration: none;
 }
 
 .home-hero {
