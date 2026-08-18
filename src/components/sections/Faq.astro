@@ -1,0 +1,44 @@
+---
+import Container from "../ui/Container.astro";
+import Heading from "../ui/Heading.astro";
+import Text from "../ui/Text.astro";
+import { faqContent } from "../../content/home/faq";
+
+import "../../styles/sections/faq.css";
+---
+
+<section class="faq" id="faq" aria-labelledby="faq-title">
+  <Container>
+    <div class="faq__layout">
+      <div class="faq__rail">
+        <header class="faq__header">
+          <Heading as="h2" variant="heading-lg" id="faq-title">
+            {faqContent.title}
+          </Heading>
+        </header>
+
+        <figure class="faq__media" data-media-status="pending" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </figure>
+      </div>
+
+      <div class="faq__list">
+        {
+          faqContent.items.map((item) => (
+            <details class="faq__item">
+              <summary>
+                <span class="faq__question">{item.question}</span>
+                <span class="faq__toggle" aria-hidden="true" />
+              </summary>
+
+              <div class="faq__answer">
+                <Text>{item.answer}</Text>
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+</section>

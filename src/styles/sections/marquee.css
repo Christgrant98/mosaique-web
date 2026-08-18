@@ -1,0 +1,205 @@
+.marquee {
+  background: var(--color-background-inverse);
+  color: var(--color-text-inverse);
+  block-size: 260svh;
+  overflow: clip;
+  position: relative;
+}
+
+.marquee__scene {
+  block-size: 100svh;
+  inset-block-start: 0;
+  overflow: hidden;
+  position: sticky;
+}
+
+.marquee__media {
+  background: var(--color-primary);
+  block-size: 100%;
+  inline-size: 100%;
+  inset: 0;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+}
+
+.marquee__media::after {
+  background: var(--color-overlay-image);
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.marquee__media > span {
+  position: absolute;
+}
+
+.marquee__media > span:first-child {
+  background: var(--color-accent);
+  block-size: 78%;
+  clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 82%);
+  inline-size: 68%;
+  inset: 0 0 auto auto;
+}
+
+.marquee__media > span:nth-child(2) {
+  background: color-mix(in oklab, var(--color-primary) 76%, var(--color-accent));
+  block-size: 58%;
+  clip-path: polygon(0 24%, 86% 0, 100% 100%, 0 100%);
+  inline-size: 62%;
+  inset: auto auto 0 0;
+}
+
+.marquee__media > span:last-child {
+  border: 1px solid color-mix(in oklab, var(--color-text-inverse) 28%, transparent);
+  block-size: 58%;
+  inline-size: 46%;
+  inset: 20% auto auto 14%;
+}
+
+.marquee__curtain {
+  display: none;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: var(--primitive-z-content);
+}
+
+.marquee.is-enhanced .marquee__curtain {
+  display: grid;
+}
+
+.marquee__curtain span {
+  background: var(--color-background);
+  block-size: 100%;
+  will-change: transform;
+}
+
+.marquee__curtain span + span {
+  margin-inline-start: -1px;
+}
+
+.marquee__intro {
+  display: grid;
+  gap: var(--space-4);
+  inline-size: min(32rem, calc(100% - (var(--space-page-gutter) * 2)));
+  inset: auto auto clamp(12.5rem, 24svh, 16.5rem) 50%;
+  position: absolute;
+  text-align: center;
+  transform: translateX(-50%);
+  z-index: var(--primitive-z-sticky);
+}
+
+.marquee__intro p {
+  color: var(--color-text-inverse);
+  font-size: var(--text-body-size);
+  line-height: 1.35;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.marquee__intro .marquee__eyebrow {
+  color: var(--color-accent);
+  font-size: var(--text-caption-size);
+  font-weight: var(--text-caption-weight);
+}
+
+.marquee__viewport {
+  align-items: end;
+  display: flex;
+  inset: 0;
+  overflow: hidden;
+  padding-block-end: clamp(var(--space-8), 5svh, var(--space-16));
+  pointer-events: none;
+  position: absolute;
+  z-index: var(--primitive-z-sticky);
+}
+
+.marquee__track {
+  animation: marquee-scroll var(--motion-marquee-duration) linear infinite;
+  display: flex;
+  inline-size: max-content;
+  opacity: 1;
+  will-change: transform;
+}
+
+.marquee.is-enhanced .marquee__intro,
+.marquee.is-enhanced .marquee__track {
+  opacity: 0;
+}
+
+.marquee__group {
+  flex: none;
+  font-family: var(--font-family-ui);
+  font-size: clamp(3.75rem, 8.8vw, 9rem);
+  font-weight: 400;
+  line-height: 0.86;
+  margin: 0;
+  padding-inline-end: clamp(var(--space-16), 5vw, var(--space-32));
+  white-space: nowrap;
+}
+
+@keyframes marquee-scroll {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (max-width: 47.999rem) {
+  .marquee {
+    block-size: 220svh;
+  }
+
+  .marquee__group {
+    font-size: clamp(3rem, 15vw, 5.5rem);
+  }
+
+  .marquee__intro {
+    inset-block-end: 9.5rem;
+    inline-size: min(28rem, calc(100% - (var(--space-page-gutter) * 2)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    block-size: auto;
+    min-block-size: 100svh;
+  }
+
+  .marquee__scene {
+    min-block-size: 100svh;
+    position: relative;
+  }
+
+  .marquee__curtain {
+    display: none !important;
+  }
+
+  .marquee__viewport {
+    align-items: end;
+    padding: var(--space-page-gutter);
+  }
+
+  .marquee__track {
+    animation: none;
+    inline-size: auto;
+    opacity: 1 !important;
+    transform: none;
+    will-change: auto;
+  }
+
+  .marquee__intro {
+    opacity: 1 !important;
+  }
+
+  .marquee__group {
+    font-size: clamp(2.5rem, 9vw, 5rem);
+    padding: 0;
+    white-space: normal;
+  }
+
+  .marquee__group[aria-hidden="true"] {
+    display: none;
+  }
+}

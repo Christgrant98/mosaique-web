@@ -1,10 +1,17 @@
 ---
 import PanelReveal from "../components/motion/PanelReveal.astro";
 import AboutMilestones from "../components/sections/AboutMilestones.astro";
+import Faq from "../components/sections/Faq.astro";
+import FinalCta from "../components/sections/FinalCta.astro";
+import Footer from "../components/sections/Footer.astro";
 import Hero from "../components/sections/Hero.astro";
+import Marquee from "../components/sections/Marquee.astro";
 import Navigation from "../components/sections/Navigation.astro";
+import Process from "../components/sections/Process.astro";
+import ProjectsExperiences from "../components/sections/ProjectsExperiences.astro";
 import ServicesIntro from "../components/sections/ServicesIntro.astro";
 import StickyServices from "../components/sections/StickyServices.astro";
+import WhyChooseUs from "../components/sections/WhyChooseUs.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
@@ -16,9 +23,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <main>
     <Hero />
     <AboutMilestones />
+    <WhyChooseUs />
+    <Marquee />
     <PanelReveal>
       <ServicesIntro slot="lead" />
       <StickyServices />
     </PanelReveal>
+    <ProjectsExperiences />
+    <Process />
+    <Faq />
+    <FinalCta />
   </main>
+  <Footer />
 </BaseLayout>

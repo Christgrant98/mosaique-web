@@ -53,6 +53,82 @@ This document is the source of truth for implementation status. The existence of
 - **Fidelity Pass: complete.** Sticky media, seven service states, panel transition, scroll pacing, responsive behavior, and reduced motion were validated.
 - React is limited to the interactive Services scene and currently hydrates with `client:load`.
 
+### Projects / Experiences
+
+- **Implementation: complete.** Five project categories render from `src/content/home/projects.ts` in an Astro section.
+- **Fidelity Pass: complete.** Desktop now follows the Movra editorial split with project context and manual controls beside a portrait-media carousel; tablet and mobile use static two-column and single-column reading flows.
+- The desktop carousel uses native horizontal scrolling, scroll snap, touch/keyboard scrolling, accessible previous/next controls, announced active state, and no automatic advance.
+- Placeholder media remains lightweight and replaceable while approved photography is pending.
+- Desktop, tablet, mobile, reduced-motion behavior, overflow, and all five navigation states were validated.
+
+### Metrics
+
+- **Implementation: complete.** Three active metrics render from `src/content/home/metrics.ts` inside `AboutMilestones.astro`, immediately after the milestone list rather than as a standalone page section.
+- **Fidelity Pass: complete.** The existing sticky About media accompanies the metric tiles, the redundant Metrics media placeholder was removed, and the responsive composition follows the supplied Movra reference.
+- Numeric values count from zero once when the block enters the viewport using IntersectionObserver, requestAnimationFrame, and the shared runtime motion duration; reduced motion preserves final values without animation.
+- Desktop, tablet, mobile, overflow, count states, content completeness, and reduced-motion behavior were validated.
+
+### Why Choose Us
+
+- **Implementation: complete.** Four numbered reasons render from `src/content/home/whyChooseUs.ts` in a static Astro section positioned after About/Milestones according to the Content Foundation.
+- The section uses a quiet editorial proof band with semantic articles, four columns on desktop, two columns on tablet, and a linear mobile flow.
+- **Fidelity Pass: complete.** Desktop uses the Movra proof-band hierarchy with centered icon-led items, compact utility labels, body-led descriptions, lower vertical density, and vertical dividers between four columns without a visible section title.
+- Compact desktop and tablet retain the two-column divided layout; mobile remains linear for readability.
+- Desktop, desktop-minimum, tablet, mobile, overflow, content completeness, and the motion-free reduced-motion state were validated.
+
+### Marquee
+
+- **Implementation: complete.** A full-viewport Astro scene renders content from `src/content/home/marquee.ts` between Why Choose Us and Services.
+- **Fidelity Pass: complete.** The scene enters through a three-step media reveal and remains sticky for a bounded scroll interval, while its oversized ticker runs independently as a token-driven CSS autoplay loop.
+- The bounded reveal uses one passive scroll listener only while the scene is near the viewport, batches updates with requestAnimationFrame, and writes only transform and opacity styles without React hydration.
+- Approved photography remains pending, so the full-bleed media contract currently renders a lightweight branded placeholder.
+- Reduced motion removes the sticky scroll distance and staged reveal, hides the visual duplicate, and presents the statement and ticker as a static full-viewport composition.
+- Desktop, tablet, mobile, document overflow, scroll-linked stability, section handoff, content duplication semantics, and reduced-motion behavior were validated.
+
+### Process
+
+- **Implementation: complete.** Five semantic steps render from `src/content/home/process.ts` after Projects / Experiences.
+- **Fidelity Pass: complete.** Desktop follows the Movra editorial split with a bounded sticky media contract on the left, compact process rows on the right, and a quiet central divider.
+- The Testimonials collection is integrated directly below the process steps in the right column, so the sticky Process media accompanies both content groups as one continuous composition.
+- Tablet preserves the split while stacking each row's title and description; mobile removes the placeholder media and uses a single-column reading flow.
+- The section remains Astro-only with CSS sticky and no React, JavaScript, scroll listeners, or active-state machinery.
+- Reduced motion returns the media to normal document flow. Desktop, tablet, mobile, sticky boundaries, content completeness, and document overflow were validated.
+
+### Testimonials
+
+- **Implementation: complete.** Five semantic blockquotes render from `src/content/home/testimonials.ts` inside Process, immediately below its final step rather than as a standalone page section.
+- **Fidelity Pass: complete.** Five alternating media/testimonial rows follow the supplied Movra composition, with a compact name above each quote.
+- Desktop and tablet alternate one-third media and two-thirds testimonial panels; mobile preserves a consistent media-then-testimonial reading order.
+- The section remains Astro-only and motion-free. Replaceable CSS media placeholders are used while approved photography is pending.
+- Names, quotes, and the explicit content status remain provisional; the internal editorial note is not rendered to visitors.
+
+### FAQ
+
+- **Implementation: complete.** Eight native disclosure items render from `src/content/home/faq.ts` after Process.
+- The section uses semantic `details` and `summary` elements, so pointer and keyboard interaction work without React, custom JavaScript, or event listeners.
+- **Fidelity Pass: complete.** Desktop follows Movra's quiet split composition with a compact label and replaceable media contract in the left rail, a central divider, and a dense disclosure list on the right.
+- Questions use compact sans-serif hierarchy and circular chevrons; answers open below their question without changing the native disclosure contract.
+- Supporting browsers receive a token-driven CSS open/close transition through `::details-content`; other browsers retain immediate native disclosure behavior without JavaScript.
+- Tablet and mobile remove the decorative media and use a constrained linear flow. Reduced motion removes the disclosure and chevron transitions while preserving immediate state changes.
+- Desktop, tablet, mobile, pointer, keyboard, long-copy constraints, document overflow, and reduced-motion code paths were validated.
+
+### Final CTA
+
+- **Implementation: complete.** The closing section renders its title, supporting copy, two actions, and closing statement from `src/content/home/finalCta.ts` after FAQ.
+- **Fidelity Pass: complete.** The composition follows Movra's closing rhythm with centered copy and actions above a continuously moving gallery at the lower edge.
+- The gallery is a CSS-only infinite loop driven by the existing `--motion-marquee-duration` token, with two identical visual groups and no hover pause, JavaScript, listeners, or React hydration.
+- Approved photography remains pending, so five replaceable CSS media states are duplicated only for visual continuity and remain hidden from assistive technology.
+- Reduced motion stops the animation, removes the duplicate group, and presents three static media panels without changing content or actions.
+- Desktop, tablet, mobile, loop movement, action constraints, content completeness, document overflow, and reduced-motion code paths were validated.
+
+### Footer
+
+- **Implementation: complete.** A semantic footer landmark renders brand, description, seven navigation links, six service labels, contact details, closing statement, and legal copy from `src/content/home/footer.ts` after `main`.
+- **Fidelity Pass: complete.** The footer continues Final CTA's inverse background and follows Movra's two-band closing rhythm with compact navigation groups, a framed Mosaïque logo wall, a contact action, service columns, and legal copy at the lower edge.
+- Desktop uses paired information bands, tablet stacks those bands, and mobile follows a linear reading order without introducing reference-only newsletter, partner brands, social links, or legal destinations.
+- The footer is Astro-only and contains no runtime JavaScript or motion; reduced motion therefore preserves the same static experience.
+- Handoff color, link destinations, mail link, content completeness, desktop, tablet, mobile, long-copy constraints, and document overflow were validated.
+
 ### SEO / Metadata Baseline
 
 - **Implementation: partial baseline complete.** Spanish document language, page title, description, viewport metadata, and favicons are present.
@@ -60,75 +136,29 @@ This document is the source of truth for implementation status. The existence of
 
 ## Current
 
-### Projects / Experiences - Implementation
+### QA - Full Regression
 
-- **Status: not started.** The content model exists in `src/content/home/projects.ts`; no Projects section or page composition exists yet.
-- Inspect the content, Movra manual-project-slider reference, available primitives, and approved media status before implementation.
-- Complete implementation only, then stop and report. Do not combine implementation and fidelity into an undocumented single state.
+- **Status: ready to begin.** All currently approved sections have completed their implementation and fidelity phases.
+- Validate the complete page across desktop, tablet, mobile, reduced motion, keyboard flow, section anchors, and production checks.
+- Values / Spotlights remains explicitly outside the regression scope pending business approval.
 
 ## Next
 
-### Projects / Experiences - Fidelity Pass
+### Performance - Audit
 
-- Compare composition, project-media role, controls, viewport usage, manual interaction, responsive behavior, and reduced motion against supplied Movra references.
-- Do not start until Projects / Experiences implementation has been reviewed and marked complete.
+- **Status: pending full regression.** Run Lighthouse and Core Web Vitals checks after the complete page is stable.
 
 ## Pending
 
-### Metrics
-
-- **Implementation: not started.** Content exists only in `src/content/home/metrics.ts`.
-- **Fidelity Pass: not started.** Movra bento metrics are documented as a reference.
-
-### Why Choose Us
-
-- **Implementation: not started.** Content exists only in `src/content/home/whyChooseUs.ts`.
-- **Fidelity Pass: not started.**
-
-### Marquee
-
-- **Implementation: not started.** Content exists only in `src/content/home/marquee.ts`.
-- **Fidelity Pass: not started.** CSS motion and reduced-motion behavior must be evaluated when implemented.
-
-### Process
-
-- **Implementation: not started.** Content exists only in `src/content/home/process.ts`.
-- **Fidelity Pass: not started.** The Movra sticky-process behavior is a reference, not yet product code.
-
-### Testimonials
-
-- **Implementation: not started.** Content exists only in `src/content/home/testimonials.ts`.
-- **Fidelity Pass: not started.**
-
 ### Values / Spotlights
 
-- **Implementation: not started.** Content exists only in `src/content/home/values.ts`.
-- **Fidelity Pass: not started.** Movra spotlight/floating-card behavior remains a reference.
-
-### FAQ
-
-- **Implementation: not started.** Content exists only in `src/content/home/faq.ts`.
-- **Fidelity Pass: not started.** Use semantic disclosure before custom scripting.
-
-### Final CTA
-
-- **Implementation: not started.** Content exists only in `src/content/home/finalCta.ts`.
-- **Fidelity Pass: not started.** Looping media behavior must include a reduced-motion alternative.
-
-### Footer
-
-- **Implementation: not started.** Content exists only in `src/content/home/footer.ts`.
-- **Fidelity Pass: not started.**
+- **Status: deferred for business review.** The attempted implementation was fully removed; content remains only in `src/content/home/values.ts`.
+- Revisit implementation and the Movra spotlight/floating-card reference only after business approval.
 
 ### Storybook
 
 - **Status: not started and not currently configured.** No Storybook dependency, stories, or build command exists.
 - Add only under an explicit phase; it is not required for current section delivery.
-
-### Performance
-
-- **Status: pending full audit.** Static-first architecture and bounded hydration are in place, but Lighthouse/Core Web Vitals validation has not been completed.
-- Approved and optimized production imagery is still required for meaningful LCP validation.
 
 ### Accessibility
 
@@ -139,18 +169,13 @@ This document is the source of truth for implementation status. The existence of
 
 - **Status: pending beyond baseline.** Social metadata, canonical strategy, structured data, production URLs, sitemap/robots decisions, and final content review have not been completed.
 
-### QA
-
-- **Status: pending full regression.** Section-level visual and technical validation has been performed.
-- No automated unit, integration, end-to-end, or visual-regression suite is configured.
-
 ### Vercel
 
 - **Status: not configured.** No repository Vercel project metadata, deployment configuration, or deployment workflow is present.
 
 ## Known Issues / Deferred Decisions
 
-- Approved production photography is unavailable. Hero, About/Milestones, and Services currently use lightweight replaceable placeholders.
+- Approved production photography is unavailable. Hero, About/Milestones, Metrics, Marquee, Services, Projects, Process, Testimonials, FAQ, and Final CTA currently use lightweight replaceable placeholders.
 - Approved self-hosted Cinzel and Montserrat font files are pending; see `docs/DESIGN_SYSTEM.md`.
 - Services intentionally remains `client:load`; changing hydration strategy is deferred until an explicit performance phase.
 - The working tree contained an uncommitted business-copy edit in `src/content/home/services.ts` when this roadmap was created. Preserve and review it before committing unrelated work.

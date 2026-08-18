@@ -1,0 +1,190 @@
+.faq {
+  background: var(--color-surface-muted);
+  color: var(--color-text-primary);
+  interpolate-size: allow-keywords;
+  overflow: clip;
+  padding-block: clamp(var(--space-16), 7vw, var(--space-24));
+}
+
+.faq__layout {
+  display: grid;
+  gap: clamp(var(--space-12), 7vw, var(--space-20));
+}
+
+.faq__rail {
+  min-inline-size: 0;
+}
+
+.faq__header h2 {
+  align-items: center;
+  display: flex;
+  font-family: var(--font-family-ui);
+  font-size: var(--text-caption-size);
+  font-weight: 700;
+  gap: var(--space-3);
+  line-height: var(--text-caption-line-height);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.faq__header h2::before {
+  background: var(--color-accent);
+  border-radius: 50%;
+  block-size: 0.5rem;
+  content: "";
+  flex: none;
+  inline-size: 0.5rem;
+}
+
+.faq__media {
+  background: var(--color-primary);
+  display: none;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.faq__media span {
+  display: block;
+  position: absolute;
+}
+
+.faq__media span:first-child {
+  background: var(--color-accent);
+  block-size: 74%;
+  clip-path: polygon(22% 0, 100% 0, 78% 100%, 0 82%);
+  inline-size: 78%;
+  inset: 0 0 auto auto;
+}
+
+.faq__media span:last-child {
+  background: color-mix(in oklab, var(--color-primary) 76%, var(--color-accent));
+  block-size: 55%;
+  clip-path: polygon(0 18%, 82% 0, 100% 100%, 0 100%);
+  inline-size: 68%;
+  inset: auto auto 0 0;
+}
+
+.faq__item {
+  border-block-end: 1px solid color-mix(in oklab, var(--color-text-inverse) 78%, transparent);
+}
+
+.faq__item summary {
+  align-items: center;
+  cursor: pointer;
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: minmax(0, 1fr) auto;
+  list-style: none;
+  min-block-size: clamp(5.5rem, 8vw, 6.5rem);
+  padding-block: var(--space-6);
+}
+
+.faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq__item summary:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.faq__question {
+  font-family: var(--font-family-body);
+  font-size: var(--text-body-size);
+  font-weight: 700;
+  line-height: 1.35;
+  max-inline-size: 48ch;
+}
+
+.faq__toggle {
+  background: var(--color-accent-muted);
+  border-radius: 50%;
+  block-size: 1.75rem;
+  display: grid;
+  inline-size: 1.75rem;
+  place-items: center;
+}
+
+.faq__toggle::before {
+  block-size: 0.38rem;
+  border-block-end: 1px solid currentColor;
+  border-inline-end: 1px solid currentColor;
+  content: "";
+  inline-size: 0.38rem;
+  transform: translateY(-0.12rem) rotate(45deg);
+  transition: transform var(--motion-duration-standard) var(--motion-easing-standard);
+}
+
+.faq__item[open] .faq__toggle::before {
+  transform: translateY(0.12rem) rotate(225deg);
+}
+
+.faq__answer {
+  padding: 0 calc(1.75rem + var(--space-6)) var(--space-8) 0;
+}
+
+.faq__answer p {
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-inline-size: 52ch;
+}
+
+@supports selector(details::details-content) {
+  .faq__item::details-content {
+    block-size: 0;
+    opacity: 0;
+    overflow: clip;
+    transition:
+      block-size var(--motion-duration-standard) var(--motion-easing-standard),
+      opacity var(--motion-duration-fast) var(--motion-easing-standard);
+  }
+
+  .faq__item[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}
+
+@media (min-width: 64rem) {
+  .faq {
+    padding-block: 0;
+  }
+
+  .faq__layout {
+    gap: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-block-size: calc(100svh - 4rem);
+  }
+
+  .faq__rail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(var(--space-12), 6vw, var(--space-20))
+      clamp(var(--space-10), 5vw, var(--space-16));
+  }
+
+  .faq__media {
+    aspect-ratio: 4 / 5;
+    display: block;
+    inline-size: clamp(9rem, 14vw, 12rem);
+  }
+
+  .faq__list {
+    border-inline-start: 1px solid var(--color-border-default);
+    padding: clamp(var(--space-12), 6vw, var(--space-20))
+      clamp(var(--space-8), 4vw, var(--space-16));
+  }
+
+  .faq__item summary {
+    min-block-size: clamp(6rem, 8vw, 7rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq__toggle::before,
+  .faq__item::details-content {
+    transition: none;
+  }
+}

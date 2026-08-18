@@ -1,0 +1,58 @@
+---
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+import Heading from "../ui/Heading.astro";
+import Text from "../ui/Text.astro";
+import { finalCtaContent } from "../../content/home/finalCta";
+
+import "../../styles/sections/final-cta.css";
+
+const galleryTones = ["01", "02", "03", "04", "05"] as const;
+---
+
+<section class="final-cta" id="contact" aria-labelledby="final-cta-title">
+  <Container>
+    <div class="final-cta__content">
+      <Heading as="h2" variant="heading-lg" id="final-cta-title">
+        {finalCtaContent.title}
+      </Heading>
+
+      <Text>{finalCtaContent.text}</Text>
+
+      <div class="final-cta__actions">
+        <Button
+          class="final-cta__action final-cta__action--primary"
+          href={finalCtaContent.actions.primary.href}
+        >
+          {finalCtaContent.actions.primary.label}
+        </Button>
+        <Button
+          class="final-cta__action final-cta__action--secondary"
+          href={finalCtaContent.actions.secondary.href}
+          variant="secondary"
+        >
+          {finalCtaContent.actions.secondary.label}
+        </Button>
+      </div>
+
+      <p class="final-cta__closing">{finalCtaContent.closingStatement}</p>
+    </div>
+  </Container>
+
+  <div class="final-cta__gallery" data-media-status="pending" aria-hidden="true">
+    <div class="final-cta__track">
+      {
+        [false, true].map((duplicate) => (
+          <div class="final-cta__group" data-duplicate={duplicate ? "true" : undefined}>
+            {galleryTones.map((tone) => (
+              <figure class="final-cta__media" data-tone={tone}>
+                <span />
+                <span />
+              </figure>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

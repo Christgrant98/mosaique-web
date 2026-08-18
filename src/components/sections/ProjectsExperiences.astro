@@ -1,0 +1,179 @@
+---
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+import Heading from "../ui/Heading.astro";
+import Text from "../ui/Text.astro";
+import { projectsContent } from "../../content/home/projects";
+
+import "../../styles/sections/projects-experiences.css";
+---
+
+<section
+  class="projects-experiences"
+  id="experiences"
+  aria-labelledby="projects-experiences-title"
+  aria-roledescription="carousel"
+>
+  <Container>
+    <div class="projects-experiences__layout">
+      <header class="projects-experiences__header">
+        <Heading as="h2" variant="display-lg" id="projects-experiences-title">
+          {projectsContent.title}
+        </Heading>
+
+        <div class="projects-experiences__introduction">
+          <Text variant="body-lg" tone="primary">{projectsContent.introduction}</Text>
+          <Button href={projectsContent.cta.href} variant="ghost">
+            {projectsContent.cta.label}
+          </Button>
+        </div>
+
+        <div class="projects-experiences__controls">
+          <p class="projects-experiences__status" aria-live="polite" aria-atomic="true">
+            Proyecto 1 de {projectsContent.items.length}: {projectsContent.items[0]?.title}
+          </p>
+          <div class="projects-experiences__buttons">
+            <button type="button" data-projects-previous aria-label="Proyecto anterior" title="Anterior">
+              <span aria-hidden="true">←</span>
+            </button>
+            <button type="button" data-projects-next aria-label="Proyecto siguiente" title="Siguiente">
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="projects-experiences__viewport">
+        <ol
+          class="projects-experiences__track"
+          data-projects-track
+          aria-label="Experiencias Mosaïque"
+          tabindex="0"
+        >
+          {
+            projectsContent.items.map((project, index) => (
+              <li
+                class="projects-experiences__slide"
+                data-projects-slide
+                data-project-title={project.title}
+                aria-label={`${index + 1} de ${projectsContent.items.length}`}
+                aria-roledescription="slide"
+              >
+                <article>
+                  <div
+                    class="projects-experiences__media"
+                    data-media-status="pending"
+                    data-tone={String(index + 1).padStart(2, "0")}
+                    aria-hidden="true"
+                  >
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="projects-experiences__meta">
+                    <span>{project.index}</span>
+                    <div>
+                      <Heading as="h3" variant="heading-md">{project.title}</Heading>
+                      <Text>{project.description}</Text>
+                    </div>
+                  </div>
+                </article>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".projects-experiences").forEach((section) => {
+    if (section.dataset.carouselReady === "true") return;
+
+    section.dataset.carouselReady = "true";
+
+    const track = section.querySelector<HTMLElement>("[data-projects-track]");
+    const slides = Array.from(section.querySelectorAll<HTMLElement>("[data-projects-slide]"));
+    const previous = section.querySelector<HTMLButtonElement>("[data-projects-previous]");
+    const next = section.querySelector<HTMLButtonElement>("[data-projects-next]");
+    const status = section.querySelector<HTMLElement>(".projects-experiences__status");
+
+    if (!track || !previous || !next || slides.length === 0) return;
+
+    const controller = new AbortController();
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const desktopCarousel = window.matchMedia("(min-width: 64rem)");
+    let activeIndex = 0;
+    let frameId = 0;
+
+    const slideOffset = (slide: HTMLElement) => slide.offsetLeft - track.offsetLeft;
+
+    const update = () => {
+      frameId = 0;
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      const isAtEnd = maxScroll - track.scrollLeft <= 2;
+      const closestIndex = isAtEnd
+        ? slides.length - 1
+        : slides.reduce((bestIndex, slide, index) => {
+            const currentDistance = Math.abs(slideOffset(slide) - track.scrollLeft);
+            const bestDistance = Math.abs(slideOffset(slides[bestIndex]) - track.scrollLeft);
+            return currentDistance < bestDistance ? index : bestIndex;
+          }, 0);
+
+      activeIndex = closestIndex;
+      previous.disabled = activeIndex === 0;
+      next.disabled = activeIndex === slides.length - 1;
+
+      if (status) {
+        status.textContent = `Proyecto ${activeIndex + 1} de ${slides.length}: ${slides[activeIndex].dataset.projectTitle ?? ""}`;
+      }
+    };
+
+    const requestUpdate = () => {
+      if (!frameId) frameId = window.requestAnimationFrame(update);
+    };
+
+    const goTo = (index: number) => {
+      if (!desktopCarousel.matches) return;
+
+      const targetIndex = Math.min(Math.max(index, 0), slides.length - 1);
+      track.scrollTo({
+        behavior: reducedMotion.matches ? "auto" : "smooth",
+        left: slideOffset(slides[targetIndex]),
+      });
+    };
+
+    const syncMode = () => {
+      track.tabIndex = desktopCarousel.matches ? 0 : -1;
+      if (!desktopCarousel.matches) track.scrollTo({ behavior: "auto", left: 0 });
+      requestUpdate();
+    };
+
+    previous.addEventListener("click", () => goTo(activeIndex - 1), {
+      signal: controller.signal,
+    });
+    next.addEventListener("click", () => goTo(activeIndex + 1), {
+      signal: controller.signal,
+    });
+    track.addEventListener("scroll", requestUpdate, {
+      passive: true,
+      signal: controller.signal,
+    });
+    desktopCarousel.addEventListener("change", syncMode, { signal: controller.signal });
+
+    const resizeObserver = new ResizeObserver(requestUpdate);
+    resizeObserver.observe(track);
+
+    window.addEventListener(
+      "pagehide",
+      () => {
+        controller.abort();
+        resizeObserver.disconnect();
+        if (frameId) window.cancelAnimationFrame(frameId);
+      },
+      { once: true },
+    );
+
+    syncMode();
+  });
+</script>
