@@ -68,6 +68,23 @@ This document is the source of truth for implementation status. The existence of
 - Numeric values count from zero once when the block enters the viewport using IntersectionObserver, requestAnimationFrame, and the shared runtime motion duration; reduced motion preserves final values without animation.
 - Desktop, tablet, mobile, overflow, count states, content completeness, and reduced-motion behavior were validated.
 
+### Why Choose Us
+
+- **Implementation: complete.** Four numbered reasons render from `src/content/home/whyChooseUs.ts` in a static Astro section positioned after About/Milestones according to the Content Foundation.
+- The section uses a quiet editorial proof band with semantic articles, four columns on desktop, two columns on tablet, and a linear mobile flow.
+- **Fidelity Pass: complete.** Desktop uses the Movra proof-band hierarchy with centered icon-led items, compact utility labels, body-led descriptions, lower vertical density, and vertical dividers between four columns without a visible section title.
+- Compact desktop and tablet retain the two-column divided layout; mobile remains linear for readability.
+- Desktop, desktop-minimum, tablet, mobile, overflow, content completeness, and the motion-free reduced-motion state were validated.
+
+### Marquee
+
+- **Implementation: complete.** A full-viewport Astro scene renders content from `src/content/home/marquee.ts` between Why Choose Us and Services.
+- **Fidelity Pass: complete.** The scene enters through a three-step media reveal and remains sticky for a bounded scroll interval, while its oversized ticker runs independently as a token-driven CSS autoplay loop.
+- The bounded reveal uses one passive scroll listener only while the scene is near the viewport, batches updates with requestAnimationFrame, and writes only transform and opacity styles without React hydration.
+- Approved photography remains pending, so the full-bleed media contract currently renders a lightweight branded placeholder.
+- Reduced motion removes the sticky scroll distance and staged reveal, hides the visual duplicate, and presents the statement and ticker as a static full-viewport composition.
+- Desktop, tablet, mobile, document overflow, scroll-linked stability, section handoff, content duplication semantics, and reduced-motion behavior were validated.
+
 ### SEO / Metadata Baseline
 
 - **Implementation: partial baseline complete.** Spanish document language, page title, description, viewport metadata, and favicons are present.
@@ -75,29 +92,19 @@ This document is the source of truth for implementation status. The existence of
 
 ## Current
 
-### Why Choose Us - Implementation
+### Process - Implementation
 
-- **Status: not started.** Content exists only in `src/content/home/whyChooseUs.ts`.
-- Inspect the Movra grouped editorial-card reference and approved media status before implementation.
-- Do not start until explicitly requested.
+- **Status: not started.** Content exists only in `src/content/home/process.ts`.
+- Implement the semantic section before comparing its sticky sequence against Movra.
+- Do not modify other validated sections during this phase.
 
 ## Next
 
-### Why Choose Us - Fidelity Pass
+### Process - Fidelity Pass
 
-- **Status: blocked by implementation.** Compare composition, hierarchy, responsive behavior, and any required motion only after the section exists.
+- **Status: not started.** Begin only after Process Implementation is complete.
 
 ## Pending
-
-### Marquee
-
-- **Implementation: not started.** Content exists only in `src/content/home/marquee.ts`.
-- **Fidelity Pass: not started.** CSS motion and reduced-motion behavior must be evaluated when implemented.
-
-### Process
-
-- **Implementation: not started.** Content exists only in `src/content/home/process.ts`.
-- **Fidelity Pass: not started.** The Movra sticky-process behavior is a reference, not yet product code.
 
 ### Testimonials
 
@@ -154,7 +161,7 @@ This document is the source of truth for implementation status. The existence of
 
 ## Known Issues / Deferred Decisions
 
-- Approved production photography is unavailable. Hero, About/Milestones, Metrics, Services, and Projects currently use lightweight replaceable placeholders.
+- Approved production photography is unavailable. Hero, About/Milestones, Metrics, Marquee, Services, and Projects currently use lightweight replaceable placeholders.
 - Approved self-hosted Cinzel and Montserrat font files are pending; see `docs/DESIGN_SYSTEM.md`.
 - Services intentionally remains `client:load`; changing hydration strategy is deferred until an explicit performance phase.
 - The working tree contained an uncommitted business-copy edit in `src/content/home/services.ts` when this roadmap was created. Preserve and review it before committing unrelated work.

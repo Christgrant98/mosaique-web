@@ -1,0 +1,28 @@
+---
+import Container from "../ui/Container.astro";
+import Heading from "../ui/Heading.astro";
+import Text from "../ui/Text.astro";
+import { whyChooseUsContent } from "../../content/home/whyChooseUs";
+
+import "../../styles/sections/why-choose-us.css";
+
+const reasonIcons = ["✦", "◎", "◇", "◉"] as const;
+---
+
+<section class="why-choose-us" aria-label={whyChooseUsContent.title}>
+  <Container>
+    <ol class="why-choose-us__list">
+      {
+        whyChooseUsContent.reasons.map((reason, index) => (
+          <li class="why-choose-us__reason">
+            <article>
+              <span class="why-choose-us__icon" aria-hidden="true">{reasonIcons[index]}</span>
+              <Heading as="h3" variant="heading-md">{reason.title}</Heading>
+              <Text>{reason.description}</Text>
+            </article>
+          </li>
+        ))
+      }
+    </ol>
+  </Container>
+</section>

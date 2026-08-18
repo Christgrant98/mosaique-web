@@ -25,11 +25,5 @@ export const whyChooseUsContent = {
       description:
         "No solo producimos eventos para clientes. También creamos experiencias que pueden aumentar el tráfico, la visibilidad y el posicionamiento de restaurantes, salones y espacios aliados.",
     },
-    {
-      index: "05",
-      title: "Ejecución confiable",
-      description:
-        "Cuidamos la logística antes, durante y después del evento para que cada detalle tenga un lugar y cada etapa avance con claridad.",
-    },
   ],
 } as const;

@@ -11,6 +11,7 @@
   --motion-stagger-text-duration: 480ms;
   --motion-stagger-interval: 80ms;
   --motion-crossfade-duration: var(--motion-duration-slow);
+  --motion-marquee-duration: 48s;
 }
 
 @media (prefers-reduced-motion: reduce) {
