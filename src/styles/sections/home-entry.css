@@ -184,6 +184,14 @@
   z-index: var(--primitive-z-content);
 }
 
+.home-hero__stage {
+  block-size: 100%;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: var(--primitive-z-content);
+}
+
 .home-hero__brand {
   align-items: baseline;
   display: flex;
@@ -226,17 +234,12 @@
   line-height: 0.98;
   margin: 0;
   max-inline-size: 18ch;
-  opacity: var(--hero-title-opacity, 0);
-  transform: translateY(var(--hero-title-y, 1.5rem));
 }
 
 .home-hero__primary-action {
   background: var(--color-background) !important;
   border-color: var(--color-background) !important;
   color: var(--color-text-primary) !important;
-  opacity: var(--hero-action-opacity, 0);
-  pointer-events: var(--hero-action-pointer-events, none);
-  transform: translateY(var(--hero-action-y, 1.25rem));
 }
 
 .home-hero__handoff {

@@ -1,4 +1,7 @@
 ---
+import Button from "../ui/Button.astro";
+import Container from "../ui/Container.astro";
+import Heading from "../ui/Heading.astro";
 import { heroContent } from "../../content/home/hero";
 
 import "../../styles/sections/home-entry.css";
@@ -6,7 +9,7 @@ import "../../styles/sections/home-entry.css";
 const [heroBrand, heroCategory] = heroContent.brand.split(" ");
 ---
 
-<section class="home-hero" id="top" aria-label={heroContent.brand}>
+<section class="home-hero" id="top" aria-labelledby="home-hero-title">
   <p class="home-hero__brand" aria-hidden="true">
     <span>{heroBrand}</span>
     <span>{heroCategory}</span>
@@ -30,6 +33,17 @@ const [heroBrand, heroCategory] = heroContent.brand.split(" ");
       }
       <figcaption>{heroContent.overlay}</figcaption>
     </figure>
+
+    <Container class="home-hero__stage">
+      <div class="home-hero__final-state">
+        <Heading as="h1" variant="heading-lg" class="home-hero__title" id="home-hero-title">
+          {heroContent.title}
+        </Heading>
+        <Button class="home-hero__primary-action" href={heroContent.actions.primary.href}>
+          {heroContent.actions.primary.label}
+        </Button>
+      </div>
+    </Container>
   </div>
 </section>
 

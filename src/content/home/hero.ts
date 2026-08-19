@@ -1,5 +1,11 @@
+import type { ContentLink } from "../types";
+
 export const heroContent = {
   brand: "MOSAÏQUE EVENTS",
+  title: "Creamos eventos que se viven, se recuerdan y se comparten.",
+  actions: {
+    primary: { label: "Planear mi evento", href: "#contact" } satisfies ContentLink,
+  },
   overlay: "Every detail has its place.",
   media: {
     status: "pending",
