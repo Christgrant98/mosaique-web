@@ -50,16 +50,22 @@ This document is the source of truth for implementation status. The existence of
 ### Services
 
 - **Implementation: complete.** StickyServices, ServicesScene, PanelReveal, and the neutral ScrollLinkedScene pattern are integrated. ServicesIntro was removed from the page; Marquee remains an independent preceding section while a panel-only overlap lets Services reveal over its final viewport.
+- The seven service records use the approved compact title, description, audience, and commercial CTA copy from `src/content/home/services.ts`; the commercial actions continue to target `#contact`.
+- Desktop and tablet use equal scene columns plus an intrinsic-width index column so service copy and synchronized media carry comparable visual weight without increasing the bounded scroll interval.
+- The synchronized media frame exposes one contextual `Ver más` button for the active service on desktop and tablet. It uses the existing stable service `id`, provides a descriptive accessible name, and currently logs the selected identifier without navigation so a future detail action can replace one handler.
+- Mobile removes the media frame and its associated `Ver más` action at the existing 48 rem breakpoint, leaving the complete service copy in a full-width natural flow without reserved media space.
+- The former Services transition CTA beginning “¿Tienes una idea, un espacio o una celebración en mente?” and its exclusive content and styles were removed by product direction, so Services now hands off directly to Projects / Experiences.
 - **Fidelity Pass: complete.** Section overlap, sticky media, seven service states, scroll pacing, responsive behavior, and reduced motion were validated.
 - React is limited to the interactive Services scene and hydrates with `client:visible`.
 
 ### Projects / Experiences
 
-- **Implementation: complete.** Five project categories render from `src/content/home/projects.ts` in an Astro section.
-- **Fidelity Pass: complete.** Desktop now follows the Movra editorial split with project context and manual controls beside a portrait-media carousel; tablet and mobile use static two-column and single-column reading flows.
-- The desktop carousel uses native horizontal scrolling, scroll snap, touch/keyboard scrolling, accessible previous/next controls, announced active state, and no automatic advance.
-- Placeholder media remains lightweight and replaceable while approved photography is pending.
-- Desktop, tablet, mobile, reduced-motion behavior, overflow, and all five navigation states were validated.
+- **Implementation: complete.** The section now presents a six-slot gallery for completed events from `src/content/home/projects.ts` instead of five conceptual project categories.
+- No verified event names, clients, venues, dates, or photography exist in the repository, so all six event records are explicitly marked as placeholders with stable identifiers, pending factual content and media.
+- **Fidelity Pass: complete.** The existing Movra editorial split, divider, typography, portrait media, controls, and responsive reading flows remain unchanged.
+- The desktop carousel uses native horizontal scrolling, scroll snap, touch/keyboard scrolling, and accessible previous/next controls. Arrow navigation advances in derived two-event pages (`1–2`, `3–4`, `5–6`) without an isolated final card; the live status announces the first event in the visible pair as `Evento X de 6`.
+- Tablet and mobile retain the existing static two-column and single-column flows. Placeholder media remains lightweight and replaceable while approved event photography is pending.
+- Desktop, tablet, mobile, reduced-motion behavior, overflow, six-item completeness, and all three paired navigation states were validated.
 
 ### Why Choose Us
 
@@ -98,9 +104,11 @@ This document is the source of truth for implementation status. The existence of
 ### FAQ
 
 - **Implementation: complete.** Eight native disclosure items render from `src/content/home/faq.ts` after Process.
-- The section uses semantic `details` and `summary` elements, so pointer and keyboard interaction work without React, custom JavaScript, or event listeners.
+- The section uses semantic `details` and `summary` elements grouped by the native `name` attribute, so pointer and keyboard interaction work without React, custom JavaScript, or event listeners while only one answer remains open at a time.
 - **Fidelity Pass: complete.** Desktop follows Movra's quiet split composition with a compact label and replaceable media contract in the left rail, a central divider, and a dense disclosure list on the right.
 - Questions use compact sans-serif hierarchy and circular chevrons; answers open below their question without changing the native disclosure contract.
+- The eight closed questions fit within one desktop viewport below the persistent navigation; opening an answer expands the section in normal document flow.
+- Desktop aligns the left label with the first question and the placeholder media with the start of the final question through shared row-size variables rather than viewport-specific offsets.
 - Supporting browsers receive a token-driven CSS open/close transition through `::details-content`; other browsers retain immediate native disclosure behavior without JavaScript.
 - Tablet and mobile remove the decorative media and use a constrained linear flow. Reduced motion removes the disclosure and chevron transitions while preserving immediate state changes.
 - Desktop, tablet, mobile, pointer, keyboard, long-copy constraints, document overflow, and reduced-motion code paths were validated.
@@ -197,6 +205,5 @@ This document is the source of truth for implementation status. The existence of
 - Approved social sharing artwork is pending; `og:image` and `twitter:image` should be enabled through the existing layout prop when it is delivered.
 - The final public domain remains unconfirmed. Production must define `SITE_URL` before deployment acceptance so canonical and sitemap URLs are emitted.
 - Services uses `client:visible`; preserve its server-rendered fallback and verify hydration again when production media is introduced.
-- The working tree contained an uncommitted business-copy edit in `src/content/home/services.ts` when this roadmap was created. Preserve and review it before committing unrelated work.
 - `README.md` remains the Astro starter README. New sessions should use `AGENTS.md` and this roadmap for project-specific guidance.
 - Media models for future sections must not invent asset paths while approved assets are unavailable.
