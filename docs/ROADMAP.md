@@ -1,6 +1,6 @@
 # Mosaïque Web Roadmap
 
-Last verified against code and git history: 2026-08-18.
+Last verified against code and git history: 2026-08-19.
 
 This document is the source of truth for implementation status. The existence of a module in `src/content/home/` does not mean its section has been implemented.
 
@@ -60,13 +60,6 @@ This document is the source of truth for implementation status. The existence of
 - The desktop carousel uses native horizontal scrolling, scroll snap, touch/keyboard scrolling, accessible previous/next controls, announced active state, and no automatic advance.
 - Placeholder media remains lightweight and replaceable while approved photography is pending.
 - Desktop, tablet, mobile, reduced-motion behavior, overflow, and all five navigation states were validated.
-
-### Metrics
-
-- **Implementation: complete.** Three active metrics render from `src/content/home/metrics.ts` inside `AboutMilestones.astro`, immediately after the milestone list rather than as a standalone page section.
-- **Fidelity Pass: complete.** The existing sticky About media accompanies the metric tiles, the redundant Metrics media placeholder was removed, and the responsive composition follows the supplied Movra reference.
-- Numeric values count from zero once when the block enters the viewport using IntersectionObserver, requestAnimationFrame, and the shared runtime motion duration; reduced motion preserves final values without animation.
-- Desktop, tablet, mobile, overflow, count states, content completeness, and reduced-motion behavior were validated.
 
 ### Why Choose Us
 
@@ -174,6 +167,11 @@ This document is the source of truth for implementation status. The existence of
 
 ## Pending
 
+### Metrics
+
+- **Status: removed from the rendered page by product direction.** The metric tiles and their count-up runtime were removed from `AboutMilestones.astro`; typed content remains in `src/content/home/metrics.ts` for possible future review.
+- About and Milestones retain their existing sticky-media composition without a separate Metrics block.
+
 ### Values / Spotlights
 
 - **Status: deferred for business review.** The attempted implementation was fully removed; content remains only in `src/content/home/values.ts`.
@@ -194,7 +192,7 @@ This document is the source of truth for implementation status. The existence of
 
 ## Known Issues / Deferred Decisions
 
-- Approved production photography is unavailable. Hero, About/Milestones, Metrics, Marquee, Services, Projects, Process, Testimonials, FAQ, and Final CTA currently use lightweight replaceable placeholders.
+- Approved production photography is unavailable. Hero, About/Milestones, Marquee, Services, Projects, Process, Testimonials, FAQ, and Final CTA currently use lightweight replaceable placeholders.
 - Approved self-hosted Cinzel and Montserrat font files are pending; see `docs/DESIGN_SYSTEM.md`.
 - Approved social sharing artwork is pending; `og:image` and `twitter:image` should be enabled through the existing layout prop when it is delivered.
 - The final public domain remains unconfirmed. Production must define `SITE_URL` before deployment acceptance so canonical and sitemap URLs are emitted.

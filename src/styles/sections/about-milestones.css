@@ -138,76 +138,6 @@
   max-inline-size: var(--layout-max-reading);
 }
 
-.about-milestones__metrics {
-  margin-block-start: var(--space-4);
-}
-
-.about-milestones__metrics-list {
-  display: grid;
-  gap: var(--space-1);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.about-milestones__metric {
-  background: var(--color-surface);
-  container-type: inline-size;
-  min-block-size: 14rem;
-}
-
-.about-milestones__metric article {
-  align-content: space-between;
-  block-size: 100%;
-  display: grid;
-  gap: var(--space-8);
-  min-inline-size: 0;
-  padding: clamp(var(--space-6), 4vw, var(--space-10));
-}
-
-.about-milestones__metric-value,
-.about-milestones__metric p {
-  margin: 0;
-}
-
-.about-milestones__metric-value {
-  font-family: var(--font-family-display);
-  font-size: clamp(2.25rem, 8vw, 4.5rem);
-  font-weight: var(--text-heading-md-weight);
-  inline-size: 100%;
-  line-height: 0.98;
-  max-inline-size: 100%;
-  overflow-wrap: anywhere;
-  text-wrap: balance;
-}
-
-.about-milestones__metric article > p:last-child {
-  border-block-start: 1px solid currentColor;
-  max-inline-size: 34rem;
-  padding-block-start: var(--space-4);
-}
-
-.about-milestones__metric:nth-child(1) {
-  background: var(--color-accent);
-}
-
-.about-milestones__metric:nth-child(2) {
-  background: var(--color-background-inverse);
-  color: var(--color-text-inverse);
-}
-
-.about-milestones__metric:nth-child(2) article > p:last-child {
-  color: var(--color-text-inverse);
-}
-
-.about-milestones__metric:nth-child(3) {
-  background: var(--color-surface-muted);
-}
-
-.about-milestones__metric:nth-child(5) {
-  background: var(--color-accent-muted);
-}
-
 @media (min-width: 48rem) {
   .about-milestones__layout {
     align-items: start;
@@ -225,7 +155,7 @@
 
   .about-milestones__media {
     grid-column: 1;
-    grid-row: 1 / span 3;
+    grid-row: 1 / span 2;
     inline-size: min(100%, calc(75svh - var(--space-16)));
     justify-self: start;
     position: sticky;
@@ -233,13 +163,8 @@
   }
 
   .about-milestones__about,
-  .about-milestones__timeline,
-  .about-milestones__metrics {
+  .about-milestones__timeline {
     grid-column: 2;
-  }
-
-  .about-milestones__metric-value {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
   }
 
   .about-milestones__item {
@@ -287,34 +212,5 @@
   .about-milestones__item p {
     grid-column: 3;
     margin-block-start: 0;
-  }
-
-  .about-milestones__metrics {
-    margin-block-start: 0;
-  }
-
-  .about-milestones__metrics-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .about-milestones__metric:last-child:nth-child(odd) {
-    grid-column: 1 / -1;
-  }
-
-  .about-milestones__metric {
-    min-block-size: 16rem;
-  }
-
-  .about-milestones__metric article {
-    padding: clamp(var(--space-6), 2.5vw, var(--space-10));
-  }
-
-  .about-milestones__metric-value {
-    font-size: clamp(2.25rem, 14cqi, 4rem);
-  }
-
-  .about-milestones__metric article > p:last-child {
-    font-size: var(--text-caption-size);
-    line-height: var(--text-caption-line-height);
   }
 }
