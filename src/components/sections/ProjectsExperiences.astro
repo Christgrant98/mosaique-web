@@ -28,32 +28,6 @@ import "../../styles/sections/projects-experiences.css";
             {eventGalleryContent.cta.label}
           </Button>
         </div>
-
-        <div class="projects-experiences__controls">
-          <p class="projects-experiences__status" aria-live="polite" aria-atomic="true">
-            Evento 1 de {eventGalleryContent.items.length}: {
-              eventGalleryContent.items[0]?.title
-            }
-          </p>
-          <div class="projects-experiences__buttons">
-            <button
-              type="button"
-              data-projects-previous
-              aria-label="Eventos anteriores"
-              title="Anterior"
-            >
-              <span aria-hidden="true">←</span>
-            </button>
-            <button
-              type="button"
-              data-projects-next
-              aria-label="Eventos siguientes"
-              title="Siguiente"
-            >
-              <span aria-hidden="true">→</span>
-            </button>
-          </div>
-        </div>
       </header>
 
       <div class="projects-experiences__viewport">
@@ -71,6 +45,7 @@ import "../../styles/sections/projects-experiences.css";
                 data-event-id={event.id}
                 data-event-title={event.title}
                 data-content-status={event.status}
+                data-active={index === 0 ? "true" : "false"}
                 aria-label={`${index + 1} de ${eventGalleryContent.items.length}`}
                 aria-roledescription="slide"
               >
@@ -99,6 +74,30 @@ import "../../styles/sections/projects-experiences.css";
           }
         </ol>
       </div>
+
+      <div class="projects-experiences__controls">
+        <p class="projects-experiences__status" aria-live="polite" aria-atomic="true">
+          Evento 1 de {eventGalleryContent.items.length}: {eventGalleryContent.items[0]?.title}
+        </p>
+        <div class="projects-experiences__buttons">
+          <button
+            type="button"
+            data-projects-previous
+            aria-label="Evento anterior"
+            title="Anterior"
+          >
+            <span aria-hidden="true">←</span>
+          </button>
+          <button
+            type="button"
+            data-projects-next
+            aria-label="Evento siguiente"
+            title="Siguiente"
+          >
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
     </div>
   </Container>
 </section>
@@ -120,17 +119,52 @@ import "../../styles/sections/projects-experiences.css";
     const controller = new AbortController();
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const desktopCarousel = window.matchMedia("(min-width: 64rem)");
-    const eventsPerPage = 2;
     let activeIndex = 0;
     let frameId = 0;
 
     const slideOffset = (slide: HTMLElement) => slide.offsetLeft - track.offsetLeft;
 
+    const getNavigationState = () => {
+      const visibleCount = desktopCarousel.matches ? 2 : 1;
+      const lastPageStart = Math.max(0, slides.length - visibleCount);
+
+      return { lastPageStart, visibleCount };
+    };
+
+    const renderState = () => {
+      const { lastPageStart, visibleCount } = getNavigationState();
+      activeIndex = Math.min(Math.max(activeIndex, 0), lastPageStart);
+      previous.disabled = activeIndex === 0;
+      next.disabled = activeIndex === lastPageStart;
+
+      slides.forEach((slide, index) => {
+        const isVisible = index >= activeIndex && index < activeIndex + visibleCount;
+        slide.dataset.active = String(isVisible);
+
+        if (desktopCarousel.matches || isVisible) {
+          slide.removeAttribute("aria-hidden");
+          slide.removeAttribute("inert");
+        } else {
+          slide.setAttribute("aria-hidden", "true");
+          slide.setAttribute("inert", "");
+        }
+      });
+
+      if (status) {
+        status.textContent = `Evento ${activeIndex + 1} de ${slides.length}: ${slides[activeIndex].dataset.eventTitle ?? ""}`;
+      }
+    };
+
     const update = () => {
       frameId = 0;
+      if (!desktopCarousel.matches) {
+        renderState();
+        return;
+      }
+
       const maxScroll = track.scrollWidth - track.clientWidth;
       const isAtEnd = maxScroll - track.scrollLeft <= 2;
-      const lastPageStart = Math.max(0, slides.length - eventsPerPage);
+      const { lastPageStart, visibleCount } = getNavigationState();
       const closestIndex = isAtEnd
         ? lastPageStart
         : slides.reduce((bestIndex, slide, index) => {
@@ -140,15 +174,10 @@ import "../../styles/sections/projects-experiences.css";
           }, 0);
 
       activeIndex = Math.min(
-        Math.floor(closestIndex / eventsPerPage) * eventsPerPage,
+        Math.floor(closestIndex / visibleCount) * visibleCount,
         lastPageStart,
       );
-      previous.disabled = activeIndex === 0;
-      next.disabled = activeIndex === lastPageStart;
-
-      if (status) {
-        status.textContent = `Evento ${activeIndex + 1} de ${slides.length}: ${slides[activeIndex].dataset.eventTitle ?? ""}`;
-      }
+      renderState();
     };
 
     const requestUpdate = () => {
@@ -156,10 +185,15 @@ import "../../styles/sections/projects-experiences.css";
     };
 
     const goTo = (index: number) => {
-      if (!desktopCarousel.matches) return;
-
-      const lastPageStart = Math.max(0, slides.length - eventsPerPage);
+      const { lastPageStart } = getNavigationState();
       const targetIndex = Math.min(Math.max(index, 0), lastPageStart);
+
+      if (!desktopCarousel.matches) {
+        activeIndex = targetIndex;
+        renderState();
+        return;
+      }
+
       track.scrollTo({
         behavior: reducedMotion.matches ? "auto" : "smooth",
         left: slideOffset(slides[targetIndex]),
@@ -168,16 +202,35 @@ import "../../styles/sections/projects-experiences.css";
 
     const syncMode = () => {
       track.tabIndex = desktopCarousel.matches ? 0 : -1;
-      if (!desktopCarousel.matches) track.scrollTo({ behavior: "auto", left: 0 });
-      requestUpdate();
+      const { lastPageStart, visibleCount } = getNavigationState();
+      activeIndex = Math.min(
+        Math.floor(activeIndex / visibleCount) * visibleCount,
+        lastPageStart,
+      );
+
+      if (desktopCarousel.matches) {
+        track.scrollTo({ behavior: "auto", left: slideOffset(slides[activeIndex]) });
+        requestUpdate();
+      } else {
+        track.scrollTo({ behavior: "auto", left: 0 });
+        renderState();
+      }
     };
 
-    previous.addEventListener("click", () => goTo(activeIndex - eventsPerPage), {
-      signal: controller.signal,
-    });
-    next.addEventListener("click", () => goTo(activeIndex + eventsPerPage), {
-      signal: controller.signal,
-    });
+    previous.addEventListener(
+      "click",
+      () => goTo(activeIndex - getNavigationState().visibleCount),
+      {
+        signal: controller.signal,
+      },
+    );
+    next.addEventListener(
+      "click",
+      () => goTo(activeIndex + getNavigationState().visibleCount),
+      {
+        signal: controller.signal,
+      },
+    );
     track.addEventListener("scroll", requestUpdate, {
       passive: true,
       signal: controller.signal,

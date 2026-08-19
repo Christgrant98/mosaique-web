@@ -62,10 +62,10 @@ This document is the source of truth for implementation status. The existence of
 
 - **Implementation: complete.** The section now presents a six-slot gallery for completed events from `src/content/home/projects.ts` instead of five conceptual project categories.
 - No verified event names, clients, venues, dates, or photography exist in the repository, so all six event records are explicitly marked as placeholders with stable identifiers, pending factual content and media.
-- **Fidelity Pass: complete.** The existing Movra editorial split, divider, typography, portrait media, controls, and responsive reading flows remain unchanged.
+- **Fidelity Pass: complete.** The Movra editorial split, divider, typography, portrait media, and desktop controls remain unchanged; responsive controls were aligned with the CTA row against the supplied mobile reference.
 - The desktop carousel uses native horizontal scrolling, scroll snap, touch/keyboard scrolling, and accessible previous/next controls. Arrow navigation advances in derived two-event pages (`1–2`, `3–4`, `5–6`) without an isolated final card; the live status announces the first event in the visible pair as `Evento X de 6`.
-- Tablet and mobile retain the existing static two-column and single-column flows. Placeholder media remains lightweight and replaceable while approved event photography is pending.
-- Desktop, tablet, mobile, reduced-motion behavior, overflow, six-item completeness, and all three paired navigation states were validated.
+- Tablet and mobile use the same data-driven carousel in a single-event mode: one complete event card is visible at a time, navigation advances by one, and the finite previous/next controls share the CTA row above the active card. Mobile keeps the full-width editorial heading clear of the navigation and uses one tokenized grid gap between that control row and the media; tablet retains its wider spacing. Placeholder media remains lightweight and replaceable while approved event photography is pending.
+- Desktop, tablet, mobile, breakpoint resize normalization, reduced-motion behavior, overflow, six-item completeness, all six responsive navigation states, and all three desktop paired navigation states were validated.
 
 ### Why Choose Us
 
