@@ -5,15 +5,10 @@ import Heading from "../ui/Heading.astro";
 import { heroContent } from "../../content/home/hero";
 
 import "../../styles/sections/home-entry.css";
-
-const [heroBrand, heroCategory] = heroContent.brand.split(" ");
 ---
 
 <section class="home-hero" id="top" aria-labelledby="home-hero-title">
-  <p class="home-hero__brand" aria-hidden="true">
-    <span>{heroBrand}</span>
-    <span>{heroCategory}</span>
-  </p>
+  <p class="home-hero__brand" aria-hidden="true">{heroContent.brand}</p>
 
   <div class="home-hero__scene">
     <figure

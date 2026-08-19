@@ -7,7 +7,6 @@ import "../../styles/sections/home-entry.css";
 import "../../styles/sections/navigation-menu.css";
 
 const homeLabel = navigationContent.items[0].label;
-const [navigationBrand, navigationCategory] = navigationContent.logo.split(" ");
 ---
 
 <header class="site-navigation">
@@ -24,10 +23,9 @@ const [navigationBrand, navigationCategory] = navigationContent.logo.split(" ");
       href="#top"
       aria-label={`${navigationContent.logo} — ${homeLabel}`}
     >
-      <span class="site-navigation__brand-line" aria-hidden="true">
-        <span>{navigationBrand}</span>
-        <span>{navigationCategory}</span>
-      </span>
+      <span class="site-navigation__brand-line" aria-hidden="true"
+        >{navigationContent.logo}</span
+      >
     </a>
 
     <details class="site-navigation__menu">

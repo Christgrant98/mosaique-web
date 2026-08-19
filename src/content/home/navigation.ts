@@ -1,7 +1,7 @@
 import type { ContentLink } from "../types";
 
 export const navigationContent = {
-  logo: "MOSAÏQUE EVENTS",
+  logo: "MOSAÏQUE ÉVÉNEMENTS",
   items: [
     { label: "Inicio", href: "#top" },
     { label: "Nosotros", href: "#about" },
