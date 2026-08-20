@@ -9,13 +9,17 @@ type ServicesSceneProps = {
   services: readonly ServiceContentItem[];
 };
 
+const handleViewMore = (service: ServiceContentItem) => {
+  console.log("View service details:", service.id);
+};
+
 export default function ServicesScene({ panelReveal, services }: ServicesSceneProps) {
   return (
     <ScrollLinkedScene
       className="services-spike__scene"
       items={services}
-      renderMedia={({ activeIndex }) => (
-        <div className="services-spike__media" aria-live="polite">
+      renderMedia={({ activeIndex, activeItem }) => (
+        <div className="services-spike__media">
           <div className="services-spike__media-frame">
             {services.map((service, index) => (
               <div
@@ -34,6 +38,15 @@ export default function ServicesScene({ panelReveal, services }: ServicesScenePr
               </div>
             ))}
           </div>
+          <button
+            aria-label={`Ver más sobre ${activeItem.title}`}
+            className="services-spike__media-action"
+            onClick={() => handleViewMore(activeItem)}
+            type="button"
+          >
+            <span>Ver más</span>
+            <span className="services-spike__media-action-arrow" aria-hidden="true" />
+          </button>
         </div>
       )}
       renderContent={({ activeIndex, activeItem, itemCount, items, registerItem }) => (
@@ -64,15 +77,9 @@ export default function ServicesScene({ panelReveal, services }: ServicesScenePr
                     {service.index} / {String(itemCount).padStart(2, "0")}
                   </span>
                   <div>
-                    <p className="services-spike__eyebrow">
-                      Servicio {service.index} — {service.category}
-                    </p>
-                    <h3 className="services-spike__title">
-                      {service.title}
-                    </h3>
-                    <p className="services-spike__description">
-                      {service.description}
-                    </p>
+                    <p className="services-spike__eyebrow">Servicio {service.index}</p>
+                    <h3 className="services-spike__title">{service.title}</h3>
+                    <p className="services-spike__description">{service.description}</p>
                     <div className="services-spike__ideal-for">
                       <p className="services-spike__ideal-for-label">Ideal para:</p>
                       <p>{service.idealFor}</p>

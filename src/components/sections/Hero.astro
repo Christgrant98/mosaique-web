@@ -2,24 +2,13 @@
 import Button from "../ui/Button.astro";
 import Container from "../ui/Container.astro";
 import Heading from "../ui/Heading.astro";
-import Text from "../ui/Text.astro";
 import { heroContent } from "../../content/home/hero";
 
 import "../../styles/sections/home-entry.css";
-
-const [heroBrand, heroCategory] = heroContent.brand.split(" ");
 ---
 
-<section
-  class="home-hero"
-  id="top"
-  aria-labelledby="home-hero-title"
-  style="--hero-title-opacity: 1; --hero-title-y: 0; --hero-action-opacity: 1; --hero-action-y: 0; --hero-action-pointer-events: auto;"
->
-  <p class="home-hero__brand" aria-hidden="true">
-    <span>{heroBrand}</span>
-    <span>{heroCategory}</span>
-  </p>
+<section class="home-hero" id="top" aria-labelledby="home-hero-title">
+  <p class="home-hero__brand" aria-hidden="true">{heroContent.brand}</p>
 
   <div class="home-hero__scene">
     <figure
@@ -32,8 +21,8 @@ const [heroBrand, heroCategory] = heroContent.brand.split(" ");
           <img src={heroContent.media.src} alt={heroContent.media.alt} loading="eager" />
         ) : (
           <div class="home-hero__media-placeholder" aria-hidden="true">
-            <span></span>
-            <span></span>
+            <span />
+            <span />
           </div>
         )
       }
@@ -47,21 +36,6 @@ const [heroBrand, heroCategory] = heroContent.brand.split(" ");
         </Heading>
         <Button class="home-hero__primary-action" href={heroContent.actions.primary.href}>
           {heroContent.actions.primary.label}
-        </Button>
-      </div>
-    </Container>
-  </div>
-
-  <div class="home-hero__handoff">
-    <Container class="home-hero__handoff-inner">
-      <Text as="span" variant="caption" tone="primary" class="home-hero__eyebrow">
-        {heroContent.eyebrow}
-      </Text>
-      <div class="home-hero__copy">
-        <Text variant="body-lg" tone="primary">{heroContent.subtitle}</Text>
-        <Text>{heroContent.supportingText}</Text>
-        <Button href={heroContent.actions.secondary.href} variant="secondary">
-          {heroContent.actions.secondary.label}
         </Button>
       </div>
     </Container>
@@ -81,9 +55,10 @@ const [heroBrand, heroCategory] = heroContent.brand.split(" ");
     const navigation = document.querySelector<HTMLElement>(".site-navigation");
     const heroBrand = hero.querySelector<HTMLElement>(".home-hero__brand");
     const navigationBrand = navigation?.querySelector<HTMLElement>(".site-navigation__brand");
-    const primaryAction = hero.querySelector<HTMLElement>(".home-hero__primary-action");
+    const scrollOrigin = hero.closest<HTMLElement>(".panel-reveal") ?? hero;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const controller = new AbortController();
+    let heroTop = scrollOrigin.getBoundingClientRect().top + window.scrollY;
     let frameId = 0;
 
     const update = () => {
@@ -91,23 +66,26 @@ const [heroBrand, heroCategory] = heroContent.brand.split(" ");
 
       if (reducedMotion.matches) {
         navigation?.style.removeProperty("--hero-nav-brand-opacity");
-        primaryAction?.removeAttribute("tabindex");
         return;
       }
 
-      const heroTop = hero.getBoundingClientRect().top + window.scrollY;
       const scrollRange = Math.max(window.innerHeight * 0.55, 1);
       const progress = clamp((window.scrollY - heroTop) / scrollRange);
       const brandProgress = rangeProgress(progress, 0, 0.58);
       const brandHandoffProgress = rangeProgress(progress, 0.56, 0.64);
-      const actionProgress = 1;
       const captionProgress = rangeProgress(progress, 0.64, 0.88);
 
       if (heroBrand && navigationBrand) {
+        const currentScale =
+          Number.parseFloat(hero.style.getPropertyValue("--hero-brand-scale")) || 1;
+        const heroBrandRect = heroBrand.getBoundingClientRect();
+        const heroBrandTop = Number.parseFloat(window.getComputedStyle(heroBrand).top);
         const navigationBrandRect = navigationBrand.getBoundingClientRect();
-        const heroBrandCenter = heroBrand.offsetTop + heroBrand.offsetHeight / 2;
+        const heroBrandWidth = heroBrandRect.width / currentScale;
+        const heroBrandHeight = heroBrandRect.height / currentScale;
+        const heroBrandCenter = heroBrandTop + heroBrandHeight / 2;
         const navigationBrandCenter = navigationBrandRect.top + navigationBrandRect.height / 2;
-        const targetScale = navigationBrandRect.width / heroBrand.offsetWidth;
+        const targetScale = navigationBrandRect.width / heroBrandWidth;
 
         hero.style.setProperty("--hero-brand-opacity", String(1 - brandHandoffProgress));
         hero.style.setProperty(
@@ -118,36 +96,27 @@ const [heroBrand, heroCategory] = heroContent.brand.split(" ");
           "--hero-brand-scale",
           String(1 - (1 - targetScale) * brandProgress),
         );
-        navigation?.style.setProperty(
-          "--hero-nav-brand-opacity",
-          String(brandHandoffProgress),
-        );
+        navigation?.style.setProperty("--hero-nav-brand-opacity", String(brandHandoffProgress));
       }
 
-      hero.style.setProperty("--hero-action-opacity", String(actionProgress));
-      hero.style.setProperty("--hero-action-y", `${(1 - actionProgress) * 1.25}rem`);
-      hero.style.setProperty(
-        "--hero-action-pointer-events",
-        actionProgress > 0.05 ? "auto" : "none",
-      );
       hero.style.setProperty("--hero-caption-opacity", String(captionProgress));
       navigation?.style.setProperty("--hero-nav-progress", `${brandProgress * 100}%`);
-
-      if (primaryAction) {
-        if (actionProgress > 0.05) primaryAction.removeAttribute("tabindex");
-        else primaryAction.setAttribute("tabindex", "-1");
-      }
     };
 
     const requestUpdate = () => {
       if (!frameId) frameId = window.requestAnimationFrame(update);
     };
 
+    const handleResize = () => {
+      heroTop = scrollOrigin.getBoundingClientRect().top + window.scrollY;
+      requestUpdate();
+    };
+
     window.addEventListener("scroll", requestUpdate, {
       passive: true,
       signal: controller.signal,
     });
-    window.addEventListener("resize", requestUpdate, { signal: controller.signal });
+    window.addEventListener("resize", handleResize, { signal: controller.signal });
     reducedMotion.addEventListener("change", requestUpdate, { signal: controller.signal });
     window.addEventListener(
       "pagehide",

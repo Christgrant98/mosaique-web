@@ -67,8 +67,11 @@
 }
 
 .final-cta__gallery {
-  block-size: clamp(16rem, 30vw, 25rem);
+  background: var(--color-background);
+  block-size: clamp(17rem, 24vw, 24rem);
+  box-sizing: border-box;
   overflow: hidden;
+  padding: var(--space-3) var(--space-4) var(--space-4);
 }
 
 .final-cta__track {
@@ -83,10 +86,10 @@
   block-size: 100%;
   display: grid;
   flex: none;
-  gap: var(--space-2);
-  grid-auto-columns: clamp(12rem, 19vw, 18rem);
+  gap: var(--space-1);
+  grid-auto-columns: clamp(11rem, 15vw, 16rem);
   grid-auto-flow: column;
-  padding-inline-end: var(--space-2);
+  padding-inline-end: var(--space-1);
 }
 
 .final-cta__media {
@@ -176,11 +179,12 @@
   }
 
   .final-cta__gallery {
-    block-size: 17rem;
+    block-size: 15rem;
+    padding: var(--space-2);
   }
 
   .final-cta__group {
-    grid-auto-columns: 11rem;
+    grid-auto-columns: 9.5rem;
   }
 }
 

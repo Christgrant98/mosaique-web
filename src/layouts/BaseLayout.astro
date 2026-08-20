@@ -4,12 +4,33 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  noindex?: boolean;
 }
 
 const {
   title = "MOSAÏQUE EVENTS",
   description = "Organización, producción y experiencias para eventos en Montréal.",
+  image,
+  noindex = false,
 } = Astro.props;
+
+const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
+const socialImageUrl = image && Astro.site ? new URL(image, Astro.site) : undefined;
+const robots = noindex ? "noindex, nofollow" : "index, follow";
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "MOSAÏQUE EVENTS",
+  description,
+  email: "info@mosaique-events.com",
+  areaServed: {
+    "@type": "City",
+    name: "Montréal",
+  },
+  ...(canonicalUrl ? { url: canonicalUrl.href } : {}),
+};
+const structuredDataJson = JSON.stringify(structuredData).replace(/</g, "\\u003c");
 ---
 
 <!doctype html>
@@ -20,10 +41,28 @@ const {
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
     <meta name="generator" content={Astro.generator} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CA" />
+    <meta property="og:site_name" content="MOSAÏQUE EVENTS" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    {socialImageUrl && <meta property="og:image" content={socialImageUrl} />}
+
+    <meta name="twitter:card" content={socialImageUrl ? "summary_large_image" : "summary"} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {socialImageUrl && <meta name="twitter:image" content={socialImageUrl} />}
+
+    <script type="application/ld+json" set:html={structuredDataJson} is:inline />
     <title>{title}</title>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
     <slot />
   </body>
 </html>

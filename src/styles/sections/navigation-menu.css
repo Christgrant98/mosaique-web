@@ -39,12 +39,12 @@
 
 .site-navigation__menu[open] summary {
   background: var(--color-background);
+  block-size: calc(4rem + env(safe-area-inset-top));
   border-block-end: 1px solid var(--color-border-default);
   inline-size: 100%;
   justify-content: flex-end;
-  min-block-size: clamp(4.5rem, 8svh, 6rem);
-  padding: max(var(--space-4), env(safe-area-inset-top))
-    max(var(--space-page-gutter), env(safe-area-inset-right)) var(--space-4)
+  min-block-size: calc(4rem + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) max(var(--space-page-gutter), env(safe-area-inset-right)) 0
     var(--space-page-gutter);
   inset: 0 0 auto;
   position: fixed;
@@ -91,10 +91,11 @@
 }
 
 .site-navigation__menu-panel {
+  block-size: calc(100dvh - 2px);
   display: flex;
   flex-direction: column;
-  min-block-size: 100dvh;
-  padding-block-start: clamp(4.5rem, 8svh, 6rem);
+  min-block-size: calc(100dvh - 2px);
+  padding-block-start: calc(4rem + env(safe-area-inset-top));
 }
 
 .site-navigation__menu nav ul {
@@ -109,15 +110,16 @@
 
 .site-navigation__menu nav a {
   align-items: center;
+  block-size: 3.5rem;
   color: var(--color-text-primary);
   display: flex;
   font-family: var(--font-family-ui);
-  font-size: clamp(1.75rem, 4vw, 3.25rem);
+  font-size: clamp(1.375rem, 4vw, 1.5rem);
   font-weight: var(--text-navigation-weight);
   inline-size: 100%;
   line-height: 1.05;
-  min-block-size: clamp(5rem, 10svh, 7rem);
-  padding: var(--space-5) max(var(--space-page-gutter), env(safe-area-inset-left));
+  min-block-size: 3.5rem;
+  padding: 0 max(var(--space-page-gutter), env(safe-area-inset-left));
   text-decoration: none;
   transition:
     background-color var(--motion-duration-fast) var(--motion-easing-standard),
@@ -136,40 +138,25 @@
 
 .site-navigation__menu-footer {
   display: grid;
-  gap: clamp(var(--space-10), 8vw, var(--space-20));
+  gap: var(--space-4);
   margin-block-start: auto;
-  padding-block-start: clamp(var(--space-20), 14svh, var(--space-40));
+  padding-block-start: var(--space-8);
 }
 
 .site-navigation__menu-contact {
   display: grid;
-  gap: var(--space-8);
+  gap: var(--space-6);
   padding-inline: max(var(--space-page-gutter), env(safe-area-inset-left));
 }
 
-.site-navigation__menu-contact address,
 .site-navigation__menu-contact a {
   color: var(--color-text-primary);
   font-family: var(--font-family-ui);
-  font-size: var(--text-body-size);
+  font-size: var(--text-caption-size);
   font-style: normal;
   font-weight: var(--text-navigation-weight);
-  line-height: var(--text-body-line-height);
+  line-height: var(--text-caption-line-height);
   text-decoration: none;
-}
-
-.site-navigation__menu-contact a {
-  align-items: start;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  justify-self: start;
-}
-
-.site-navigation__menu-contact a span {
-  color: var(--color-text-secondary);
-  font-size: var(--text-caption-size);
-  font-weight: var(--text-caption-weight);
 }
 
 .site-navigation__menu-contact a strong {
@@ -250,12 +237,12 @@
 
 @media (min-width: 48rem) {
   .site-navigation__menu-contact {
-    align-items: end;
-    grid-template-columns: minmax(0, 1fr) minmax(18rem, 1fr);
+    align-items: center;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .site-navigation__menu-media {
-    block-size: clamp(26rem, 62svh, 48rem);
+    block-size: clamp(12rem, min(49dvh, calc(100dvh - 34.625rem)), 41.5rem);
   }
 }
 
@@ -270,30 +257,33 @@
 
   .site-navigation__menu[open] {
     border-end-end-radius: clamp(var(--space-4), 2vw, var(--space-8));
-    inline-size: clamp(32rem, 35vw, 42.5rem);
+    inline-size: clamp(32rem, 35vw, 45rem);
     inset-inline-start: auto;
   }
 
   .site-navigation__menu[open] summary {
-    inline-size: clamp(32rem, 35vw, 42.5rem);
+    block-size: 3.5rem;
+    inline-size: clamp(32rem, 35vw, 45rem);
     inset-inline-start: auto;
-    min-block-size: clamp(4.25rem, 6.5svh, 5rem);
+    min-block-size: 3.5rem;
+    padding-block: 0;
     padding-inline: var(--space-10);
   }
 
   .site-navigation__menu-panel {
-    padding-block-start: clamp(4.25rem, 6.5svh, 5rem);
+    padding-block-start: 3.5rem;
   }
 
   .site-navigation__menu nav a {
-    font-size: clamp(1.5rem, 1.6vw, 2rem);
-    min-block-size: clamp(4.25rem, 7svh, 5rem);
-    padding: var(--space-4) var(--space-10);
+    block-size: 3.5rem;
+    font-size: 1.5rem;
+    min-block-size: 3.5rem;
+    padding: 0 var(--space-10);
   }
 
   .site-navigation__menu-footer {
-    gap: clamp(var(--space-8), 4svh, var(--space-12));
-    padding-block-start: clamp(var(--space-16), 7svh, var(--space-24));
+    gap: var(--space-4);
+    padding-block-start: var(--space-8);
   }
 
   .site-navigation__menu-contact {
@@ -302,7 +292,16 @@
   }
 
   .site-navigation__menu-media {
-    block-size: clamp(24rem, 55svh, 36rem);
+    block-size: clamp(12rem, min(49dvh, calc(100dvh - 34.125rem)), 41.5rem);
+  }
+
+  .site-navigation__menu-close-icon {
+    block-size: 1.5rem;
+    inline-size: 1.5rem;
+  }
+
+  .site-navigation__menu-close-label {
+    font-size: 1.25rem;
   }
 }
 

@@ -1,0 +1,59 @@
+<section class="quote-step" data-quote-step="0" aria-labelledby="quote-contact-title">
+  <header>
+    <span>01</span>
+    <h2 id="quote-contact-title" tabindex="-1">Contacto</h2>
+  </header>
+
+  <div class="quote-fields">
+    <label class="quote-field quote-field--wide">
+      <span>Nombre completo <strong aria-hidden="true">*</strong></span>
+      <input
+        type="text"
+        name="fullName"
+        autocomplete="name"
+        required
+        aria-describedby="quote-full-name-error"
+        data-error-required="Ingresa tu nombre completo."
+      />
+      <small id="quote-full-name-error" data-quote-error></small>
+    </label>
+
+    <label class="quote-field">
+      <span>Email <strong aria-hidden="true">*</strong></span>
+      <input
+        type="email"
+        name="email"
+        autocomplete="email"
+        required
+        aria-describedby="quote-email-error"
+        data-error-required="Ingresa tu email."
+        data-error-invalid="Ingresa un email válido."
+      />
+      <small id="quote-email-error" data-quote-error></small>
+    </label>
+
+    <label class="quote-field">
+      <span>Teléfono <strong aria-hidden="true">*</strong></span>
+      <span class="quote-field__control">
+        <input
+          type="tel"
+          name="phone"
+          autocomplete="tel"
+          inputmode="tel"
+          maxlength="10"
+          required
+          aria-describedby="quote-phone-count quote-phone-error"
+          data-error-required="Ingresa tu teléfono."
+          data-error-invalid="Ingresa un teléfono válido."
+        />
+        <output
+          id="quote-phone-count"
+          class="quote-field__counter"
+          data-quote-phone-count
+          aria-live="polite">0 / 10</output
+        >
+      </span>
+      <small id="quote-phone-error" data-quote-error></small>
+    </label>
+  </div>
+</section>

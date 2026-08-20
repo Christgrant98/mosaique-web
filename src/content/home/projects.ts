@@ -1,40 +1,59 @@
 import type { ContentLink } from "../types";
 
-export const projectsContent = {
-  title: "Experiencias que toman forma.",
+export const eventGalleryContent = {
+  status: "placeholder",
+  title: "Eventos que ya tomaron forma.",
   introduction:
-    "Cada proyecto es una composición distinta. Algunos nacen para celebrar una historia personal; otros para activar un espacio, conectar una comunidad o posicionar una marca.",
+    "Una selección de celebraciones, producciones y experiencias que hemos llevado de la idea a la realidad.",
   items: [
     {
+      id: "event-slot-01",
       index: "01",
-      title: "Celebraciones privadas",
-      description:
-        "Diseño, producción y montaje para momentos íntimos, elegantes y memorables.",
+      title: "Evento pendiente de documentar",
+      context: "Nombre y contexto pendientes de confirmación.",
+      status: "placeholder",
+      media: { status: "pending" },
     },
     {
+      id: "event-slot-02",
       index: "02",
-      title: "Bodas y eventos familiares",
-      description:
-        "Experiencias cuidadas para celebrar con intención, belleza y organización.",
+      title: "Evento pendiente de documentar",
+      context: "Nombre y contexto pendientes de confirmación.",
+      status: "placeholder",
+      media: { status: "pending" },
     },
     {
+      id: "event-slot-03",
       index: "03",
-      title: "Eventos corporativos",
-      description:
-        "Encuentros profesionales con estética, estructura y una ejecución confiable.",
+      title: "Evento pendiente de documentar",
+      context: "Nombre y contexto pendientes de confirmación.",
+      status: "placeholder",
+      media: { status: "pending" },
     },
     {
+      id: "event-slot-04",
       index: "04",
-      title: "Activaciones con venues",
-      description:
-        "Eventos propios y alianzas estratégicas para generar tráfico, visibilidad y nuevas oportunidades comerciales.",
+      title: "Evento pendiente de documentar",
+      context: "Nombre y contexto pendientes de confirmación.",
+      status: "placeholder",
+      media: { status: "pending" },
     },
     {
+      id: "event-slot-05",
       index: "05",
-      title: "Montajes y alquileres",
-      description:
-        "Soluciones prácticas para complementar eventos con mobiliario, equipos e insumos propios.",
+      title: "Evento pendiente de documentar",
+      context: "Nombre y contexto pendientes de confirmación.",
+      status: "placeholder",
+      media: { status: "pending" },
+    },
+    {
+      id: "event-slot-06",
+      index: "06",
+      title: "Evento pendiente de documentar",
+      context: "Nombre y contexto pendientes de confirmación.",
+      status: "placeholder",
+      media: { status: "pending" },
     },
   ],
-  cta: { label: "Ver próximos proyectos", href: "#experiences" } satisfies ContentLink,
+  cta: { label: "Explorar eventos", href: "#experiences" } satisfies ContentLink,
 } as const;

@@ -1,6 +1,6 @@
 # Mosaïque Web Roadmap
 
-Last verified against code and git history: 2026-08-17.
+Last verified against code and git history: 2026-08-19.
 
 This document is the source of truth for implementation status. The existence of a module in `src/content/home/` does not mean its section has been implemented.
 
@@ -27,19 +27,30 @@ This document is the source of truth for implementation status. The existence of
 
 ### Navigation
 
-- **Implementation: complete.** Astro navigation with contact action, centered brand, semantic menu disclosure, keyboard Escape handling, and outside-click close behavior.
+- **Implementation: complete.** Astro navigation with a contact-action trigger for the Quote Flow, centered brand, semantic menu disclosure, keyboard Escape handling, and outside-click close behavior.
 - **Fidelity Pass: complete.** Composition and Hero integration were compared against Movra reference states.
 - Responsive mobile compaction is implemented.
 
+### Quote / Contact Flow
+
+- **Implementation: complete for the available contact infrastructure.** The unchanged topbar CTA opens a three-step native-dialog flow for Contacto, Tu evento, and Cuéntanos un poco más; the form is not rendered as a permanent visible page section.
+- Step-local validation runs only when advancing, focuses the first invalid control, and preserves every value through Back, Close, and same-session reopen. The stepper reports active, completed, and pending states without enabling direct step jumps.
+- Venue = Sí opens a second accessible native dialog with required venue name, optional JPEG/PNG/WEBP selection, five-file limit, local previews, individual removal, saved summary, and edit behavior. Venue details are excluded from the prepared payload when the final choice is No or Estoy buscando.
+- The current repository has no form API, EmailJS integration, server endpoint, or attachment transport. Submit therefore prepares a truthful email draft through the verified `mailto:` contact channel; venue photos remain local previews and are explicitly reported as requiring separate delivery.
+- `#contact` remains on Final CTA for the existing Hero, Services, navigation, footer, and deep-link contract. Only the topbar CTA intercepts that destination to open the flow.
+- Mobile uses a compact branded header, a complete three-stage connected stepper, an independently scrollable form body, and persistent bottom navigation with an icon-only Back control and full-width primary action. Tablet and desktop retain the established editorial dialog composition.
+- The optional event-date field uses a localized, dependency-free calendar dialog instead of the browser-native picker. It preserves the ISO submission contract and Back/Next persistence while providing Spanish month navigation, circular day controls, distinct today/selected/past states, keyboard arrow navigation, Escape/backdrop close, and compatibility with “Aún no tengo fecha”.
+- Desktop, tablet, mobile, nested-dialog stacking, body-scroll restoration, Escape, focus return, validation, Back persistence, 500-character enforcement, and horizontal overflow were validated.
+
 ### Hero
 
-- **Implementation: complete.** Full-viewport media scene, initial title and CTA, scroll-linked brand-to-topbar morph, sticky handoff, and replaceable media contract.
+- **Implementation: complete.** Full-viewport media scene, initial title and CTA, scroll-linked brand-to-topbar morph, sticky handoff, replaceable media contract, and a CSS-only PanelReveal handoff into About.
 - **Fidelity Pass: complete.** Initial, intermediate, final, and section-handoff states were compared against screenshots and recordings.
 - Desktop, tablet, mobile, and reduced-motion states were validated.
 
 ### About
 
-- **Implementation: complete.** Rendered through `AboutMilestones.astro` from `src/content/home/about.ts`.
+- **Implementation: complete.** Rendered through `AboutMilestones.astro` from `src/content/home/about.ts`; the section remains in normal flow while revealing over the temporarily sticky Hero.
 - **Fidelity Pass: complete.** The two-column editorial composition, viewport proportions, divider, sticky media, and responsive reading order were compared against the Movra recording.
 
 ### Milestones
@@ -49,24 +60,23 @@ This document is the source of truth for implementation status. The existence of
 
 ### Services
 
-- **Implementation: complete.** ServicesIntro, PanelReveal, StickyServices, ServicesScene, and the neutral ScrollLinkedScene pattern are integrated.
-- **Fidelity Pass: complete.** Sticky media, seven service states, panel transition, scroll pacing, responsive behavior, and reduced motion were validated.
-- React is limited to the interactive Services scene and currently hydrates with `client:load`.
+- **Implementation: complete.** StickyServices, ServicesScene, PanelReveal, and the neutral ScrollLinkedScene pattern are integrated. ServicesIntro was removed from the page; Marquee remains an independent preceding section while a panel-only overlap lets Services reveal over its final viewport.
+- The seven service records use the approved compact title, description, audience, and commercial CTA copy from `src/content/home/services.ts`; the commercial actions continue to target `#contact`.
+- Desktop and tablet use equal scene columns plus an intrinsic-width index column so service copy and synchronized media carry comparable visual weight without increasing the bounded scroll interval.
+- The synchronized media frame exposes one contextual `Ver más` button for the active service on desktop and tablet. It uses the existing stable service `id`, provides a descriptive accessible name, and currently logs the selected identifier without navigation so a future detail action can replace one handler.
+- Mobile removes the media frame and its associated `Ver más` action at the existing 48 rem breakpoint, leaving the complete service copy in a full-width natural flow without reserved media space.
+- The former Services transition CTA beginning “¿Tienes una idea, un espacio o una celebración en mente?” and its exclusive content and styles were removed by product direction, so Services now hands off directly to Projects / Experiences.
+- **Fidelity Pass: complete.** Section overlap, sticky media, seven service states, scroll pacing, responsive behavior, and reduced motion were validated.
+- React is limited to the interactive Services scene and hydrates with `client:visible`.
 
 ### Projects / Experiences
 
-- **Implementation: complete.** Five project categories render from `src/content/home/projects.ts` in an Astro section.
-- **Fidelity Pass: complete.** Desktop now follows the Movra editorial split with project context and manual controls beside a portrait-media carousel; tablet and mobile use static two-column and single-column reading flows.
-- The desktop carousel uses native horizontal scrolling, scroll snap, touch/keyboard scrolling, accessible previous/next controls, announced active state, and no automatic advance.
-- Placeholder media remains lightweight and replaceable while approved photography is pending.
-- Desktop, tablet, mobile, reduced-motion behavior, overflow, and all five navigation states were validated.
-
-### Metrics
-
-- **Implementation: complete.** Three active metrics render from `src/content/home/metrics.ts` inside `AboutMilestones.astro`, immediately after the milestone list rather than as a standalone page section.
-- **Fidelity Pass: complete.** The existing sticky About media accompanies the metric tiles, the redundant Metrics media placeholder was removed, and the responsive composition follows the supplied Movra reference.
-- Numeric values count from zero once when the block enters the viewport using IntersectionObserver, requestAnimationFrame, and the shared runtime motion duration; reduced motion preserves final values without animation.
-- Desktop, tablet, mobile, overflow, count states, content completeness, and reduced-motion behavior were validated.
+- **Implementation: complete.** The section now presents a six-slot gallery for completed events from `src/content/home/projects.ts` instead of five conceptual project categories.
+- No verified event names, clients, venues, dates, or photography exist in the repository, so all six event records are explicitly marked as placeholders with stable identifiers, pending factual content and media.
+- **Fidelity Pass: complete.** The Movra editorial split, divider, typography, portrait media, and desktop controls remain unchanged; responsive controls were aligned with the CTA row against the supplied mobile reference.
+- The desktop carousel uses native horizontal scrolling, scroll snap, touch/keyboard scrolling, and accessible previous/next controls. Arrow navigation advances in derived two-event pages (`1–2`, `3–4`, `5–6`) without an isolated final card; the live status announces the first event in the visible pair as `Evento X de 6`.
+- Tablet and mobile use the same data-driven carousel in a single-event mode: one complete event card is visible at a time, navigation advances by one, and the finite previous/next controls share the CTA row above the active card. Mobile keeps the full-width editorial heading clear of the navigation and uses one tokenized grid gap between that control row and the media; tablet retains its wider spacing. Placeholder media remains lightweight and replaceable while approved event photography is pending.
+- Desktop, tablet, mobile, breakpoint resize normalization, reduced-motion behavior, overflow, six-item completeness, all six responsive navigation states, and all three desktop paired navigation states were validated.
 
 ### Why Choose Us
 
@@ -105,9 +115,11 @@ This document is the source of truth for implementation status. The existence of
 ### FAQ
 
 - **Implementation: complete.** Eight native disclosure items render from `src/content/home/faq.ts` after Process.
-- The section uses semantic `details` and `summary` elements, so pointer and keyboard interaction work without React, custom JavaScript, or event listeners.
+- The section uses semantic `details` and `summary` elements grouped by the native `name` attribute, so pointer and keyboard interaction work without React, custom JavaScript, or event listeners while only one answer remains open at a time.
 - **Fidelity Pass: complete.** Desktop follows Movra's quiet split composition with a compact label and replaceable media contract in the left rail, a central divider, and a dense disclosure list on the right.
 - Questions use compact sans-serif hierarchy and circular chevrons; answers open below their question without changing the native disclosure contract.
+- The eight closed questions fit within one desktop viewport below the persistent navigation; opening an answer expands the section in normal document flow.
+- Desktop aligns the left label with the first question and the placeholder media with the start of the final question through shared row-size variables rather than viewport-specific offsets.
 - Supporting browsers receive a token-driven CSS open/close transition through `::details-content`; other browsers retain immediate native disclosure behavior without JavaScript.
 - Tablet and mobile remove the decorative media and use a constrained linear flow. Reduced motion removes the disclosure and chevron transitions while preserving immediate state changes.
 - Desktop, tablet, mobile, pointer, keyboard, long-copy constraints, document overflow, and reduced-motion code paths were validated.
@@ -124,60 +136,85 @@ This document is the source of truth for implementation status. The existence of
 ### Footer
 
 - **Implementation: complete.** A semantic footer landmark renders brand, description, seven navigation links, six service labels, contact details, closing statement, and legal copy from `src/content/home/footer.ts` after `main`.
-- **Fidelity Pass: complete.** The footer continues Final CTA's inverse background and follows Movra's two-band closing rhythm with compact navigation groups, a framed Mosaïque logo wall, a contact action, service columns, and legal copy at the lower edge.
+- **Fidelity Pass: complete.** Final CTA now hands off through a compact edge-padded visual strip into Movra's two-row footer composition: aligned 50/50 desktop grids, inset vertical dividers, full-width horizontal dividers, three navigation groups, the framed Mosaïque brand grid, contact CTA and verified contact details, a six-item service grid, and the closing copy at opposite lower edges.
 - Desktop uses paired information bands, tablet stacks those bands, and mobile follows a linear reading order without introducing reference-only newsletter, partner brands, social links, or legal destinations.
 - The footer is Astro-only and contains no runtime JavaScript or motion; reduced motion therefore preserves the same static experience.
 - Handoff color, link destinations, mail link, content completeness, desktop, tablet, mobile, long-copy constraints, and document overflow were validated.
 
-### SEO / Metadata Baseline
-
-- **Implementation: partial baseline complete.** Spanish document language, page title, description, viewport metadata, and favicons are present.
-- Full SEO work remains pending.
-
-## Current
-
 ### QA - Full Regression
 
-- **Status: ready to begin.** All currently approved sections have completed their implementation and fidelity phases.
-- Validate the complete page across desktop, tablet, mobile, reduced motion, keyboard flow, section anchors, and production checks.
-- Values / Spotlights remains explicitly outside the regression scope pending business approval.
-
-## Next
+- **Status: complete.** The approved page surface was validated on the production build across desktop, tablet, and mobile.
+- Section anchors, unique IDs, landmarks, horizontal overflow, Navigation focus containment and Escape behavior, Projects controls, FAQ disclosure semantics, Services hydration, Footer constraints, and runtime console output passed.
+- Reduced-motion CSS and JavaScript paths were reviewed across every animated section; static sections remain motion-free.
+- Values / Spotlights remains outside the approved regression scope pending business review.
 
 ### Performance - Audit
 
-- **Status: pending full regression.** Run Lighthouse and Core Web Vitals checks after the complete page is stable.
+- **Status: baseline complete.** The production build ships approximately 27 KB gzip of initial HTML and CSS and approximately 96 KB gzip for the complete core payload after the interactive Services scene hydrates.
+- Services now uses `client:visible`: its complete server-rendered content remains available immediately, while React and Motion hydration is deferred until the section approaches the viewport.
+- Desktop and mobile confirmed that Services remains unhydrated at the top of the page, hydrates correctly on entry, preserves all seven states, and produces no runtime console errors or horizontal overflow.
+- Scroll work remains bounded through passive listeners, requestAnimationFrame batching, IntersectionObserver, and transform/opacity updates. No additional runtime dependency was introduced.
+- Final Lighthouse and field Core Web Vitals conclusions remain pending approved production imagery, self-hosted fonts, and a production deployment.
+
+### Accessibility - Audit
+
+- **Status: complete for the current implemented surface.** Document language, landmarks, heading hierarchy, accessible names, references, unique IDs, image alternatives, and hidden-content focus safety passed semantic review.
+- A keyboard-visible skip link now targets the main content, the title-less Why Choose Us proof band retains a visually hidden section heading, and the Navigation menu preserves focus containment and Escape close behavior.
+- Small accent text on light surfaces and the global focus indicator now use a dedicated contrast-safe semantic token; key Navigation actions meet a 44 px minimum target height.
+- Services uses one dedicated polite live region for state changes instead of two competing announcements.
+- Desktop, tablet, mobile, 320 px reflow, menu-open containment, document overflow, and reduced-motion code paths were validated. Final assistive-technology testing with real users remains part of production acceptance.
+
+### SEO / Metadata
+
+- **Implementation: complete for the current single-page surface.** Spanish document language, descriptive title, description, robots directives, Open Graph metadata, Twitter card metadata, favicons, and Organization JSON-LD are present.
+- `SITE_URL` is the single production URL source. Canonical, `og:url`, the Organization URL, sitemap generation, and the sitemap reference in robots are emitted only when it is configured, preventing localhost or speculative domains from entering production metadata.
+- The official Astro sitemap integration generates the sitemap index and page sitemap. `robots.txt` remains valid without a configured domain and adds the absolute sitemap URL when one exists.
+- Social image tags remain intentionally absent until an approved production image is available.
+
+## Current
+
+### Deployment Sync / Verification
+
+- **Status: initial Vercel deployment live.** `https://mosaique-web.vercel.app` responds successfully over HTTPS.
+- The live deployment currently predates the completed SEO work: redeploy the current code and configure `SITE_URL` after the definitive public domain is confirmed, then verify canonical, robots, sitemap, metadata, and runtime behavior on the deployed revision.
+
+## Next
+
+### Business Asset Brief
+
+- **Status: pending business instruction.** Obtain approved photography, self-hosted font files, social sharing artwork, and any final content decisions before the production asset pass.
 
 ## Pending
+
+### Metrics
+
+- **Status: removed from the rendered page by product direction.** The metric tiles and their count-up runtime were removed from `AboutMilestones.astro`; typed content remains in `src/content/home/metrics.ts` for possible future review.
+- About and Milestones retain their existing sticky-media composition without a separate Metrics block.
 
 ### Values / Spotlights
 
 - **Status: deferred for business review.** The attempted implementation was fully removed; content remains only in `src/content/home/values.ts`.
 - Revisit implementation and the Movra spotlight/floating-card reference only after business approval.
 
+### Production Assets
+
+- **Status: deferred pending business instruction.** Placeholder replacement, approved fonts, responsive image optimization, and social artwork will be completed when final assets are supplied.
+
 ### Storybook
 
 - **Status: not started and not currently configured.** No Storybook dependency, stories, or build command exists.
 - Add only under an explicit phase; it is not required for current section delivery.
 
-### Accessibility
-
-- **Status: pending full audit.** Semantic markup, focus styles, keyboard navigation, and reduced-motion handling exist on implemented sections.
-- Full keyboard, screen-reader, contrast, zoom, and automated accessibility regression checks remain pending.
-
-### SEO / Metadata
-
-- **Status: pending beyond baseline.** Social metadata, canonical strategy, structured data, production URLs, sitemap/robots decisions, and final content review have not been completed.
-
 ### Vercel
 
-- **Status: not configured.** No repository Vercel project metadata, deployment configuration, or deployment workflow is present.
+- **Status: initial deployment complete.** The Vercel URL is live; synchronization of the current SEO revision, final domain configuration, and production acceptance checks remain pending.
 
 ## Known Issues / Deferred Decisions
 
-- Approved production photography is unavailable. Hero, About/Milestones, Metrics, Marquee, Services, Projects, Process, Testimonials, FAQ, and Final CTA currently use lightweight replaceable placeholders.
+- Approved production photography is unavailable. Hero, About/Milestones, Marquee, Services, Projects, Process, Testimonials, FAQ, and Final CTA currently use lightweight replaceable placeholders.
 - Approved self-hosted Cinzel and Montserrat font files are pending; see `docs/DESIGN_SYSTEM.md`.
-- Services intentionally remains `client:load`; changing hydration strategy is deferred until an explicit performance phase.
-- The working tree contained an uncommitted business-copy edit in `src/content/home/services.ts` when this roadmap was created. Preserve and review it before committing unrelated work.
+- Approved social sharing artwork is pending; `og:image` and `twitter:image` should be enabled through the existing layout prop when it is delivered.
+- The final public domain remains unconfirmed. Production must define `SITE_URL` before deployment acceptance so canonical and sitemap URLs are emitted.
+- Services uses `client:visible`; preserve its server-rendered fallback and verify hydration again when production media is introduced.
 - `README.md` remains the Astro starter README. New sessions should use `AGENTS.md` and this roadmap for project-specific guidance.
 - Media models for future sections must not invent asset paths while approved assets are unavailable.

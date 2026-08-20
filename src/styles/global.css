@@ -71,6 +71,24 @@
     color: var(--color-text-primary);
   }
 
+  .skip-link {
+    background: var(--color-background-inverse);
+    color: var(--color-text-inverse);
+    inset: var(--space-3) auto auto var(--space-3);
+    padding: var(--space-3) var(--space-5);
+    position: fixed;
+    transform: translateY(calc(-100% - var(--space-6)));
+    z-index: var(--primitive-z-modal);
+  }
+
+  .skip-link:focus-visible {
+    transform: none;
+  }
+
+  .site-main:focus {
+    outline: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;

@@ -4,6 +4,16 @@ This document defines reusable interaction and composition patterns owned by Mos
 
 Patterns should be promoted here only after a real section demonstrates a reusable need. The governing principle is: generalize from evidence, not imagination.
 
+## Panel Reveal
+
+`PanelReveal` composes a sticky lead and a higher-layer panel while preserving both children in normal document flow. It is a CSS-only handoff: scroll position naturally controls how the panel covers the lead, so pausing or reversing scroll pauses or reverses the reveal without additional orchestration.
+
+Hero/About uses the default form. Hero occupies the `lead` slot and retains its existing internal scene and brand-to-navigation motion; About is the solid panel that enters from the viewport edge and then continues as ordinary content. The Hero script measures progress from the non-sticky `PanelReveal` wrapper so the existing morph remains stable during sticky positioning and viewport resizes.
+
+Services uses the `overlap` form without a lead slot. Its negative viewport overlap pulls only the Services panel over the final Marquee viewport; Marquee remains an independent section with its own bounded scene.
+
+The panel uses `--primitive-z-content`, below persistent navigation and modal layers. Reduced motion returns the lead to relative positioning and removes the optional overlap, preserving linear reading order without hiding content.
+
 ## Scroll-Linked Scene
 
 ### Relationship
@@ -54,7 +64,7 @@ The consumer owns:
 - section layout, sticky boundaries, responsive composition, and visual transitions;
 - the meaning communicated by active and inactive states.
 
-Services is the first consumer. Its section layer supplies service data, renders the copy and placeholder media, and owns every `services-spike` class. The current fidelity pass also composes the section with the neutral Astro `PanelReveal` primitive, which provides the sticky handoff without knowing Services content or styling.
+Services is the first consumer. Its section layer supplies service data, renders the copy and placeholder media, and owns every `services-spike` class. After removing ServicesIntro from the page, Marquee remains an independent preceding section while the neutral Astro `PanelReveal` primitive gives Services a panel-only overlap across the final viewport. Services retains its own sticky-media behavior inside that revealed panel.
 
 ### Responsive behavior
 

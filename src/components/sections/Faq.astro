@@ -26,7 +26,7 @@ import "../../styles/sections/faq.css";
       <div class="faq__list">
         {
           faqContent.items.map((item) => (
-            <details class="faq__item">
+            <details class="faq__item" name="faq-accordion">
               <summary>
                 <span class="faq__question">{item.question}</span>
                 <span class="faq__toggle" aria-hidden="true" />

@@ -1,5 +1,6 @@
 ---
 import PanelReveal from "../components/motion/PanelReveal.astro";
+import QuoteDialog from "../components/quote/QuoteDialog.astro";
 import AboutMilestones from "../components/sections/AboutMilestones.astro";
 import Faq from "../components/sections/Faq.astro";
 import FinalCta from "../components/sections/FinalCta.astro";
@@ -9,7 +10,6 @@ import Marquee from "../components/sections/Marquee.astro";
 import Navigation from "../components/sections/Navigation.astro";
 import Process from "../components/sections/Process.astro";
 import ProjectsExperiences from "../components/sections/ProjectsExperiences.astro";
-import ServicesIntro from "../components/sections/ServicesIntro.astro";
 import StickyServices from "../components/sections/StickyServices.astro";
 import WhyChooseUs from "../components/sections/WhyChooseUs.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -20,13 +20,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   description="Empresa integral de eventos en Montréal especializada en organización, producción, montaje y experiencias."
 >
   <Navigation />
-  <main>
-    <Hero />
-    <AboutMilestones />
+  <QuoteDialog />
+  <main class="site-main" id="main-content" tabindex="-1">
+    <PanelReveal>
+      <Hero slot="lead" />
+      <AboutMilestones />
+    </PanelReveal>
     <WhyChooseUs />
     <Marquee />
-    <PanelReveal>
-      <ServicesIntro slot="lead" />
+    <PanelReveal overlap>
       <StickyServices />
     </PanelReveal>
     <ProjectsExperiences />
