@@ -6,78 +6,70 @@
   padding-block: clamp(var(--space-16), 7vw, var(--space-24));
 }
 
-.faq__layout {
+.faq__header {
   display: grid;
-  gap: clamp(var(--space-12), 7vw, var(--space-20));
+  gap: var(--space-4);
+  justify-items: center;
+  margin-inline: auto;
+  max-inline-size: var(--layout-max-reading);
+  text-align: center;
 }
 
-.faq__rail {
-  min-inline-size: 0;
-}
-
+.faq__header p,
 .faq__header h2 {
+  margin: 0;
+}
+
+.faq__header p {
   align-items: center;
-  display: flex;
+  color: var(--color-accent-text);
+  display: inline-flex;
   font-family: var(--font-family-ui);
   font-size: var(--text-caption-size);
   font-weight: 700;
   gap: var(--space-3);
   line-height: var(--text-caption-line-height);
-  margin: 0;
   text-transform: uppercase;
 }
 
-.faq__header h2::before {
+.faq__header p::before {
   background: var(--color-accent);
   border-radius: 50%;
   block-size: 0.5rem;
   content: "";
-  flex: none;
   inline-size: 0.5rem;
 }
 
-.faq__media {
-  background: var(--color-primary);
-  display: none;
-  margin: 0;
-  overflow: hidden;
-  position: relative;
+.faq__header h2 {
+  font-family: var(--font-family-display);
+  font-size: var(--text-heading-md-size);
+  font-weight: var(--text-heading-md-weight);
+  line-height: var(--text-heading-md-line-height);
 }
 
-.faq__media span {
-  display: block;
-  position: absolute;
+.faq__columns {
+  display: grid;
+  gap: clamp(var(--space-10), 5vw, var(--space-20));
+  margin-block-start: clamp(var(--space-12), 6vw, var(--space-20));
 }
 
-.faq__media span:first-child {
-  background: var(--color-accent);
-  block-size: 74%;
-  clip-path: polygon(22% 0, 100% 0, 78% 100%, 0 82%);
-  inline-size: 78%;
-  inset: 0 0 auto auto;
-}
-
-.faq__media span:last-child {
-  background: color-mix(in oklab, var(--color-primary) 76%, var(--color-accent));
-  block-size: 55%;
-  clip-path: polygon(0 18%, 82% 0, 100% 100%, 0 100%);
-  inline-size: 68%;
-  inset: auto auto 0 0;
+.faq__column {
+  min-inline-size: 0;
 }
 
 .faq__item {
-  border-block-end: 1px solid color-mix(in oklab, var(--color-text-inverse) 78%, transparent);
+  border-block-end: 1px solid var(--color-border-default);
 }
 
 .faq__item summary {
   align-items: center;
   cursor: pointer;
   display: grid;
-  gap: var(--space-6);
-  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-5);
+  grid-template-columns: minmax(0, 1fr) 2.75rem;
   list-style: none;
-  min-block-size: clamp(5.5rem, 8vw, 6.5rem);
-  padding-block: var(--space-6);
+  min-block-size: 4.75rem;
+  padding-block: var(--space-5);
 }
 
 .faq__item summary::-webkit-details-marker {
@@ -93,41 +85,52 @@
   font-family: var(--font-family-body);
   font-size: var(--text-body-size);
   font-weight: 700;
-  line-height: 1.35;
-  max-inline-size: 48ch;
+  line-height: 1.4;
+  max-inline-size: 46ch;
 }
 
 .faq__toggle {
-  background: var(--color-accent-muted);
-  border-radius: 50%;
-  block-size: 1.75rem;
-  display: grid;
-  inline-size: 1.75rem;
-  place-items: center;
+  align-items: center;
+  block-size: 2.75rem;
+  display: inline-flex;
+  inline-size: 2.75rem;
+  justify-content: center;
 }
 
 .faq__toggle::before {
-  block-size: 0.38rem;
-  border-block-end: 1px solid currentColor;
-  border-inline-end: 1px solid currentColor;
-  content: "";
-  inline-size: 0.38rem;
-  transform: translateY(-0.12rem) rotate(45deg);
-  transition: transform var(--motion-duration-standard) var(--motion-easing-standard);
+  content: "+";
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1;
+  transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 .faq__item[open] .faq__toggle::before {
-  transform: translateY(0.12rem) rotate(225deg);
+  transform: rotate(45deg);
 }
 
 .faq__answer {
-  padding: 0 calc(1.75rem + var(--space-6)) var(--space-8) 0;
+  padding: 0 calc(2.75rem + var(--space-5)) var(--space-6) 0;
 }
 
 .faq__answer p {
   color: var(--color-text-secondary);
+  line-height: var(--text-body-line-height);
   margin: 0;
-  max-inline-size: 52ch;
+  max-inline-size: 54ch;
+}
+
+.faq__contact {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin-block-start: var(--space-10);
+}
+
+.faq__contact p {
+  color: var(--color-text-secondary);
+  margin: 0;
 }
 
 @supports selector(details::details-content) {
@@ -147,52 +150,41 @@
 }
 
 @media (min-width: 64rem) {
-  .faq {
-    padding-block: 0;
-  }
-
-  .faq__layout {
-    --faq-item-size: calc(var(--faq-row-size) + 1px);
-    --faq-row-size: clamp(4.5rem, 8svh, 5.5rem);
-    --faq-section-padding: clamp(var(--space-12), 6svh, var(--space-16));
-
-    gap: 0;
+  .faq__columns {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    min-block-size: calc(100svh - 4rem);
   }
+}
 
-  .faq__rail {
-    display: grid;
-    grid-template-rows: repeat(7, var(--faq-item-size)) minmax(var(--faq-item-size), 1fr);
-    padding-block: var(--faq-section-padding);
-    padding-inline: clamp(var(--space-10), 5vw, var(--space-16));
+@media (max-width: 47.99rem) {
+  .faq {
+    padding-block: var(--space-16);
   }
 
   .faq__header {
-    align-items: center;
-    block-size: var(--faq-row-size);
-    display: flex;
-    grid-row: 1;
+    justify-items: start;
+    text-align: start;
   }
 
-  .faq__media {
-    aspect-ratio: 4 / 5;
-    block-size: min(100%, clamp(11.25rem, 17.5vw, 15rem));
-    display: block;
-    grid-row: 8;
-    inline-size: auto;
-    justify-self: start;
-  }
-
-  .faq__list {
-    border-inline-start: 1px solid var(--color-border-default);
-    padding-block: var(--faq-section-padding);
-    padding-inline: clamp(var(--space-8), 4vw, var(--space-16));
+  .faq__columns {
+    gap: 0;
+    margin-block-start: var(--space-10);
   }
 
   .faq__item summary {
-    min-block-size: var(--faq-row-size);
-    padding-block: var(--space-3);
+    gap: var(--space-3);
+    grid-template-columns: minmax(0, 1fr) 2.75rem;
+    min-block-size: 4.25rem;
+    padding-block: var(--space-4);
+  }
+
+  .faq__answer {
+    padding-inline-end: var(--space-4);
+  }
+
+  .faq__contact {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-block-start: var(--space-8);
   }
 }
 

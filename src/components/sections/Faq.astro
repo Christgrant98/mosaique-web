@@ -1,44 +1,51 @@
 ---
+import Button from "../ui/Button.astro";
 import Container from "../ui/Container.astro";
 import Heading from "../ui/Heading.astro";
 import Text from "../ui/Text.astro";
 import { faqContent } from "../../content/home/faq";
 
 import "../../styles/sections/faq.css";
+
+const columnSize = Math.ceil(faqContent.items.length / 2);
+const faqColumns = [faqContent.items.slice(0, columnSize), faqContent.items.slice(columnSize)];
 ---
 
 <section class="faq" id="faq" aria-labelledby="faq-title">
   <Container>
-    <div class="faq__layout">
-      <div class="faq__rail">
-        <header class="faq__header">
-          <Heading as="h2" variant="heading-lg" id="faq-title">
-            {faqContent.title}
-          </Heading>
-        </header>
+    <header class="faq__header">
+      <p>{faqContent.eyebrow}</p>
+      <Heading as="h2" variant="heading-md" id="faq-title">
+        {faqContent.title}
+      </Heading>
+    </header>
 
-        <figure class="faq__media" data-media-status="pending" aria-hidden="true">
-          <span></span>
-          <span></span>
-        </figure>
-      </div>
+    <div class="faq__columns">
+      {
+        faqColumns.map((column) => (
+          <div class="faq__column">
+            {column.map((item) => (
+              <details class="faq__item" name="faq-accordion">
+                <summary>
+                  <span class="faq__question">{item.question}</span>
+                  <span class="faq__toggle" aria-hidden="true" />
+                </summary>
 
-      <div class="faq__list">
-        {
-          faqContent.items.map((item) => (
-            <details class="faq__item" name="faq-accordion">
-              <summary>
-                <span class="faq__question">{item.question}</span>
-                <span class="faq__toggle" aria-hidden="true" />
-              </summary>
+                <div class="faq__answer">
+                  <Text>{item.answer}</Text>
+                </div>
+              </details>
+            ))}
+          </div>
+        ))
+      }
+    </div>
 
-              <div class="faq__answer">
-                <Text>{item.answer}</Text>
-              </div>
-            </details>
-          ))
-        }
-      </div>
+    <div class="faq__contact">
+      <p>{faqContent.contact.prompt}</p>
+      <Button href={faqContent.contact.cta.href} variant="ghost" data-quote-trigger>
+        {faqContent.contact.cta.label}
+      </Button>
     </div>
   </Container>
 </section>

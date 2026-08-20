@@ -1,4 +1,7 @@
+import type { ContentLink } from "../types";
+
 export const faqContent = {
+  eyebrow: "Preguntas",
   title: "Preguntas frecuentes",
   items: [
     {
@@ -42,4 +45,8 @@ export const faqContent = {
         "Puedes contactarnos a través del formulario, indicando el tipo de evento, fecha tentativa, número de invitados, ubicación y servicios que necesitas. Con esa información podremos preparar una propuesta adaptada.",
     },
   ],
+  contact: {
+    prompt: "¿No encontraste tu respuesta?",
+    cta: { label: "Hablemos", href: "#contact" } satisfies ContentLink,
+  },
 } as const;
