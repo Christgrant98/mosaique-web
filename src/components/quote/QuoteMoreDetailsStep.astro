@@ -1,0 +1,59 @@
+---
+import { quoteContent } from "../../content/home/quote";
+---
+
+<section class="quote-step" data-quote-step="2" aria-labelledby="quote-details-title" hidden>
+  <header>
+    <span>03</span>
+    <h2 id="quote-details-title" tabindex="-1">Cuéntanos un poco más</h2>
+  </header>
+
+  <div class="quote-fields">
+    <fieldset
+      class="quote-choice-group quote-field--wide"
+      data-quote-choice-group="venue"
+      aria-describedby="quote-venue-error"
+    >
+      <legend>¿Ya tienes venue? <strong aria-hidden="true">*</strong></legend>
+      <div>
+        {
+          quoteContent.venueOptions.map((option) => (
+            <label>
+              <input type="radio" name="hasVenue" value={option.value} />
+              <span>{option.label}</span>
+            </label>
+          ))
+        }
+      </div>
+      <small id="quote-venue-error" data-quote-error></small>
+    </fieldset>
+
+    <div class="quote-venue-summary quote-field--wide" data-quote-venue-summary hidden>
+      <div>
+        <span>Venue guardado</span>
+        <strong data-quote-venue-summary-name></strong>
+        <small data-quote-venue-summary-photos></small>
+      </div>
+      <button type="button" class="quote-text-action" data-quote-venue-edit>Editar</button>
+    </div>
+
+    <label class="quote-field quote-field--wide">
+      <span>Presupuesto estimado</span>
+      <select name="budget">
+        <option value="">Selecciona una opción (opcional)</option>
+        {quoteContent.budgets.map((budget) => <option value={budget}>{budget}</option>)}
+      </select>
+    </label>
+
+    <label class="quote-field quote-field--wide">
+      <span>¿Qué tienes en mente?</span>
+      <textarea
+        name="message"
+        rows="5"
+        maxlength="500"
+        placeholder="Cuéntanos brevemente sobre la experiencia, estilo o necesidades que tienes en mente."
+        aria-describedby="quote-message-count"></textarea>
+      <small id="quote-message-count" data-quote-message-count>0 / 500</small>
+    </label>
+  </div>
+</section>

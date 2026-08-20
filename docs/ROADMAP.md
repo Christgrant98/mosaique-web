@@ -27,9 +27,20 @@ This document is the source of truth for implementation status. The existence of
 
 ### Navigation
 
-- **Implementation: complete.** Astro navigation with contact action, centered brand, semantic menu disclosure, keyboard Escape handling, and outside-click close behavior.
+- **Implementation: complete.** Astro navigation with a contact-action trigger for the Quote Flow, centered brand, semantic menu disclosure, keyboard Escape handling, and outside-click close behavior.
 - **Fidelity Pass: complete.** Composition and Hero integration were compared against Movra reference states.
 - Responsive mobile compaction is implemented.
+
+### Quote / Contact Flow
+
+- **Implementation: complete for the available contact infrastructure.** The unchanged topbar CTA opens a three-step native-dialog flow for Contacto, Tu evento, and Cuéntanos un poco más; the form is not rendered as a permanent visible page section.
+- Step-local validation runs only when advancing, focuses the first invalid control, and preserves every value through Back, Close, and same-session reopen. The stepper reports active, completed, and pending states without enabling direct step jumps.
+- Venue = Sí opens a second accessible native dialog with required venue name, optional JPEG/PNG/WEBP selection, five-file limit, local previews, individual removal, saved summary, and edit behavior. Venue details are excluded from the prepared payload when the final choice is No or Estoy buscando.
+- The current repository has no form API, EmailJS integration, server endpoint, or attachment transport. Submit therefore prepares a truthful email draft through the verified `mailto:` contact channel; venue photos remain local previews and are explicitly reported as requiring separate delivery.
+- `#contact` remains on Final CTA for the existing Hero, Services, navigation, footer, and deep-link contract. Only the topbar CTA intercepts that destination to open the flow.
+- Mobile uses a compact branded header, a complete three-stage connected stepper, an independently scrollable form body, and persistent bottom navigation with an icon-only Back control and full-width primary action. Tablet and desktop retain the established editorial dialog composition.
+- The optional event-date field uses a localized, dependency-free calendar dialog instead of the browser-native picker. It preserves the ISO submission contract and Back/Next persistence while providing Spanish month navigation, circular day controls, distinct today/selected/past states, keyboard arrow navigation, Escape/backdrop close, and compatibility with “Aún no tengo fecha”.
+- Desktop, tablet, mobile, nested-dialog stacking, body-scroll restoration, Escape, focus return, validation, Back persistence, 500-character enforcement, and horizontal overflow were validated.
 
 ### Hero
 

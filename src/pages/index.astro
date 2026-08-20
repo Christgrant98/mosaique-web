@@ -1,5 +1,6 @@
 ---
 import PanelReveal from "../components/motion/PanelReveal.astro";
+import QuoteDialog from "../components/quote/QuoteDialog.astro";
 import AboutMilestones from "../components/sections/AboutMilestones.astro";
 import Faq from "../components/sections/Faq.astro";
 import FinalCta from "../components/sections/FinalCta.astro";
@@ -19,6 +20,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   description="Empresa integral de eventos en Montréal especializada en organización, producción, montaje y experiencias."
 >
   <Navigation />
+  <QuoteDialog />
   <main class="site-main" id="main-content" tabindex="-1">
     <PanelReveal>
       <Hero slot="lead" />
