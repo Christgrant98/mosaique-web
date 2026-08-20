@@ -135,7 +135,8 @@ This document is the source of truth for implementation status. The existence of
 
 ### Footer
 
-- **Implementation: complete.** A semantic footer landmark renders brand, description, seven navigation links, six service labels, contact details, closing statement, and legal copy from `src/content/home/footer.ts` after `main`.
+- **Implementation: complete.** A semantic footer landmark renders the brand, seven navigation links, six service labels, contact details, closing statement, and legal copy from `src/content/home/footer.ts` after `main`.
+- On mobile, Compañía, Recursos, and Servicios use collapsed native disclosures to reduce scroll length; tablet and desktop keep all three groups expanded in the established grid.
 - **Fidelity Pass: complete.** Final CTA now hands off through a compact edge-padded visual strip into Movra's two-row footer composition: aligned 50/50 desktop grids, inset vertical dividers, full-width horizontal dividers, three navigation groups, the framed Mosaïque brand grid, contact CTA and verified contact details, a six-item service grid, and the closing copy at opposite lower edges.
 - Desktop uses paired information bands, tablet stacks those bands, and mobile follows a linear reading order without introducing reference-only newsletter, partner brands, social links, or legal destinations.
 - The footer is Astro-only and contains no runtime JavaScript or motion; reduced motion therefore preserves the same static experience.

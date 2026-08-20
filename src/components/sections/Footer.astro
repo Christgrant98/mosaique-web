@@ -16,8 +16,11 @@ const secondaryLinks = footerContent.links.slice(4);
 
     <div class="site-footer__top">
       <nav class="site-footer__navigation" aria-label="Navegación del pie de página">
-        <div>
-          <h3>Compañía</h3>
+        <details open data-footer-group>
+          <summary>
+            <h3>Compañía</h3>
+            <span aria-hidden="true">+</span>
+          </summary>
           <ul>
             {
               primaryLinks.map((link) => (
@@ -27,10 +30,13 @@ const secondaryLinks = footerContent.links.slice(4);
               ))
             }
           </ul>
-        </div>
+        </details>
 
-        <div>
-          <h3>Recursos</h3>
+        <details open data-footer-group>
+          <summary>
+            <h3>Recursos</h3>
+            <span aria-hidden="true">+</span>
+          </summary>
           <ul>
             {
               secondaryLinks.map((link) => (
@@ -40,14 +46,17 @@ const secondaryLinks = footerContent.links.slice(4);
               ))
             }
           </ul>
-        </div>
+        </details>
 
-        <div>
-          <h3>Servicios</h3>
+        <details open data-footer-group>
+          <summary>
+            <h3>Servicios</h3>
+            <span aria-hidden="true">+</span>
+          </summary>
           <ul>
             {footerContent.services.map((service) => <li>{service}</li>)}
           </ul>
-        </div>
+        </details>
       </nav>
 
       <div class="site-footer__logo-wall" aria-hidden="true">
@@ -90,3 +99,24 @@ const secondaryLinks = footerContent.links.slice(4);
     </div>
   </Container>
 </footer>
+
+<script>
+  const footerGroups = Array.from(
+    document.querySelectorAll<HTMLDetailsElement>("[data-footer-group]"),
+  );
+  const compactFooter = window.matchMedia("(max-width: 47.99rem)");
+
+  const syncFooterGroups = () => {
+    footerGroups.forEach((group) => {
+      group.open = !compactFooter.matches;
+    });
+  };
+
+  footerGroups.forEach((group) => {
+    group.querySelector("summary")?.addEventListener("click", (event) => {
+      if (!compactFooter.matches) event.preventDefault();
+    });
+  });
+  compactFooter.addEventListener("change", syncFooterGroups);
+  syncFooterGroups();
+</script>
