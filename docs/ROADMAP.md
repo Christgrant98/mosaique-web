@@ -116,13 +116,10 @@ This document is the source of truth for implementation status. The existence of
 
 - **Implementation: complete.** Eight native disclosure items render from `src/content/home/faq.ts` after Process.
 - The section uses semantic `details` and `summary` elements grouped by the native `name` attribute, so pointer and keyboard interaction work without React, custom JavaScript, or event listeners while only one answer remains open at a time.
-- **Fidelity Pass: complete.** Desktop follows Movra's quiet split composition with a compact label and replaceable media contract in the left rail, a central divider, and a dense disclosure list on the right.
-- Questions use compact sans-serif hierarchy and circular chevrons; answers open below their question without changing the native disclosure contract.
-- The eight closed questions fit within one desktop viewport below the persistent navigation; opening an answer expands the section in normal document flow.
-- Desktop aligns the left label with the first question and the placeholder media with the start of the final question through shared row-size variables rather than viewport-specific offsets.
-- Supporting browsers receive a token-driven CSS open/close transition through `::details-content`; other browsers retain immediate native disclosure behavior without JavaScript.
-- Tablet and mobile remove the decorative media and use a constrained linear flow. Reduced motion removes the disclosure and chevron transitions while preserving immediate state changes.
-- Desktop, tablet, mobile, pointer, keyboard, long-copy constraints, document overflow, and reduced-motion code paths were validated.
+- **Fidelity Pass: complete.** A centered editorial header leads into two independent, balanced question columns on desktop; tablet and mobile use one linear column. Each item remains a low-chrome row with a subtle divider, full-row interaction, a plus-to-close state, and an inline answer without cards or shadows.
+- Questions are divided from the data source with a derived `ceil(total / 2)` split, so expanded content changes only its own column without forcing artificial height into the opposite column.
+- A quiet closing CTA reuses the established quote-flow trigger and `#contact` fallback instead of duplicating modal logic or inventing a route.
+- Supporting browsers receive a token-driven CSS open/close transition through `::details-content`; other browsers retain immediate native disclosure behavior without JavaScript. Reduced motion removes the disclosure and icon transitions while preserving immediate state changes.
 
 ### Final CTA
 
@@ -135,7 +132,8 @@ This document is the source of truth for implementation status. The existence of
 
 ### Footer
 
-- **Implementation: complete.** A semantic footer landmark renders brand, description, seven navigation links, six service labels, contact details, closing statement, and legal copy from `src/content/home/footer.ts` after `main`.
+- **Implementation: complete.** A semantic footer landmark renders the brand, seven navigation links, six service labels, contact details, closing statement, and legal copy from `src/content/home/footer.ts` after `main`.
+- On mobile, Compañía, Recursos, and Servicios use collapsed native disclosures to reduce scroll length; tablet and desktop keep all three groups expanded in the established grid.
 - **Fidelity Pass: complete.** Final CTA now hands off through a compact edge-padded visual strip into Movra's two-row footer composition: aligned 50/50 desktop grids, inset vertical dividers, full-width horizontal dividers, three navigation groups, the framed Mosaïque brand grid, contact CTA and verified contact details, a six-item service grid, and the closing copy at opposite lower edges.
 - Desktop uses paired information bands, tablet stacks those bands, and mobile follows a linear reading order without introducing reference-only newsletter, partner brands, social links, or legal destinations.
 - The footer is Astro-only and contains no runtime JavaScript or motion; reduced motion therefore preserves the same static experience.
