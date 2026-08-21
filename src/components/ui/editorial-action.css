@@ -1,0 +1,67 @@
+.editorial-action {
+  align-items: center;
+  background: var(--color-background);
+  border: 0;
+  border-radius: var(--primitive-radius-xs);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-family-ui);
+  font-size: var(--text-button-size);
+  font-weight: var(--text-button-weight);
+  gap: var(--space-4);
+  justify-content: space-between;
+  line-height: var(--text-button-line-height);
+  min-block-size: 2.75rem;
+  padding: var(--space-2) var(--space-4);
+  text-decoration: none;
+  transition: background-color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.editorial-action__arrow {
+  block-size: 0.625rem;
+  inline-size: 2.5rem;
+  position: relative;
+  transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.editorial-action__arrow::before {
+  border-block-start: 1px solid currentColor;
+  content: "";
+  inline-size: 100%;
+  inset: 50% auto auto 0;
+  position: absolute;
+}
+
+.editorial-action__arrow::after {
+  border-block-start: 1px solid currentColor;
+  border-inline-end: 1px solid currentColor;
+  block-size: 0.4rem;
+  content: "";
+  inline-size: 0.4rem;
+  inset: 50% 0 auto auto;
+  position: absolute;
+  transform: translateY(-45%) rotate(45deg);
+}
+
+.editorial-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+@media (hover: hover) {
+  .editorial-action:hover:not(:disabled) {
+    background: color-mix(in oklab, var(--color-background) 92%, var(--color-accent));
+  }
+
+  .editorial-action:hover:not(:disabled) .editorial-action__arrow {
+    transform: translateX(var(--space-1));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editorial-action,
+  .editorial-action__arrow {
+    transition: none;
+  }
+}
