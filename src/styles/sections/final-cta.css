@@ -22,7 +22,7 @@
 
 .final-cta__content h2 {
   font-size: clamp(2.75rem, 4.5vw, 3.5rem);
-  max-inline-size: 15ch;
+  max-inline-size: 24ch;
   text-wrap: balance;
 }
 
@@ -41,29 +41,30 @@
 }
 
 .final-cta .final-cta__action--primary {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-accent-contrast);
+  background: var(--color-background);
+  border-color: var(--color-background);
+  color: var(--color-primary);
+  inline-size: min(100%, 15rem);
+  justify-content: space-between;
 }
 
-.final-cta .final-cta__action--secondary {
-  border-color: color-mix(in oklab, var(--color-text-inverse) 52%, transparent);
-  color: var(--color-text-inverse);
+.final-cta__action-arrow {
+  border-block-start: 1px solid currentColor;
+  display: block;
+  inline-size: 4rem;
+  position: relative;
 }
 
-.final-cta .final-cta__action--secondary:hover {
-  background: color-mix(in oklab, var(--color-text-inverse) 10%, transparent);
-}
-
-.final-cta__closing {
-  border-block-start: 1px solid color-mix(in oklab, var(--color-text-inverse) 24%, transparent);
-  font-family: var(--font-family-display);
-  font-size: clamp(1rem, 1.7vw, 1.25rem);
-  line-height: 1.3;
-  margin-block-start: var(--space-6) !important;
-  max-inline-size: 42ch;
-  padding-block-start: var(--space-4);
-  text-wrap: balance;
+.final-cta__action-arrow::after {
+  border-block-start: 1px solid currentColor;
+  border-inline-end: 1px solid currentColor;
+  block-size: 0.5rem;
+  content: "";
+  inline-size: 0.5rem;
+  inset: -0.3rem 0 auto auto;
+  position: absolute;
+  transform: rotate(45deg);
+  transform-origin: center;
 }
 
 .final-cta__gallery {

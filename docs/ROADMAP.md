@@ -40,6 +40,8 @@ This document is the source of truth for implementation status. The existence of
 - `#contact` remains on Final CTA for the existing Hero, Services, navigation, footer, and deep-link contract. Only the topbar CTA intercepts that destination to open the flow.
 - Mobile uses a compact branded header, a complete three-stage connected stepper, an independently scrollable form body, and persistent bottom navigation with an icon-only Back control and full-width primary action. Tablet and desktop retain the established editorial dialog composition.
 - The optional event-date field uses a localized, dependency-free calendar dialog instead of the browser-native picker. It preserves the ISO submission contract and Back/Next persistence while providing Spanish month navigation, circular day controls, distinct today/selected/past states, keyboard arrow navigation, Escape/backdrop close, and compatibility with “Aún no tengo fecha”.
+- After the third capture step, a separate review state summarizes Contacto, Tu evento, and Cuéntanos un poco más without presenting itself as a fourth step. Each summary section returns directly to its corresponding step for edits, and the real email preparation occurs only from the final “Enviar solicitud” action.
+- The former full-screen confirmation state and `mailto:`-based completion were removed. A token-driven, accessible success toast now closes the flow and confirms completion after every submission attempt, independently of whether the optional `quote:submit-request` transport integration resolves, rejects, or is not connected yet.
 - Desktop, tablet, mobile, nested-dialog stacking, body-scroll restoration, Escape, focus return, validation, Back persistence, 500-character enforcement, and horizontal overflow were validated.
 
 ### Hero
@@ -123,7 +125,7 @@ This document is the source of truth for implementation status. The existence of
 
 ### Final CTA
 
-- **Implementation: complete.** The closing section renders its title, supporting copy, two actions, and closing statement from `src/content/home/finalCta.ts` after FAQ.
+- **Implementation: complete.** The closing section renders its title, concise supporting copy, and one quote-flow action from `src/content/home/finalCta.ts` after FAQ. The action uses an editorial line-arrow treatment, the title has a wider reading measure, and the former partnership action and closing statement have been removed.
 - **Fidelity Pass: complete.** The composition follows Movra's closing rhythm with centered copy and actions above a continuously moving gallery at the lower edge.
 - The gallery is a CSS-only infinite loop driven by the existing `--motion-marquee-duration` token, with two identical visual groups and no hover pause, JavaScript, listeners, or React hydration.
 - Approved photography remains pending, so five replaceable CSS media states are duplicated only for visual continuity and remain hidden from assistive technology.

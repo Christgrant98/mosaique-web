@@ -185,7 +185,7 @@
 }
 
 .quote-stepper li[data-state="complete"] > span {
-  background: var(--color-accent);
+  background: color-mix(in oklab, var(--color-surface-muted) 84%, var(--color-accent));
   border-color: var(--color-accent);
   color: var(--color-accent-contrast);
 }
@@ -635,33 +635,166 @@
   opacity: 0.55;
 }
 
-.quote-confirmation {
-  margin: auto;
-  max-inline-size: 38rem;
-  padding: var(--space-12) var(--space-5);
-  text-align: center;
+.quote-review {
+  margin-inline: auto;
+  max-inline-size: 58rem;
 }
 
-.quote-confirmation > span {
+.quote-review > header {
+  border-block-end: 1px solid var(--color-border-default);
+  margin-block-end: var(--space-8);
+  padding-block-end: var(--space-5);
+}
+
+.quote-review > header > span {
+  color: var(--color-accent-text);
+  font-size: var(--text-caption-size);
+  font-weight: var(--text-caption-weight);
+  text-transform: uppercase;
+}
+
+.quote-review > header h2 {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.5rem, 3vw, var(--text-heading-lg-size));
+  font-weight: var(--text-heading-lg-weight);
+  line-height: 1.1;
+  margin: var(--space-3) 0;
+}
+
+.quote-review > header p,
+.quote-review__notice {
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.quote-review__sections {
+  border-block-start: 1px solid var(--color-border-default);
+}
+
+.quote-review__section {
+  border-block-end: 1px solid var(--color-border-default);
+  padding-block: var(--space-6);
+}
+
+.quote-review__section > header {
   align-items: center;
-  background: var(--color-accent);
+  display: flex;
+  gap: var(--space-4);
+  justify-content: space-between;
+}
+
+.quote-review__section > header > div {
+  align-items: baseline;
+  display: flex;
+  gap: var(--space-3);
+}
+
+.quote-review__section > header span {
+  color: var(--color-accent-text);
+  font-size: var(--text-caption-size);
+}
+
+.quote-review__section h3 {
+  font-family: var(--font-family-display);
+  font-size: var(--text-body-lg-size);
+  font-weight: var(--text-body-lg-weight);
+  margin: 0;
+}
+
+.quote-review__section dl {
+  display: grid;
+  gap: var(--space-5) var(--space-8);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: var(--space-5) 0 0;
+}
+
+.quote-review__section dl > div {
+  display: grid;
+  gap: var(--space-1);
+  min-inline-size: 0;
+}
+
+.quote-review__section dt {
+  color: var(--color-text-secondary);
+  font-size: var(--text-caption-size);
+}
+
+.quote-review__section dd {
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+
+.quote-review__message {
+  grid-column: 1 / -1;
+}
+
+.quote-review__message dd {
+  white-space: pre-wrap;
+}
+
+.quote-review__notice {
+  background: var(--color-accent-muted);
+  border-inline-start: 2px solid var(--color-accent);
+  font-size: var(--text-caption-size);
+  margin-block-start: var(--space-8);
+  padding: var(--space-4);
+}
+
+.quote-toast {
+  align-items: start;
+  background: var(--color-accent-muted);
+  border: 0.3px solid var(--color-primary);
+  border-radius: var(--primitive-radius-sm);
+  color: var(--color-primary);
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  inline-size: min(29rem, calc(100% - (var(--space-page-gutter) * 2)));
+  inset: calc(var(--space-16) + var(--space-4)) var(--space-page-gutter) auto auto;
+  opacity: 0;
+  padding: var(--space-5);
+  position: fixed;
+  transform: translateY(calc(var(--space-2) * -1));
+  transition:
+    opacity var(--motion-duration-standard) var(--motion-easing-standard),
+    transform var(--motion-duration-standard) var(--motion-easing-standard);
+  z-index: var(--primitive-z-modal);
+}
+
+.quote-toast[data-state="open"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quote-toast__icon {
+  align-items: center;
+  border: 1px solid currentColor;
   border-radius: 50%;
+  block-size: 1.75rem;
   display: inline-flex;
-  font-size: 1.5rem;
-  block-size: 3.5rem;
-  inline-size: 3.5rem;
+  inline-size: 1.75rem;
   justify-content: center;
 }
 
-.quote-confirmation h2 {
-  font-family: var(--font-family-display);
-  font-size: var(--text-heading-lg-size);
-  margin: var(--space-6) 0 var(--space-3);
+.quote-toast strong {
+  display: block;
+  font-size: var(--text-navigation-size);
 }
 
-.quote-confirmation p {
-  color: var(--color-text-secondary);
-  margin: 0 0 var(--space-8);
+.quote-toast p {
+  font-size: var(--text-caption-size);
+  margin: var(--space-1) 0 0;
+}
+
+.quote-toast button {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: var(--space-1);
 }
 
 .venue-dialog__panel {
@@ -764,6 +897,12 @@
     border: 0;
     block-size: 100dvh;
     max-block-size: 100dvh;
+  }
+
+  .quote-toast {
+    inline-size: calc(100% - (var(--space-5) * 2));
+    inset: calc(var(--space-16) + var(--space-3)) var(--space-5) auto;
+    padding: var(--space-4);
   }
 
   .quote-dialog__header {
@@ -879,6 +1018,27 @@
     font-size: 1.125rem;
   }
 
+  .quote-review > header {
+    margin-block-end: var(--space-6);
+  }
+
+  .quote-review > header h2 {
+    font-size: 1.5rem;
+  }
+
+  .quote-review__section {
+    padding-block: var(--space-5);
+  }
+
+  .quote-review__section dl {
+    gap: var(--space-4);
+    grid-template-columns: 1fr;
+  }
+
+  .quote-review__message {
+    grid-column: auto;
+  }
+
   .quote-fields {
     grid-template-columns: 1fr;
   }
@@ -982,6 +1142,11 @@
   .quote-button,
   .quote-close,
   .quote-text-action {
+    transition: none;
+  }
+
+  .quote-toast {
+    transform: none;
     transition: none;
   }
 }

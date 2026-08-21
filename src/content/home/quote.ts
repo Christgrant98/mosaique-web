@@ -36,8 +36,4 @@ export const quoteContent = {
     "$20,000+",
     "Aún no tengo un presupuesto definido",
   ],
-  confirmation: {
-    title: "Tu solicitud está lista.",
-    text: "Preparamos los detalles en tu aplicación de correo. Envíalos para completar la solicitud de cotización.",
-  },
 } as const;

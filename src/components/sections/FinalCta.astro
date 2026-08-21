@@ -22,20 +22,13 @@ const galleryTones = ["01", "02", "03", "04", "05"] as const;
       <div class="final-cta__actions">
         <Button
           class="final-cta__action final-cta__action--primary"
-          href={finalCtaContent.actions.primary.href}
+          href={finalCtaContent.action.href}
+          data-quote-trigger
         >
-          {finalCtaContent.actions.primary.label}
-        </Button>
-        <Button
-          class="final-cta__action final-cta__action--secondary"
-          href={finalCtaContent.actions.secondary.href}
-          variant="secondary"
-        >
-          {finalCtaContent.actions.secondary.label}
+          <span>{finalCtaContent.action.label}</span>
+          <span class="final-cta__action-arrow" aria-hidden="true"></span>
         </Button>
       </div>
-
-      <p class="final-cta__closing">{finalCtaContent.closingStatement}</p>
     </div>
   </Container>
 

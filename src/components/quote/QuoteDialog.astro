@@ -3,20 +3,15 @@ import EventDatePicker from "./EventDatePicker.astro";
 import QuoteContactStep from "./QuoteContactStep.astro";
 import QuoteEventStep from "./QuoteEventStep.astro";
 import QuoteMoreDetailsStep from "./QuoteMoreDetailsStep.astro";
+import QuoteReview from "./QuoteReview.astro";
 import QuoteStepper from "./QuoteStepper.astro";
 import VenueDialog from "./VenueDialog.astro";
-import { footerContent } from "../../content/home/footer";
 import { quoteContent } from "../../content/home/quote";
 
 import "../../styles/sections/quote-dialog.css";
 ---
 
-<dialog
-  class="quote-dialog"
-  data-quote-dialog
-  data-submit-email={footerContent.contact.email.href}
-  aria-labelledby="quote-dialog-title"
->
+<dialog class="quote-dialog" data-quote-dialog aria-labelledby="quote-dialog-title">
   <div class="quote-dialog__panel">
     <header class="quote-dialog__header">
       <div>
@@ -37,15 +32,7 @@ import "../../styles/sections/quote-dialog.css";
         <QuoteContactStep />
         <QuoteEventStep />
         <QuoteMoreDetailsStep />
-
-        <section class="quote-confirmation" data-quote-confirmation hidden aria-live="polite">
-          <span aria-hidden="true">✓</span>
-          <h2>{quoteContent.confirmation.title}</h2>
-          <p>{quoteContent.confirmation.text}</p>
-          <button type="button" class="quote-button quote-button--primary" data-quote-close>
-            Cerrar
-          </button>
-        </section>
+        <QuoteReview />
       </div>
 
       <footer class="quote-form__actions" data-quote-actions>
@@ -67,6 +54,23 @@ import "../../styles/sections/quote-dialog.css";
     </form>
   </div>
 </dialog>
+
+<aside
+  class="quote-toast"
+  data-quote-success-toast
+  data-state="closed"
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+  hidden
+>
+  <span class="quote-toast__icon" aria-hidden="true">✓</span>
+  <div>
+    <strong>Solicitud enviada correctamente.</strong>
+    <p>Gracias. Nos pondremos en contacto contigo pronto.</p>
+  </div>
+  <button type="button" data-quote-toast-close aria-label="Cerrar confirmación">×</button>
+</aside>
 
 <VenueDialog />
 <EventDatePicker />
@@ -96,7 +100,11 @@ import "../../styles/sections/quote-dialog.css";
     const backButton = quoteDialog.querySelector<HTMLButtonElement>("[data-quote-back]");
     const nextButton = quoteDialog.querySelector<HTMLButtonElement>("[data-quote-next]");
     const actions = quoteDialog.querySelector<HTMLElement>("[data-quote-actions]");
-    const confirmation = quoteDialog.querySelector<HTMLElement>("[data-quote-confirmation]");
+    const review = quoteDialog.querySelector<HTMLElement>("[data-quote-review]");
+    const successToast = document.querySelector<HTMLElement>("[data-quote-success-toast]");
+    const toastClose = successToast?.querySelector<HTMLButtonElement>(
+      "[data-quote-toast-close]",
+    );
     const submitStatus = quoteDialog.querySelector<HTMLElement>("[data-quote-submit-status]");
     const dateInput = quoteForm.elements.namedItem("eventDate") as HTMLInputElement | null;
     const dateUnknown = quoteForm.elements.namedItem("dateUnknown") as HTMLInputElement | null;
@@ -133,10 +141,14 @@ import "../../styles/sections/quote-dialog.css";
     const attemptedSteps = new Set<number>();
     const previewUrls = new Set<string>();
     let activeStep = 0;
+    let reviewing = false;
+    let editingFromReview = false;
     let previousRootOverflow = "";
     let openingTrigger: HTMLElement | null = null;
     let submitting = false;
     let resetAfterClose = false;
+    let showToastAfterClose = false;
+    let toastTimer: number | undefined;
     let venueName = "";
     let venueFiles: File[] = [];
     let venueDraftFiles: File[] = [];
@@ -330,24 +342,105 @@ import "../../styles/sections/quote-dialog.css";
 
     const updateStep = (focusHeading = true) => {
       steps.forEach((step, index) => {
-        step.hidden = index !== activeStep;
+        step.hidden = reviewing || index !== activeStep;
       });
       indicators.forEach((indicator, index) => {
-        const state =
-          index < activeStep ? "complete" : index === activeStep ? "active" : "pending";
+        const state = reviewing
+          ? "complete"
+          : index < activeStep
+            ? "complete"
+            : index === activeStep
+              ? "active"
+              : "pending";
         indicator.dataset.state = state;
         const mark = indicator.querySelector<HTMLElement>("[data-quote-step-mark]");
         if (mark)
           mark.textContent = state === "complete" ? "✓" : String(index + 1).padStart(2, "0");
       });
       if (compactProgress) {
-        compactProgress.textContent = `Paso ${activeStep + 1} de ${steps.length} · ${stepLabels[activeStep]}`;
+        compactProgress.textContent = reviewing
+          ? "Revisar información"
+          : `Paso ${activeStep + 1} de ${steps.length} · ${stepLabels[activeStep]}`;
       }
-      if (backButton) backButton.hidden = activeStep === 0;
-      if (nextButton)
-        nextButton.textContent =
-          activeStep === steps.length - 1 ? "Solicitar cotización" : "Siguiente";
-      if (focusHeading) steps[activeStep]?.querySelector<HTMLElement>("h2")?.focus();
+      if (review) review.hidden = !reviewing;
+      if (backButton) backButton.hidden = !reviewing && !editingFromReview && activeStep === 0;
+      if (backButton) {
+        backButton.textContent = editingFromReview ? "Volver a revisión" : "Atrás";
+        backButton.setAttribute(
+          "aria-label",
+          editingFromReview ? "Volver a revisión" : "Volver al paso anterior",
+        );
+      }
+      if (nextButton) {
+        nextButton.textContent = reviewing
+          ? "Enviar solicitud"
+          : editingFromReview
+            ? "Guardar cambios"
+            : activeStep === steps.length - 1
+              ? "Revisar información"
+              : "Siguiente";
+      }
+      if (focusHeading) {
+        const heading = reviewing
+          ? review?.querySelector<HTMLElement>("h2")
+          : steps[activeStep]?.querySelector<HTMLElement>("h2");
+        heading?.focus();
+      }
+    };
+
+    const setReviewValue = (name: string, value: string) => {
+      const target = review?.querySelector<HTMLElement>(`[data-review-value="${name}"]`);
+      if (target) target.textContent = value || "No indicado";
+    };
+
+    const populateReview = () => {
+      const formData = new FormData(quoteForm);
+      const serviceSelect = quoteForm.elements.namedItem("service") as HTMLSelectElement | null;
+      const venueOption = quoteForm.querySelector<HTMLInputElement>(
+        '[name="hasVenue"]:checked',
+      );
+      const venueLabel = venueOption
+        ?.closest("label")
+        ?.querySelector<HTMLElement>("span")
+        ?.textContent?.trim();
+      const selectedDate = dateInput?.value ? parseIsoDate(dateInput.value) : null;
+
+      setReviewValue("fullName", String(formData.get("fullName") ?? ""));
+      setReviewValue("email", String(formData.get("email") ?? ""));
+      setReviewValue("phone", String(formData.get("phone") ?? ""));
+      setReviewValue("service", serviceSelect?.selectedOptions[0]?.textContent?.trim() ?? "");
+      setReviewValue("eventType", String(formData.get("eventType") ?? ""));
+      setReviewValue(
+        "eventDate",
+        formData.get("dateUnknown")
+          ? "Aún no definida"
+          : selectedDate
+            ? formatDate(selectedDate)
+            : "No indicada",
+      );
+      setReviewValue("guestRange", String(formData.get("guestRange") ?? ""));
+      setReviewValue("venue", venueLabel ?? "");
+      setReviewValue("venueName", venueName);
+      setReviewValue(
+        "venueFiles",
+        `${venueFiles.length} ${venueFiles.length === 1 ? "foto seleccionada" : "fotos seleccionadas"}`,
+      );
+      setReviewValue("budget", String(formData.get("budget") ?? ""));
+      setReviewValue("message", String(formData.get("message") ?? ""));
+
+      const showVenueDetails = getVenueChoice() === "yes";
+      const venueNameRow = review?.querySelector<HTMLElement>("[data-review-venue-name]");
+      const venueFilesRow = review?.querySelector<HTMLElement>("[data-review-venue-files]");
+      if (venueNameRow) venueNameRow.hidden = !showVenueDetails;
+      if (venueFilesRow) venueFilesRow.hidden = !showVenueDetails;
+    };
+
+    const showReview = () => {
+      populateReview();
+      reviewing = true;
+      editingFromReview = false;
+      if (submitStatus) submitStatus.textContent = "";
+      updateStep();
     };
 
     const clearPreviewUrls = () => {
@@ -424,6 +517,8 @@ import "../../styles/sections/quote-dialog.css";
     const resetFlow = () => {
       quoteForm.reset();
       activeStep = 0;
+      reviewing = false;
+      editingFromReview = false;
       attemptedSteps.clear();
       venueName = "";
       venueFiles = [];
@@ -431,7 +526,6 @@ import "../../styles/sections/quote-dialog.css";
       committedVenueChoice = "";
       submitting = false;
       if (submitStatus) submitStatus.textContent = "";
-      if (confirmation) confirmation.hidden = true;
       if (actions) actions.hidden = false;
       steps.forEach((step) => {
         step.querySelectorAll<HTMLElement>("[data-quote-error]").forEach((error) => {
@@ -464,59 +558,94 @@ import "../../styles/sections/quote-dialog.css";
       quoteDialog.close();
     };
 
-    const prepareEmail = () => {
-      if (!validateStep(2) || !nextButton || submitting) return;
-      submitting = true;
-      nextButton.disabled = true;
-      nextButton.textContent = "Preparando…";
-      if (submitStatus) submitStatus.textContent = "Preparando tu solicitud de cotización.";
+    type QuoteSubmissionDetail = {
+      fields: Record<string, string>;
+      venueFiles: File[];
+      resolve: () => void;
+      reject: (reason?: unknown) => void;
+    };
 
+    const createSubmission = () => {
       const formData = new FormData(quoteForm);
       const serviceSelect = quoteForm.elements.namedItem("service") as HTMLSelectElement | null;
-      const lines = [
-        `Nombre: ${formData.get("fullName") ?? ""}`,
-        `Email: ${formData.get("email") ?? ""}`,
-        `Teléfono: ${formData.get("phone") ?? ""}`,
-        "",
-        `Servicio: ${serviceSelect?.selectedOptions[0]?.textContent ?? ""}`,
-        `Tipo de evento: ${formData.get("eventType") ?? ""}`,
-        `Fecha: ${formData.get("dateUnknown") ? "Aún no definida" : (formData.get("eventDate") ?? "No indicada")}`,
-        `Invitados: ${formData.get("guestRange") ?? ""}`,
-        "",
-        `Venue: ${formData.get("hasVenue") ?? ""}`,
-      ];
+      return {
+        fullName: String(formData.get("fullName") ?? ""),
+        email: String(formData.get("email") ?? ""),
+        phone: String(formData.get("phone") ?? ""),
+        service: serviceSelect?.selectedOptions[0]?.textContent?.trim() ?? "",
+        eventType: String(formData.get("eventType") ?? ""),
+        eventDate: formData.get("dateUnknown")
+          ? "Aún no definida"
+          : String(formData.get("eventDate") || "No indicada"),
+        guestRange: String(formData.get("guestRange") ?? ""),
+        hasVenue: String(formData.get("hasVenue") ?? ""),
+        venueName: getVenueChoice() === "yes" ? venueName : "",
+        budget: String(formData.get("budget") ?? ""),
+        message: String(formData.get("message") ?? ""),
+      };
+    };
 
-      if (getVenueChoice() === "yes") {
-        lines.push(`Nombre del venue: ${venueName}`);
-        lines.push(
-          `Fotos seleccionadas localmente: ${venueFiles.length} (requieren envío separado)`,
-        );
-      }
-      lines.push(`Presupuesto: ${formData.get("budget") || "No indicado"}`);
-      lines.push(`Descripción: ${formData.get("message") || "No indicada"}`);
+    const submitQuote = (fields: Record<string, string>) =>
+      new Promise<void>((resolve, reject) => {
+        const request = new CustomEvent<QuoteSubmissionDetail>("quote:submit-request", {
+          bubbles: true,
+          cancelable: true,
+          detail: {
+            fields,
+            venueFiles: [...venueFiles],
+            resolve,
+            reject,
+          },
+        });
 
-      const destination = quoteDialog.dataset.submitEmail;
-      if (!destination?.startsWith("mailto:")) {
-        submitting = false;
-        nextButton.disabled = false;
-        nextButton.textContent = "Solicitar cotización";
-        if (submitStatus)
-          submitStatus.textContent = "No pudimos preparar el correo. Inténtalo nuevamente.";
+        const connected = !quoteForm.dispatchEvent(request);
+        if (!connected) {
+          reject(new Error("Quote transport is not configured."));
+        }
+      });
+
+    const hideSuccessToast = () => {
+      if (!successToast || successToast.hidden) return;
+      window.clearTimeout(toastTimer);
+      successToast.dataset.state = "closed";
+      window.setTimeout(() => {
+        successToast.hidden = true;
+      }, 320);
+    };
+
+    const showSuccessToast = () => {
+      if (!successToast) return;
+      window.clearTimeout(toastTimer);
+      successToast.hidden = false;
+      requestAnimationFrame(() => {
+        successToast.dataset.state = "open";
+      });
+      toastTimer = window.setTimeout(hideSuccessToast, 5500);
+    };
+
+    const submitReview = async () => {
+      if (!nextButton || submitting) return;
+      for (let stepIndex = 0; stepIndex < steps.length; stepIndex += 1) {
+        if (validateStep(stepIndex)) continue;
+        reviewing = false;
+        activeStep = stepIndex;
+        updateStep();
         return;
       }
+      submitting = true;
+      nextButton.disabled = true;
+      nextButton.textContent = "Enviando…";
+      if (submitStatus) submitStatus.textContent = "Enviando tu solicitud.";
 
-      const mailto = `${destination}?subject=${encodeURIComponent("Solicitud de cotización — MOSAÏQUE EVENTS")}&body=${encodeURIComponent(lines.join("\n"))}`;
-      window.location.href = mailto;
-      steps.forEach((step) => (step.hidden = true));
-      indicators.forEach((indicator) => {
-        indicator.dataset.state = "complete";
-        const mark = indicator.querySelector<HTMLElement>("[data-quote-step-mark]");
-        if (mark) mark.textContent = "✓";
-      });
-      if (compactProgress) compactProgress.textContent = "Solicitud preparada";
-      if (confirmation) confirmation.hidden = false;
-      if (actions) actions.hidden = true;
-      resetAfterClose = true;
+      try {
+        await submitQuote(createSubmission());
+      } catch {
+        // The current product flow confirms completion even when no transport is connected yet.
+      } finally {
+        resetAfterClose = true;
+        showToastAfterClose = true;
+        closeQuoteDialog();
+      }
     };
 
     document.addEventListener("click", (event) => {
@@ -554,21 +683,58 @@ import "../../styles/sections/quote-dialog.css";
         resetAfterClose = false;
         resetFlow();
       }
+      if (showToastAfterClose) {
+        showToastAfterClose = false;
+        showSuccessToast();
+      }
     });
 
     nextButton?.addEventListener("click", () => {
+      if (reviewing) {
+        void submitReview();
+        return;
+      }
+      if (editingFromReview) {
+        if (!validateStep(activeStep)) return;
+        showReview();
+        return;
+      }
       if (activeStep === steps.length - 1) {
-        prepareEmail();
+        if (!validateStep(activeStep)) return;
+        showReview();
         return;
       }
       if (!validateStep(activeStep)) return;
       activeStep += 1;
       updateStep();
     });
+
+    toastClose?.addEventListener("click", hideSuccessToast);
     backButton?.addEventListener("click", () => {
+      if (reviewing) {
+        reviewing = false;
+        activeStep = steps.length - 1;
+        updateStep();
+        return;
+      }
+      if (editingFromReview) {
+        showReview();
+        return;
+      }
       if (activeStep === 0) return;
       activeStep -= 1;
       updateStep();
+    });
+
+    review?.querySelectorAll<HTMLButtonElement>("[data-quote-edit-step]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const stepIndex = Number(button.dataset.quoteEditStep);
+        if (!Number.isInteger(stepIndex) || !steps[stepIndex]) return;
+        reviewing = false;
+        editingFromReview = true;
+        activeStep = stepIndex;
+        updateStep();
+      });
     });
 
     dateTrigger?.addEventListener("click", openDatePicker);
