@@ -7,10 +7,8 @@
 }
 
 .site-navigation__menu-open-icon {
-  border-block: 1px solid currentColor;
-  block-size: 0.5rem;
-  display: inline-block;
-  inline-size: 1.25rem;
+  display: block;
+  flex: none;
 }
 
 .site-navigation__menu-close-icon,
@@ -62,28 +60,7 @@
 }
 
 .site-navigation__menu-close-icon {
-  block-size: 2rem;
-  inline-size: 2rem;
-  position: relative;
-}
-
-.site-navigation__menu-close-icon::before,
-.site-navigation__menu-close-icon::after {
-  background: currentColor;
-  block-size: 2px;
-  content: "";
-  inline-size: 100%;
-  inset: 50% auto auto 0;
-  position: absolute;
-  transform-origin: center;
-}
-
-.site-navigation__menu-close-icon::before {
-  transform: rotate(45deg);
-}
-
-.site-navigation__menu-close-icon::after {
-  transform: rotate(-45deg);
+  flex: none;
 }
 
 .site-navigation__menu-close-label {

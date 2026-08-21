@@ -1,5 +1,6 @@
 ---
 import Container from "../ui/Container.astro";
+import Icon from "../ui/Icon.astro";
 import { footerContent } from "../../content/home/footer";
 import { navigationContent } from "../../content/home/navigation";
 
@@ -14,7 +15,7 @@ const homeLabel = navigationContent.items[0].label;
 
   <Container class="site-navigation__inner">
     <a class="site-navigation__contact" href={navigationContent.cta.href} data-quote-trigger>
-      <span aria-hidden="true">+</span>
+      <Icon name="plusCircle" size={16} />
       <span class="site-navigation__contact-label">{navigationContent.cta.label}</span>
     </a>
 
@@ -30,9 +31,9 @@ const homeLabel = navigationContent.items[0].label;
 
     <details class="site-navigation__menu">
       <summary>
-        <span class="site-navigation__menu-open-icon" aria-hidden="true"></span>
+        <Icon name="menu" size={24} class="site-navigation__menu-open-icon" />
         <span class="site-navigation__menu-open-label">Menú</span>
-        <span class="site-navigation__menu-close-icon" aria-hidden="true"></span>
+        <Icon name="xmark" size={28} class="site-navigation__menu-close-icon" />
         <span class="site-navigation__menu-close-label">Cerrar</span>
       </summary>
 

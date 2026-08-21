@@ -1,5 +1,6 @@
 ---
 import { quoteContent } from "../../content/home/quote";
+import Icon from "../ui/Icon.astro";
 ---
 
 <section class="quote-step" data-quote-step="1" aria-labelledby="quote-event-title" hidden>
@@ -62,7 +63,7 @@ import { quoteContent } from "../../content/home/quote";
           aria-describedby="quote-event-date-help"
         >
           <span data-date-value>Seleccionar fecha</span>
-          <span aria-hidden="true">▢</span>
+          <Icon name="calendar" size={20} />
         </button>
         <small id="quote-event-date-help">Opcional si todavía no está definida.</small>
       </label>

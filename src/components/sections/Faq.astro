@@ -3,6 +3,7 @@ import Button from "../ui/Button.astro";
 import Container from "../ui/Container.astro";
 import Heading from "../ui/Heading.astro";
 import Text from "../ui/Text.astro";
+import Icon from "../ui/Icon.astro";
 import { faqContent } from "../../content/home/faq";
 
 import "../../styles/sections/faq.css";
@@ -28,7 +29,9 @@ const faqColumns = [faqContent.items.slice(0, columnSize), faqContent.items.slic
               <details class="faq__item" name="faq-accordion">
                 <summary>
                   <span class="faq__question">{item.question}</span>
-                  <span class="faq__toggle" aria-hidden="true" />
+                  <span class="faq__toggle" aria-hidden="true">
+                    <Icon name="plus" size={22} />
+                  </span>
                 </summary>
 
                 <div class="faq__answer">

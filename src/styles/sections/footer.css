@@ -178,8 +178,8 @@
   overflow-wrap: anywhere;
 }
 
-.site-footer__contact-action span:last-child {
-  font-size: 1.35rem;
+.site-footer__contact-action svg {
+  flex: none;
 }
 
 .site-footer__details {

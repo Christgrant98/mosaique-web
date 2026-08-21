@@ -1,4 +1,5 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
+import { ArrowRight } from "iconoir-react";
 
 import "./editorial-action.css";
 
@@ -29,7 +30,7 @@ export default function EditorialAction(props: EditorialActionProps) {
     return (
       <a className={classNames(className)} href={href} {...attributes}>
         <span>{children}</span>
-        <span className="editorial-action__arrow" aria-hidden="true" />
+        <ArrowRight className="editorial-action__arrow" aria-hidden="true" strokeWidth={1.25} />
       </a>
     );
   }
@@ -38,7 +39,7 @@ export default function EditorialAction(props: EditorialActionProps) {
   return (
     <button className={classNames(className)} type={type} {...attributes}>
       <span>{children}</span>
-      <span className="editorial-action__arrow" aria-hidden="true" />
+      <ArrowRight className="editorial-action__arrow" aria-hidden="true" strokeWidth={1.25} />
     </button>
   );
 }

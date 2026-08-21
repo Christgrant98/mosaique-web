@@ -97,15 +97,11 @@
   justify-content: center;
 }
 
-.faq__toggle::before {
-  content: "+";
-  font-size: 1.5rem;
-  font-weight: 300;
-  line-height: 1;
+.faq__toggle svg {
   transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
-.faq__item[open] .faq__toggle::before {
+.faq__item[open] .faq__toggle svg {
   transform: rotate(45deg);
 }
 
@@ -189,7 +185,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .faq__toggle::before,
+  .faq__toggle svg,
   .faq__item::details-content {
     transition: none;
   }

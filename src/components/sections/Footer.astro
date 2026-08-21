@@ -1,5 +1,6 @@
 ---
 import Container from "../ui/Container.astro";
+import Icon from "../ui/Icon.astro";
 import { footerContent } from "../../content/home/footer";
 
 import "../../styles/sections/footer.css";
@@ -19,7 +20,7 @@ const secondaryLinks = footerContent.links.slice(4);
         <details open data-footer-group>
           <summary>
             <h3>Compañía</h3>
-            <span aria-hidden="true">+</span>
+            <span aria-hidden="true"><Icon name="plus" size={20} /></span>
           </summary>
           <ul>
             {
@@ -35,7 +36,7 @@ const secondaryLinks = footerContent.links.slice(4);
         <details open data-footer-group>
           <summary>
             <h3>Recursos</h3>
-            <span aria-hidden="true">+</span>
+            <span aria-hidden="true"><Icon name="plus" size={20} /></span>
           </summary>
           <ul>
             {
@@ -51,7 +52,7 @@ const secondaryLinks = footerContent.links.slice(4);
         <details open data-footer-group>
           <summary>
             <h3>Servicios</h3>
-            <span aria-hidden="true">+</span>
+            <span aria-hidden="true"><Icon name="plus" size={20} /></span>
           </summary>
           <ul>
             {footerContent.services.map((service) => <li>{service}</li>)}
@@ -71,7 +72,7 @@ const secondaryLinks = footerContent.links.slice(4);
         <h3>{footerContent.contact.purpose}</h3>
         <a class="site-footer__contact-action" href={footerContent.contact.email.href}>
           <span>{footerContent.contact.email.label}</span>
-          <span aria-hidden="true">→</span>
+          <Icon name="arrowRight" size={20} />
         </a>
       </div>
 

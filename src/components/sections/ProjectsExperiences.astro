@@ -3,6 +3,7 @@ import Button from "../ui/Button.astro";
 import Container from "../ui/Container.astro";
 import Heading from "../ui/Heading.astro";
 import Text from "../ui/Text.astro";
+import Icon from "../ui/Icon.astro";
 import { eventGalleryContent } from "../../content/home/projects";
 
 import "../../styles/sections/projects-experiences.css";
@@ -86,7 +87,7 @@ import "../../styles/sections/projects-experiences.css";
             aria-label="Evento anterior"
             title="Anterior"
           >
-            <span aria-hidden="true">←</span>
+            <Icon name="arrowLeft" size={20} />
           </button>
           <button
             type="button"
@@ -94,7 +95,7 @@ import "../../styles/sections/projects-experiences.css";
             aria-label="Evento siguiente"
             title="Siguiente"
           >
-            <span aria-hidden="true">→</span>
+            <Icon name="arrowRight" size={20} />
           </button>
         </div>
       </div>

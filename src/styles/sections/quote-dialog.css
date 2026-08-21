@@ -112,6 +112,10 @@
   padding: 0;
 }
 
+.quote-close__mobile-icon {
+  display: none;
+}
+
 .quote-stepper {
   border-block-end: 1px solid var(--color-border-default);
   padding: var(--space-5) clamp(var(--space-5), 4vw, var(--space-10));
@@ -163,6 +167,18 @@
   block-size: 2rem;
   inline-size: 2rem;
   justify-content: center;
+}
+
+.quote-stepper__check {
+  display: none;
+}
+
+.quote-stepper li[data-state="complete"] [data-quote-step-number] {
+  display: none;
+}
+
+.quote-stepper li[data-state="complete"] .quote-stepper__check {
+  display: block;
 }
 
 .quote-stepper li strong {
@@ -387,9 +403,8 @@
   text-align: start;
 }
 
-.quote-date-trigger > span:last-child {
+.quote-date-trigger > svg {
   color: var(--color-accent-text);
-  font-size: 1.25rem;
 }
 
 .quote-date-trigger:disabled {
@@ -768,8 +783,6 @@
 
 .quote-toast__icon {
   align-items: center;
-  border: 1px solid currentColor;
-  border-radius: 50%;
   block-size: 1.75rem;
   display: inline-flex;
   inline-size: 1.75rem;
@@ -849,8 +862,8 @@
   position: absolute;
 }
 
-.venue-upload__dropzone > span {
-  font-size: 2rem;
+.venue-upload__dropzone > svg {
+  color: var(--color-accent-text);
 }
 
 .venue-upload__previews {
@@ -930,17 +943,15 @@
 
   .quote-dialog__header .quote-close {
     border: 0;
-    font-size: 0;
     order: -1;
   }
 
-  .quote-dialog__header .quote-close::before {
-    content: "\2190";
-    font-size: 1.5rem;
+  .quote-dialog__header .quote-close__desktop-icon {
+    display: none;
   }
 
-  .quote-dialog__header .quote-close > span {
-    display: none;
+  .quote-dialog__header .quote-close__mobile-icon {
+    display: block;
   }
 
   .quote-stepper {
@@ -1090,14 +1101,18 @@
   }
 
   .quote-form__actions [data-quote-back] {
-    font-size: 0;
     inline-size: 3.25rem;
     padding: 0;
   }
 
-  .quote-form__actions [data-quote-back]::before {
-    content: "\2190";
-    font-size: 1.25rem;
+  .quote-form__actions [data-quote-back-label] {
+    block-size: 1px;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    inline-size: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
   }
 
   .quote-form__actions [data-quote-next] {
@@ -1105,11 +1120,6 @@
     display: inline-flex;
     gap: var(--space-3);
     justify-content: center;
-  }
-
-  .quote-form__actions [data-quote-next]::after {
-    content: "\2192";
-    font-size: 1.25rem;
   }
 
   .quote-form__actions [data-quote-back][hidden] + [data-quote-next] {
